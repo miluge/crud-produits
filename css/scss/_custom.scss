@@ -19,9 +19,25 @@
 //main section margin
 main{
     margin-top: 10rem;
-}
 
-//custom select
-.custom-select{
-    background: none;
+    //table title
+    .card-header{
+        font-size: 1.5rem;
+        color: #007bff;
+    }
+
+    //table with options
+    .card-body{
+        padding: 2rem;
+    }
+
+    //custom select
+    .custom-select{
+        background: none;
+    }
+
+    //table
+    table.dataTable{
+        margin-top: 1.25rem !important;
+    }
 }

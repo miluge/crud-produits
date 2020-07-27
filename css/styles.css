@@ -10189,9 +10189,18 @@ body {
 main {
   margin-top: 10rem;
 }
-
-.custom-select {
+main .card-header {
+  font-size: 1.5rem;
+  color: #007bff;
+}
+main .card-body {
+  padding: 2rem;
+}
+main .custom-select {
   background: none;
+}
+main table.dataTable {
+  margin-top: 1.25rem !important;
 }
 
 /*# sourceMappingURL=styles.css.map */

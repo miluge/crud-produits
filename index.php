@@ -46,13 +46,13 @@
                 <!-- table -->
                 <div class="card mb-4">
                     <!-- table title -->
-                    <div class="card-header">
+                    <div class="card-header mb-2">
                         <em class="fas fa-table mr-1"></em>
                         Products
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable">
+                            <table class="table table-bordered mt-2" id="dataTable">
                                 <!-- table bottom title -->
                                 <caption>Products</caption>
                                 <!-- table top legend -->
