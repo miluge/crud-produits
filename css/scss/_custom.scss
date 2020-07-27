@@ -1,42 +1,42 @@
-//header height
-.sb-topnav{
+//TOP BAR_________________________________________
+.sb-topnav{//top bar size
     height: 6rem;
     padding-left: 1rem;
 
-    //home button size
-    .navbar-brand{
+    .navbar-brand{//home button size
         font-size: 2rem;
         padding-left: 2rem;
     }
-
-    //user button size
-    .navbar-nav{
+    
+    .navbar-nav{//user button size
         padding-right: 2rem;
         font-size: 1.5rem;
     }
 }
 
-#product-list{
+//MAIN TABLE_______________________________________
+#product-list{//margin top
     margin-top: 10rem;
     
-    //table title
-    .card-header{
+    .card-header{//table title
         font-size: 1.5rem;
         color: #007bff;
     }
 
-    //table with options
-    .card-body{
+    .card-body{//table including options
         padding: 2rem;
     }
 
-    //custom select
-    .custom-select{
+    .custom-select{//select
         background: none;
     }
 
-    //table
-    table.dataTable{
+    table.dataTable{//table
         margin-top: 1.25rem !important;
     }
+}
+
+//LOGIN PAGE___________________________________________
+h3{
+    font-size: 2.5rem;
 }
