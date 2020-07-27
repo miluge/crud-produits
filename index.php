@@ -57,28 +57,28 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <table class="table table-bordered" id="dataTable">
                                         <!-- table top legend -->
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
+                                                <th scope="reference_number">Reference</th>
+                                                <th scope="name">Name</th>
+                                                <th scope="category">Category</th>
+                                                <th scope="price">Price</th>
+                                                <th scope="buy_date">Buy date</th>
+                                                <th scope="action">Action</th>
                                             </tr>
                                         </thead>
 
                                         <!-- table bottom legend -->
                                         <tfoot>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
+                                                <th scope="reference_number">Reference</th>
+                                                <th scope="name">Name</th>
+                                                <th scope="category">Category</th>
+                                                <th scope="price">Price</th>
+                                                <th scope="buy_date">Buy date</th>
+                                                <th scope="action">Action</th>
                                             </tr>
                                         </tfoot>
 
