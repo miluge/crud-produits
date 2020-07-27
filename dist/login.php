@@ -26,7 +26,7 @@ try {
              if($count > 0)  
              {  
                   $_SESSION["email"] = $_POST["email"];  
-                  header("location:index.html");  
+                  header("location:dashboard.php");  
              }  
              else  
              {  
