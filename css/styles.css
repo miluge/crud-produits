@@ -10186,20 +10186,20 @@ body {
   font-size: 1.5rem;
 }
 
-main {
+#product-list {
   margin-top: 10rem;
 }
-main .card-header {
+#product-list .card-header {
   font-size: 1.5rem;
   color: #007bff;
 }
-main .card-body {
+#product-list .card-body {
   padding: 2rem;
 }
-main .custom-select {
+#product-list .custom-select {
   background: none;
 }
-main table.dataTable {
+#product-list table.dataTable {
   margin-top: 1.25rem !important;
 }
 

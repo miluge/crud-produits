@@ -44,7 +44,7 @@
             <div class="container">
 
                 <!-- table -->
-                <div class="card mb-4">
+                <div id="product-list" class="card mb-4">
                     <!-- table title -->
                     <div class="card-header mb-2">
                         <em class="fas fa-table mr-1"></em>
