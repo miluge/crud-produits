@@ -1,0 +1,43 @@
+//header height
+.sb-topnav{
+    height: 6rem;
+    padding-left: 1rem;
+
+    //home button size
+    .navbar-brand{
+        font-size: 2rem;
+        padding-left: 2rem;
+    }
+
+    //user button size
+    .navbar-nav{
+        padding-right: 2rem;
+        font-size: 1.5rem;
+    }
+}
+
+//main section margin
+main{
+    margin-top: 10rem;
+
+    //table title
+    .card-header{
+        font-size: 1.5rem;
+        color: #007bff;
+    }
+
+    //table with options
+    .card-body{
+        padding: 2rem;
+    }
+
+    //custom select
+    .custom-select{
+        background: none;
+    }
+
+    //table
+    table.dataTable{
+        margin-top: 1.25rem !important;
+    }
+}

@@ -2,7 +2,7 @@
 @import "variables.scss";
 
 // Import Bootstrap
-@import "bootstrap/scss/bootstrap.scss";
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
 // Import Custom SCSS
 @import "global.scss";
@@ -19,3 +19,6 @@
 @import "navigation/sidenav/sidenav.scss";
 @import "navigation/sidenav/sidenav-dark.scss";
 @import "navigation/sidenav/sidenav-light.scss";
+
+// Custom
+@import "custom.scss";
