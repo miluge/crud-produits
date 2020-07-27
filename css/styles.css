@@ -10173,8 +10173,21 @@ body {
   background-color: #e9ecef;
 }
 
+.sb-topnav {
+  height: 6rem;
+  padding-left: 1rem;
+}
+.sb-topnav .navbar-brand {
+  font-size: 2rem;
+  padding-left: 2rem;
+}
+.sb-topnav .navbar-nav {
+  padding-right: 2rem;
+  font-size: 1.5rem;
+}
+
 main {
-  margin-top: 56px;
+  margin-top: 10rem;
 }
 
 .custom-select {

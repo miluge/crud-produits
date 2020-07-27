@@ -1,10 +1,27 @@
-//correction main section margin
-main{
-    margin-top: 56px;
+//header height
+.sb-topnav{
+    height: 6rem;
+    padding-left: 1rem;
+
+    //home button size
+    .navbar-brand{
+        font-size: 2rem;
+        padding-left: 2rem;
+    }
+
+    //user button size
+    .navbar-nav{
+        padding-right: 2rem;
+        font-size: 1.5rem;
+    }
 }
 
+//main section margin
+main{
+    margin-top: 10rem;
+}
 
-//correction to custom select
+//custom select
 .custom-select{
     background: none;
 }

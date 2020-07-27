@@ -23,7 +23,7 @@
     
         <header>
             <!-- top bar -->
-            <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark d-flex justify-content-between">
     
                 <!-- top bar title -->
                 <a class="navbar-brand" href="index.php">Home</a>
@@ -41,11 +41,8 @@
         </header>
 
         <main>
-            <div class="container-fluid">
+            <div class="container">
 
-                <!-- main title -->
-                <h1 class="mt-4">Products list</h1>
-                
                 <!-- table -->
                 <div class="card mb-4">
                     <!-- table title -->
