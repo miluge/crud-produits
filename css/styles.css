@@ -10173,4 +10173,12 @@ body {
   background-color: #e9ecef;
 }
 
+main {
+  margin-top: 56px;
+}
+
+.custom-select {
+  background: none;
+}
+
 /*# sourceMappingURL=styles.css.map */
