@@ -97,8 +97,8 @@
                                 <tbody>
 
                                     <?php
-                                        //load entry template
-                                        echo $twig->render( 'entry.html.twig' , ['reference_number' => 'AAA','name' => 'computer', 'category' => 'informatic', 'price' => '599€', 'buy_date' => '28/07/20', 'action' => 'delete']);
+                                        //load entries
+                                        require_once('php/view-product.php');
                                     ?>
 
                                     <tr>

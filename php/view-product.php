@@ -22,5 +22,6 @@ foreach($products as $product){
     $product['buy_date'];
     $product['end_warranty'];
     $product['care_products'];
+
+    echo $twig->render( 'entry.html.twig' , ['reference_number' => $product['reference_number'],'name' => $product['name'], 'category' => 'informatic', 'price' => $product['price'], 'buy_date' => $product['buy_date'], 'action' => 'delete']);
 }
-?>
