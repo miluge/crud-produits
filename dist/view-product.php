@@ -11,16 +11,16 @@ $stmt->execute();
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // var_dump($products);
 foreach($products as $product){
-    echo $product['id_products'];
-    echo $product['image_id'];
-    echo $product['category_id'];
-    echo $product['manual_id'];
-    echo $product['source_id'];
-    echo $product['name'];
-    echo $product['reference_number'];
-    echo $product['price'];
-    echo $product['buy_date'];
-    echo $product['end_warranty'];
-    echo $product['care_products'];
+    $product['id_products'];
+    $product['image_id'];
+    $product['category_id'];
+    $product['manual_id'];
+    $product['source_id'];
+    $product['name'];
+    $product['reference_number'];
+    $product['price'];
+    $product['buy_date'];
+    $product['end_warranty'];
+    $product['care_products'];
 }
 ?>
