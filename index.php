@@ -20,6 +20,18 @@
             'cache' => false,
         ]);
         ?>
+
+        <!-- form modal -->
+        <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <?php
+                    //load form
+                    echo $twig->render( 'form.html.twig' , ['mode' => 'Add' , 'category1' => 'informatic' , 'category2' => 'vehicule' , 'name' =>'' , 'buy-date' => '' , 'price' => '' , 'source' => '' , 'end_warranty' => '' , 'care_products' => '', 'image_product' => '' , 'manual_product' => '']);
+                ?>
+                </div>
+            </div>
+        </div>
     
         <header>
             <!-- top bar -->
@@ -41,9 +53,16 @@
                 <!-- table -->
                 <div id="product-list" class="card mb-4">
                     <!-- table title -->
-                    <div class="card-header mb-2">
-                        <em class="fas fa-table mr-1"></em>
-                        Products
+                    <div class="card-header mb-2 p-4 d-flex justify-content-between">
+                        <p>
+                            <em class="fas fa-table mr-1"></em>
+                            Products
+                        </p>
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">
+                            Add product
+                        </button>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
