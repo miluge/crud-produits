@@ -1,0 +1,50 @@
+
+
+
+    <form class="field" action="" method="post" name="add-trip">
+       
+        <label class="label">Select Trip</label>
+        <div class="control select">
+        <select class="select" name="trip_name" id="trip_name">
+
+            <!-- <?php
+            $con=mysqli_connect("localhost","root","","natural-coach");
+                $get_category="select * from category";
+                $run_category=mysqli_query($con,$get_category);
+                while($row_category=mysqli_fetch_array($run_category))
+                {
+                $cat_id=$row_category['id_category'];
+                $cat_name=$row_category['name'];
+                
+                echo"<option value='$cat_id' required >$cat_name</option>";
+                }
+            ?> -->
+        </select>
+        </div>
+        <label class="label">Buy date</label>
+        <div class="control">
+            <input class="input" type="date" name="buy_date" id="buy_date" placeholder="DD-MM-YYYY"  required>
+        </div>
+        <label class="label">Warranty end date</label>
+        <div class="control">
+            <input class="input" type="date" name="end_warranty" id="end_warranty" placeholder="DD-MM-DDDD" required>
+        </div>
+        <label class="label">Price</label>
+        <div class="control">
+            <input class="input" type="text" name="price" id="price" placeholder="Price" required>
+        </div>
+        <label class="label">Product image</label>
+        <div class="control">
+            <input class="input" type="" name="region_end" placeholder="Product image" required>
+        </div>
+        <label class="label">Group max Participants</label>
+        <div class="control">
+            <input class="input" type="text" name="max_participant" placeholder="Max participants" required>
+        </div>
+        
+        <br>
+        <div class="control">
+            <input class="button is-link" type="submit" value="Save"></input>
+            <input class="button is-danger" value="Cancel"></input>
+        </div>
+    </form>
