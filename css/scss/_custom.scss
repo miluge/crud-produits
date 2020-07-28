@@ -67,3 +67,9 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+//CUSTOM TEXTAREA_______________________________________
+textarea.form-control{
+    height: 50px;
+    padding-top: 11px;
+}

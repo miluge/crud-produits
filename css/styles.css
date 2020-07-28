@@ -10232,4 +10232,9 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+textarea.form-control {
+  height: 50px;
+  padding-top: 11px;
+}
+
 /*# sourceMappingURL=styles.css.map */

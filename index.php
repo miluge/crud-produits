@@ -41,7 +41,7 @@
                     <div class="modal-body">
                         <div class="container-fluid">
                             <form method="post" action="" novalidate>
-                                
+
                                 <div class="form-row form-group">
                                     <!-- name input -->
                                     <div class="col-6">
@@ -69,7 +69,6 @@
                                 </div>
     
                                 <div class="form-row form-group">
-
                                     <!-- buy date input -->
                                     <div class="col-3">
                                         <label class="small mb-1" for="buy_dateInput">Buy date</label>
@@ -86,19 +85,35 @@
 
                                     <!-- source type input -->
                                     <div class="col-2">
-                                    <label class="small mb-1" for="source_typeSelect">Source type</label>
+                                    <label class="small mb-1" for="source_typeSelect">Purchase type</label>
                                         <select class="form-control custom" name="source_type" id="source_typeSelect" required>
                                             <option value="offline">Offline</option>
                                             <option value="online">Online</option>
                                         </select>
-                                        <div class="invalid-feedback">Please choose a source type</div>
+                                        <div class="invalid-feedback">Please choose a Purchase type</div>
                                     </div>
 
                                     <!-- source input -->
                                     <div class="col-5">
-                                        <label class="small mb-1" for="sourceInput">Source</label>
+                                        <label class="small mb-1" for="sourceInput">Purchase location</label>
                                         <input class="form-control py-4" id="sourceInput" name="source" type="text" placeholder="Enter source" value="{{ source }}" required/>
-                                        <div class="invalid-feedback">Please enter a source</div>
+                                        <div class="invalid-feedback">Please enter a purchase location</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row form-group">
+                                    <!-- end warranty input -->
+                                    <div class="col-3">
+                                        <label class="small mb-1" for="end_warrantyInput">End warranty date</label>
+                                        <input class="form-control py-4" id="end_warrantyInput" name="end_warranty" type="text"  placeholder="Enter buy date" value="{{ end_warranty }}" onfocus="(this.type='date')" onblur="(this.type='text')" required/>
+                                        <div class="invalid-feedback">Please enter end of warranty date</div>
+                                    </div>
+
+                                    <!-- care products input -->
+                                    <div class="col-9">
+                                        <label class="small mb-1" for="care_productsInput">Product maintenance advice</label>
+                                        <textarea class="form-control" id="care_productsInput" name="care_products" type="text" placeholder="Enter product care_products" required>{{ care_products }}</textarea>
+                                        <div class="invalid-feedback">Please enter advices</div>
                                     </div>
                                 </div>
                             </form>
