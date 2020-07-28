@@ -73,7 +73,7 @@
                                     <!-- buy date input -->
                                     <div class="col-3">
                                     <label class="small mb-1" for="buy_dateInput">Buy date</label>
-                                    <input class="form-control py-4" id="buy_dateInput" name="buy_date" type="date" placeholder="DD-MM-YYYY" value="{{ buy_date }}" required/>
+                                    <input class="form-control py-4" id="buy_dateInput" name="buy_date" type="text"  placeholder="Enter buy date" value="{{ buy-date }}" onfocus="(this.type='date')" onblur="(this.type='text')" required/>
                                     <div class="invalid-feedback">Please enter a buy date</div>
                                 </div>
 
