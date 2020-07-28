@@ -30,8 +30,7 @@
                 
                 <?php
                     //load user template
-                    $template = $twig->load('user.html.twig');
-                    echo $template->render(['user' => 'Guillaume']);
+                    echo $twig->render( 'user.html.twig' , ['user' => 'Guillaume']);
                 ?>
             </nav>
         </header>
@@ -80,8 +79,7 @@
 
                                     <?php
                                         //load entry template
-                                        $template = $twig->load('entry.html.twig');
-                                        echo $template->render(['reference_number' => 'AAA','name' => 'computer', 'category' => 'informatic', 'price' => '599€', 'buy_date' => '28/07/20', 'action' => 'delete']);
+                                        echo $twig->render( 'entry.html.twig' , ['reference_number' => 'AAA','name' => 'computer', 'category' => 'informatic', 'price' => '599€', 'buy_date' => '28/07/20', 'action' => 'delete']);
                                     ?>
 
                                     <tr>
