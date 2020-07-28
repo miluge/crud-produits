@@ -9,7 +9,6 @@ $stmt = $pdo->prepare('SELECT * FROM products');
 $stmt->execute();
 // Fetch the records so we can display them in our template.
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-// var_dump($products);
 foreach($products as $product){
     $product['id_products'];
     $product['image_id'];
