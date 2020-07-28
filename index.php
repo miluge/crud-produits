@@ -20,6 +20,79 @@
             'cache' => false,
         ]);
         ?>
+
+        <!-- form modal -->
+        <!-- Button trigger modal -->
+        <button style="margin-top: 156px" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">
+        Launch demo modal
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- form title -->
+                        <h5 class="modal-title">{{ mode }} product</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <form method="post" action="" novalidate>
+                                
+                                <div class="form-row form-group">
+                                    <!-- name input -->
+                                    <div class="col-6">
+                                        <label class="small mb-1" for="nameInput">Product name</label>
+                                        <input class="form-control py-4" id="nameInput" name="name" type="text" placeholder="Enter product name" value="{{ name }}" required/>
+                                        <div class="invalid-feedback">Please enter a product name</div>
+                                    </div>
+    
+                                    <!-- reference input -->
+                                    <div class="col-3">
+                                        <label class="small mb-1" for="reference_numberInput">Reference number</label>
+                                        <input class="form-control py-4" id="reference_numberInput" name="reference_number" type="text" placeholder="Enter product reference" value="{{ reference_number }}" required/>
+                                        <div class="invalid-feedback">Please enter a product reference</div>
+                                    </div>
+    
+                                    <!-- category select -->
+                                    <div class="col-3">
+                                        <label class="small mb-1" for="categorySelect">Category</label>
+                                        <select class="form-control custom" name="category" id="categorySelect">
+                                            <option value="{{ category[1] }}">{{ category[1] }}</option>
+                                            <option value="{{ category[2] }}">{{ category[2] }}</option>
+                                        </select>
+                                        <div class="invalid-feedback">Please choose a category</div>
+                                    </div>
+                                </div>
+    
+                                <div class="form-row form-group">
+
+                                    <!-- buy date input -->
+                                    <div class="col-3">
+                                    <label class="small mb-1" for="buy_dateInput">Buy date</label>
+                                    <input class="form-control py-4" id="buy_dateInput" name="buy_date" type="date" placeholder="DD-MM-YYYY" value="{{ buy_date }}" required/>
+                                    <div class="invalid-feedback">Please enter a buy date</div>
+                                </div>
+
+                                </div>
+    
+                                
+    
+                                
+                                
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- submit button -->
+                        <button type="button" class="btn btn-primary">{{ mode }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     
         <header>
             <!-- top bar -->
