@@ -50,21 +50,21 @@
                                         <div class="invalid-feedback">Please enter a product name</div>
                                     </div>
     
-                                    <!-- reference input -->
-                                    <div class="col-3">
-                                        <label class="small mb-1" for="reference_numberInput">Reference number</label>
-                                        <input class="form-control py-4" id="reference_numberInput" name="reference_number" type="text" placeholder="Enter product reference" value="{{ reference_number }}" required/>
-                                        <div class="invalid-feedback">Please enter a product reference</div>
-                                    </div>
-    
                                     <!-- category select -->
-                                    <div class="col-3">
+                                    <div class="col-4">
                                         <label class="small mb-1" for="categorySelect">Category</label>
-                                        <select class="form-control custom" name="category" id="categorySelect">
+                                        <select class="form-control custom" name="category" id="categorySelect" required>
                                             <option value="{{ category[1] }}">{{ category[1] }}</option>
                                             <option value="{{ category[2] }}">{{ category[2] }}</option>
                                         </select>
                                         <div class="invalid-feedback">Please choose a category</div>
+                                    </div>
+                                    
+                                    <!-- reference input -->
+                                    <div class="col-2">
+                                        <label class="small mb-1" for="reference_numberInput">Reference number</label>
+                                        <input class="form-control py-4" id="reference_numberInput" name="reference_number" type="text" placeholder="Enter product reference" value="{{ reference_number }}" required/>
+                                        <div class="invalid-feedback">Please enter a product reference</div>
                                     </div>
                                 </div>
     
@@ -78,10 +78,27 @@
                                     </div>
 
                                     <!-- price input -->
-                                    <div class="col-3">
+                                    <div class="col-2">
                                         <label class="small mb-1" for="priceInput">Price</label>
                                         <input class="form-control py-4" id="priceInput" name="price" type="number" placeholder="Enter price" value="{{ price }}" required/>
                                         <div class="invalid-feedback">Please enter a price</div>
+                                    </div>
+
+                                    <!-- source type input -->
+                                    <div class="col-2">
+                                    <label class="small mb-1" for="source_typeSelect">Source type</label>
+                                        <select class="form-control custom" name="source_type" id="source_typeSelect" required>
+                                            <option value="offline">Offline</option>
+                                            <option value="online">Online</option>
+                                        </select>
+                                        <div class="invalid-feedback">Please choose a source type</div>
+                                    </div>
+
+                                    <!-- source input -->
+                                    <div class="col-5">
+                                        <label class="small mb-1" for="sourceInput">Source</label>
+                                        <input class="form-control py-4" id="sourceInput" name="source" type="text" placeholder="Enter source" value="{{ source }}" required/>
+                                        <div class="invalid-feedback">Please enter a source</div>
                                     </div>
                                 </div>
                             </form>
