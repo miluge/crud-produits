@@ -22,137 +22,13 @@
         ?>
 
         <!-- form modal -->
-        <!-- Button trigger modal -->
-        <button style="margin-top: 156px" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">
-        Launch demo modal
-        </button>
-
-        <!-- Modal -->
         <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalTitle" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
-                    <div class="modal-header mb-2">
-                        <!-- form title -->
-                        <h5 class="modal-title">{{ mode }} product</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <form method="post" action="" novalidate>
-
-                                <div class="form-row mb-3">
-                                    <!-- name input -->
-                                    <div class="col-6 form-group">
-                                        <label class="small mb-1" for="nameInput">Product name</label>
-                                        <input class="form-control py-4" id="nameInput" name="name" type="text" placeholder="Enter product name" value="{{ name }}" required/>
-                                        <div class="invalid-feedback">Please enter the product name</div>
-                                    </div>
-    
-                                    <!-- category select -->
-                                    <div class="col-4 form-group">
-                                        <label class="small mb-1" for="categorySelect">Category</label>
-                                        <select class="form-control custom" name="category" id="categorySelect" required>
-                                            <option value="{{ category[1] }}">{{ category[1] }}</option>
-                                            <option value="{{ category[2] }}">{{ category[2] }}</option>
-                                        </select>
-                                        <div class="invalid-feedback">Please choose a category</div>
-                                    </div>
-                                    
-                                    <!-- reference input -->
-                                    <div class="col-2 form-group">
-                                        <label class="small mb-1" for="reference_numberInput">Reference number</label>
-                                        <input class="form-control py-4" id="reference_numberInput" name="reference_number" type="text" placeholder="Enter product reference" value="{{ reference_number }}" required/>
-                                        <div class="invalid-feedback">Please enter the product reference</div>
-                                    </div>
-                                </div>
-    
-                                <div class="form-row mb-3">
-                                    <!-- buy date input -->
-                                    <div class="col-3 form-group">
-                                        <label class="small mb-1" for="buy_dateInput">Buy date</label>
-                                        <input class="form-control py-4" id="buy_dateInput" name="buy_date" type="text"  placeholder="Enter buy date" value="{{ buy-date }}" onfocus="(this.type='date')" onblur="(this.type='text')" required/>
-                                        <div class="invalid-feedback">Please enter the buy date</div>
-                                    </div>
-
-                                    <!-- price input -->
-                                    <div class="col-2 form-group">
-                                        <label class="small mb-1" for="priceInput">Price</label>
-                                        <input class="form-control py-4" id="priceInput" name="price" type="number" placeholder="Enter price" value="{{ price }}" required/>
-                                        <div class="invalid-feedback">Please enter the price</div>
-                                    </div>
-
-                                    <!-- source type input -->
-                                    <div class="col-2 form-group">
-                                    <label class="small mb-1" for="source_typeSelect">Purchase type</label>
-                                        <select class="form-control custom" name="source_type" id="source_typeSelect" required>
-                                            <option value="offline">Offline</option>
-                                            <option value="online">Online</option>
-                                        </select>
-                                        <div class="invalid-feedback">Please choose the purchase type</div>
-                                    </div>
-
-                                    <!-- source input -->
-                                    <div class="col-5 form-group">
-                                        <label class="small mb-1" for="sourceInput">Purchase location</label>
-                                        <input class="form-control py-4" id="sourceInput" name="source" type="text" placeholder="Enter source" value="{{ source }}" required/>
-                                        <div class="invalid-feedback">Please enter the purchase location</div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row mb-3">
-                                    <!-- end warranty input -->
-                                    <div class="col-3 form-group">
-                                        <label class="small mb-1" for="end_warrantyInput">End warranty date</label>
-                                        <input class="form-control py-4" id="end_warrantyInput" name="end_warranty" type="text"  placeholder="Enter buy date" value="{{ end_warranty }}" onfocus="(this.type='date')" onblur="(this.type='text')" required/>
-                                        <div class="invalid-feedback">Please enter the end of warranty date</div>
-                                    </div>
-
-                                    <!-- care products input -->
-                                    <div class="col-9 form-group">
-                                        <label class="small mb-1" for="care_productsInput">Product maintenance advice</label>
-                                        <textarea class="form-control" id="care_productsInput" name="care_products" type="text" placeholder="Enter product care_products" required>{{ care_products }}</textarea>
-                                        <div class="invalid-feedback">Please enter maintenance advice</div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row mb-">
-                                    <!-- edit image -->
-                                    <div class="col-4">
-                                        {{ image_product }}
-                                    </div>
-
-
-                                    <!-- edit manual -->
-                                    <div class="col-4 offset-2">
-                                        {{ manual_product }}
-                                    </div>
-                                </div>
-
-                                <div class="form-row mb-2">
-
-                                    <!-- receipt image upload -->
-                                    <div class="col-4 form-group custom-file">
-                                        <input type="file" class="custom-file-input" id="image_productInput" name="image_product" required/>
-                                        <label class="small custom-file-label" for="image_productInput">Upload receipt</label>
-                                        <div class="invalid-feedback">Please upload the receipt</div>
-                                    </div>
-
-
-                                    <!-- manual upload -->
-                                    <div class="col-4 offset-2 form-group custom-file">
-                                        <input type="file" class="custom-file-input" id="manual_productInput" name="manual_product"/>
-                                        <label class="small custom-file-label" for="manual_productInput">Upload manual</label>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <!-- submit button -->
-                        <button type="button" class="btn btn-primary">{{ mode }}</button>
-                    </div>
+                <?php
+                    //load form
+                    echo $twig->render( 'form.html.twig' , ['mode' => 'Add' , 'category1' => 'informatic' , 'category2' => 'vehicule' , 'name' =>'' , 'buy-date' => '' , 'price' => '' , 'source' => '' , 'end_warranty' => '' , 'care_products' => '', 'image_product' => '' , 'manual_product' => '']);
+                ?>
                 </div>
             </div>
         </div>
@@ -177,9 +53,16 @@
                 <!-- table -->
                 <div id="product-list" class="card mb-4">
                     <!-- table title -->
-                    <div class="card-header mb-2">
-                        <em class="fas fa-table mr-1"></em>
-                        Products
+                    <div class="card-header mb-2 p-4 d-flex justify-content-between">
+                        <p>
+                            <em class="fas fa-table mr-1"></em>
+                            Products
+                        </p>
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">
+                            Add product
+                        </button>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
