@@ -56,3 +56,14 @@ select.custom {
 select.custom::-ms-expand {
 display: none;
 }
+
+//CUSTOM NUMBER INPUT___________________________________
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}

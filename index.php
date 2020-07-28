@@ -72,17 +72,18 @@
 
                                     <!-- buy date input -->
                                     <div class="col-3">
-                                    <label class="small mb-1" for="buy_dateInput">Buy date</label>
-                                    <input class="form-control py-4" id="buy_dateInput" name="buy_date" type="text"  placeholder="Enter buy date" value="{{ buy-date }}" onfocus="(this.type='date')" onblur="(this.type='text')" required/>
-                                    <div class="invalid-feedback">Please enter a buy date</div>
-                                </div>
+                                        <label class="small mb-1" for="buy_dateInput">Buy date</label>
+                                        <input class="form-control py-4" id="buy_dateInput" name="buy_date" type="text"  placeholder="Enter buy date" value="{{ buy-date }}" onfocus="(this.type='date')" onblur="(this.type='text')" required/>
+                                        <div class="invalid-feedback">Please enter a buy date</div>
+                                    </div>
 
+                                    <!-- price input -->
+                                    <div class="col-3">
+                                        <label class="small mb-1" for="priceInput">Price</label>
+                                        <input class="form-control py-4" id="priceInput" name="price" type="number" placeholder="Enter price" value="{{ price }}" required/>
+                                        <div class="invalid-feedback">Please enter a price</div>
+                                    </div>
                                 </div>
-    
-                                
-    
-                                
-                                
                             </form>
                         </div>
                     </div>
