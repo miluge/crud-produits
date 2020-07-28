@@ -23,4 +23,3 @@ foreach($products as $product){
     $product['end_warranty'];
     $product['care_products'];
 }
-?>
