@@ -1,3 +1,46 @@
+<?php
+session_start();
+require_once 'dbconfig.php';
+$message="";
+
+try {
+    $connect = new PDO("mysql:host=$host; dbname=$db", $username, $password);
+    $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  
+      if(isset($_POST["login"])) 
+      {  
+        if(empty($_POST["email"]) || empty($_POST["password"]))  
+        {  
+             $message = '<label>All fields are required</label>';  
+        }  
+        else  
+        {  
+             $query = "SELECT * FROM users WHERE email = :email AND password = :password";  
+             $statement = $connect->prepare($query);  
+             $statement->execute(  
+                  array(  
+                       'email'     =>     $_POST["email"],  
+                       'password'     =>     $_POST["password"]  
+                  )  
+             );  
+             $count = $statement->rowCount();  
+             if($count > 0)  
+             {  
+                  $_SESSION["email"] = $_POST["email"];  
+                  header("location:dashboard.php");  
+             }  
+             else  
+             {  
+                  $message = '<label>Username and/or password is incorrect</label>';  
+             }  
+        }  
+   }  
+}  
+catch(PDOException $error)  
+{  
+   $message = $error->getMessage();  
+}  
+
+?>  
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -20,23 +63,23 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
                                     <div class="card-body">
-                                        <form>
+                                        <form method="post" action="">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="inputEmailAddress">Email</label>
-                                                <input class="form-control py-4" id="inputEmailAddress" type="email" placeholder="Enter email address" />
+                                                <input class="form-control py-4" id="inputEmailAddress" name="email" type="email" placeholder="Enter email address" />
                                             </div>
                                             <div class="form-group">
                                                 <label class="small mb-1" for="inputPassword">Password</label>
-                                                <input class="form-control py-4" id="inputPassword" type="password" placeholder="Enter password" />
+                                                <input class="form-control py-4" id="inputPassword" name="password" type="password" placeholder="Enter password" />
                                             </div>
                                             <div class="form-group">
                                                 <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox" />
+                                                    <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox"/>
                                                     <label class="custom-control-label" for="rememberPasswordCheck">Remember password</label>
                                                 </div>
                                             </div>
                                             <div class="form-group mt-4 mb-0">
-                                                <a class="btn btn-primary btn-block" href="index.php">Login</a>
+                                                <input class="btn btn-primary btn-block" name="login" href="index.php" type="submit" value="Login"/>
                                             </div>
                                         </form>
                                     </div>
