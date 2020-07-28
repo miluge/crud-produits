@@ -28,15 +28,11 @@
                 <!-- top bar title -->
                 <a class="navbar-brand" href="index.php">Home</a>
                 
-                <!-- top bar user -->
-                <ul class="navbar-nav ml-auto ml-md-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><em class="fas fa-user fa-fw"></em></a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="login.php">Logout</a>
-                        </div>
-                    </li>
-                </ul>
+                <?php
+                    //load user template
+                    $template = $twig->load('user.html.twig');
+                    echo $template->render(['user' => 'Guillaume']);
+                ?>
             </nav>
         </header>
 
@@ -81,6 +77,13 @@
 
                                 <!-- table entries -->
                                 <tbody>
+
+                                    <?php
+                                        //load entry template
+                                        $template = $twig->load('entry.html.twig');
+                                        echo $template->render(['reference_number' => 'AAA','name' => 'computer', 'category' => 'informatic', 'price' => '599€', 'buy_date' => '28/07/20', 'action' => 'delete']);
+                                    ?>
+
                                     <tr>
                                         <td>Tiger Nixon</td>
                                         <td>System Architect</td>
