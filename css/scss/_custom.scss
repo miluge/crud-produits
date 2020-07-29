@@ -73,3 +73,28 @@ textarea.form-control{
     height: 50px;
     padding-top: 11px;
 }
+
+//DETAILS BOX____________________________________________
+.details-box{
+    padding: 0.375rem 1.5rem;
+    border: 1px solid #CED4DA;
+    border-radius: 0.25rem;
+
+    p:first-of-type{
+        color: #495057;
+        
+        &::after{
+            content: '';
+            display: block;
+            height: 1px;
+            width: calc(100% + 3rem);
+            margin: 0.375rem 0 0.375rem -1.5rem;
+            background-color: #CED4DA;
+        }
+    }
+}
+
+//LARGE TEXT_______________________________________________
+.large{
+    font-size: 1.25rem;
+}

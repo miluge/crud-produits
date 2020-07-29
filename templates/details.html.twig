@@ -1,0 +1,111 @@
+<div class="modal-header mb-2">
+    <!-- product details title -->
+    <h2 class="modal-title">Product details</h2>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="container-fluid">
+        <div class="row mb-3">
+            <!-- name -->
+            <div class="col-5">
+                <div class="details-box">
+                    <p class="mb-1">Product name</p>
+                    <p class="large">{{ name }}</p>
+                </div>
+            </div>
+
+            <!-- category -->
+            <div class="col-3">
+                <div class="details-box">
+                    <p class="mb-1">Category</p>
+                    <p class="large">{{ category }}</p>
+                </div>
+            </div>
+            
+            <!-- reference -->
+            <div class="col-4">
+                <div class="details-box">
+                    <p class="mb-1">Reference number</p>
+                    <p class="large">{{ reference_number }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <!-- buy date -->
+            <div class="col-3">
+                <div class="details-box">
+                    <p class="mb-1">Buy date</p>
+                    <p class="large">{{ buy_date }}</p>
+                </div>
+            </div>
+
+            <!-- price -->
+            <div class="col-2">
+                <div class="details-box">
+                    <p class="mb-1">Price</p>
+                    <p class="large">{{ price }}</p>
+                </div>
+            </div>
+
+            <!-- source type -->
+            <div class="col-3">
+                <div class="details-box">
+                    <p class="mb-1">Purchase type</p>
+                    <p class="large">{{ source_type }}</p>
+                </div>
+            </div>
+
+            <!-- source -->
+            <div class="col-4">
+                <div class="details-box">
+                    <p class="mb-1">Purchase location</p>
+                    <p class="large">{{ source }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <!-- end warranty -->
+            <div class="col-4">
+                <div class="details-box">
+                    <p class="mb-1">End of warranty date</p>
+                    <p class="large">{{ end_warranty }}</p>
+                </div>
+            </div>
+
+            <!-- care products -->
+            <div class="col-8">
+                <div class="details-box">
+                    <p class="mb-1">Product maintenance advice</p>
+                    <p class="large">{{ care_products }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <!-- receipt image -->
+            <div class="col-4">
+                <div class="details-box">
+                    <p class="mb-1">Receipt</p>
+                    <p class="large">{{ image_product }}</p>
+                </div>
+            </div>
+
+
+            <!-- manual -->
+            <div class="col-4 offset-2">
+                <div class="details-box">
+                    <p class="mb-1">Manual</p>
+                    <p class="large">{{ manual_product }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <!-- edit modal button -->
+    <button id="edit-btn" type="button" class="btn btn-primary btn-lg btn-block" data-dismiss="modal" data-toggle="modal" data-target="#formModal">Edit product</button>
+</div>

@@ -10237,4 +10237,25 @@ textarea.form-control {
   padding-top: 11px;
 }
 
+.details-box {
+  padding: 0.375rem 1.5rem;
+  border: 1px solid #CED4DA;
+  border-radius: 0.25rem;
+}
+.details-box p:first-of-type {
+  color: #495057;
+}
+.details-box p:first-of-type::after {
+  content: "";
+  display: block;
+  height: 1px;
+  width: calc(100% + 3rem);
+  margin: 0.375rem 0 0.375rem -1.5rem;
+  background-color: #CED4DA;
+}
+
+.large {
+  font-size: 1.25rem;
+}
+
 /*# sourceMappingURL=styles.css.map */

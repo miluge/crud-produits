@@ -4,5 +4,13 @@
     <td>{{ category }}</td>
     <td>{{ price }}</td>
     <td>{{ buy_date }}</td>
-    <td>{{ action }}</td>
+    <td>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detailsModal" data-id={{ id_products }}>
+            Details
+        </button>
+
+        <button type="button" class="btn btn-primary btn-danger" data-toggle="modal" data-target="#deleteModal" data-id={{ id_products }} data-name={{ name }}>
+            Delete
+        </button>
+    </td>
 </tr>
