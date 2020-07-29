@@ -10,5 +10,6 @@ $stmt->execute();
 // Fetch the records so we can display them in our template.
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 foreach($products as $product){
-    echo $twig->render( 'entry.html.twig' , ['id_products' => $product['id_products'], 'reference_number' => $product['reference_number'],'name' => $product['name'], 'category' => 'informatic', 'price' => $product['price'], 'buy_date' => $product['buy_date'], 'action' => 'delete']);
+    //load entry template
+    echo $twig->render( 'entry.html.twig' , ['id_products' => $product['id_products'], 'reference_number' => $product['reference_number'],'name' => $product['name'], 'category' => 'informatic', 'price' => $product['price'], 'buy_date' => $product['buy_date']]);
 }
