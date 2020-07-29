@@ -3,15 +3,8 @@ error_reporting(E_ALL);
 ini_set('display_errors',1);
 
 include 'functions.php';
-
 $pdo = pdo_connect_mysql();
-
-// load twig
-require_once '../vendor/autoload.php';
-$loader = new \Twig\Loader\FilesystemLoader('../templates/');
-$twig = new \Twig\Environment($loader, [
-    'cache' => false,
-]);
+$twig = load_twig();
 
 if (isset($_POST['id'])) {
     //get product by id

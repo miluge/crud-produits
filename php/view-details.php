@@ -2,13 +2,7 @@
 
 if (isset($_POST['id'])) {
     include 'functions.php';
-
-    // load twig
-    require_once '../vendor/autoload.php';
-    $loader = new \Twig\Loader\FilesystemLoader('../templates/');
-    $twig = new \Twig\Environment($loader, [
-        'cache' => false,
-    ]);
+    $twig = load_twig();
 
     //Connect to MySQL
     $pdo = pdo_connect_mysql();
