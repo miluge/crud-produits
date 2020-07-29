@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'dbconfig.php';
+require_once 'php/dbconfig.php';
 $message="";
 
 try {
@@ -65,11 +65,11 @@ catch(PDOException $error)
                                     <div class="card-body">
                                         <form method="post" action="">
                                             <div class="form-group">
-                                                <label class="small mb-1" for="inputEmailAddress">Email</label>
+                                                <label class="mb-1" for="inputEmailAddress">Email</label>
                                                 <input class="form-control py-4" id="inputEmailAddress" name="email" type="email" placeholder="Enter email address" />
                                             </div>
                                             <div class="form-group">
-                                                <label class="small mb-1" for="inputPassword">Password</label>
+                                                <label class="mb-1" for="inputPassword">Password</label>
                                                 <input class="form-control py-4" id="inputPassword" name="password" type="password" placeholder="Enter password" />
                                             </div>
                                             <div class="form-group">
