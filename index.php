@@ -25,8 +25,7 @@
         <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalTitle" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
-                <?php
-                    //load form
+                <?php //load form template
                     echo $twig->render( 'form.html.twig' , ['mode' => 'Add' , 'category1' => 'informatic' , 'category2' => 'vehicule' , 'name' => '' , 'buy-date' => '' , 'price' => '' , 'source' => '' , 'end_warranty' => '' , 'care_products' => '', 'image_product' => '' , 'manual_product' => '']);
                 ?>
                 </div>
@@ -37,9 +36,19 @@
         <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalTitle" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
-                <?php
-                    //load details
+                <?php //load details template
                     echo $twig->render( 'details.html.twig' , ['name' => 'test' , 'reference_number' => '1234' , 'category' => 'informatic' ,  'buy_date' => '22-08-2016' , 'price' => '365€' , 'source_type' => 'Online' , 'source' => 'ebazaar' , 'end_warranty' => '14-11-2022' , 'care_products' => 'phezoyezoyvznpoeyvpoz', 'image_product' => 'receipt.jpg' , 'manual_product' => 'manual.pdf']);
+                ?>
+                </div>
+            </div>
+        </div>
+
+        <!-- delete modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <?php //load delete template
+                    echo $twig->render( 'delete.html.twig');
                 ?>
                 </div>
             </div>
@@ -49,11 +58,10 @@
             <!-- top bar -->
             <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark d-flex justify-content-between">
     
-                <!-- top bar title -->
+                <!-- top bar nav -->
                 <a class="navbar-brand" href="index.php">Home</a>
                 
-                <?php
-                    //load user template
+                <?php //load user template
                     echo $twig->render( 'user.html.twig' , ['user' => 'Guillaume']);
                 ?>
             </nav>
@@ -64,14 +72,11 @@
 
                 <!-- table -->
                 <div id="product-list" class="card mb-4">
-                    <!-- table title -->
                     <div class="card-header mb-2 p-4 d-flex justify-content-between">
-                        <p>
-                            <em class="fas fa-table mr-1"></em>
-                            Products
-                        </p>
+                        <!-- table title -->
+                        <p><em class="fas fa-table mr-1"></em>Products</p>
 
-                        <!-- Button trigger modal -->
+                        <!-- add modal button -->
                         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#formModal">
                             Add product
                         </button>
@@ -105,14 +110,10 @@
                                     </tr>
                                 </tfoot>
 
-                                <!-- table entries -->
                                 <tbody>
-
-                                    <?php
-                                        //load entries
+                                    <?php  //load table entries template
                                         require_once('php/view-product.php');
                                     ?>
-
                                 </tbody>
                             </table>
                         </div>
