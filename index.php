@@ -42,10 +42,8 @@
         <!-- delete modal -->
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                <?php //load delete template
-                    echo $twig->render( 'delete.html.twig', ['id_products' => '1', 'name' => 'nom produit']);
-                ?>
+                <div id="delete-modal-content" class="modal-content">
+                    <!-- include delete template -->
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ $('#detailsModal').on('show.bs.modal', function (event) {
     //get product id
     const button = $(event.relatedTarget);
     const productId = button.data('id');
+    //fetch details render
     const formData = new FormData();
     formData.append('id',productId);
     fetch('php/view-details.php',{method: 'post', body: formData}).then(res=>res.text()).then(data =>{
@@ -19,14 +20,14 @@ $('#formModal').on('show.bs.modal', function (event) {
     const button = $(event.relatedTarget);
     const productId = button.data('id');
 
-    if (productId){//edit mode
+    if (productId){//fetch form render in edit mode
         const formData = new FormData();
         formData.append('id',productId);
         fetch('php/edit-product.php',{method: 'post', body: formData}).then(res=>res.text()).then(data=>{
             const formModal = document.getElementById('form-modal-content');
             formModal.innerHTML = data;
         });
-    }else{//create mode
+    }else{//fetch form render in add mode
         fetch('php/edit-product.php').then(res=>res.text()).then(data=>{
             const formModal = document.getElementById('form-modal-content');
             formModal.innerHTML = data;
@@ -36,14 +37,14 @@ $('#formModal').on('show.bs.modal', function (event) {
 
 //delete modal trigger
 $('#deleteModal').on('show.bs.modal', function (event) {
-    //get product name and id
+    //get product id
     const button = $(event.relatedTarget);
     const productId = button.data('id');
-    const productName = button.data('name');
-    //add product name
-    const name = document.getElementById('delete-name');
-    name.innerText = productName;
-    //add data-id to delete button
-    const deleteBtn = document.getElementById('delete-btn');
-    deleteBtn.setAttribute('data-id',productId);
+    //fetch delete render
+    const formData = new FormData();
+    formData.append('id',productId);
+    fetch('php/view-delete.php',{method: 'post', body: formData}).then(res=>res.text()).then(data=>{
+        const deleteModal = document.getElementById('delete-modal-content');
+        deleteModal.innerHTML = data;
+    });
 })
