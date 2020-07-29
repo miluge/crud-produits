@@ -5,33 +5,34 @@ $('#detailsModal').on('show.bs.modal', function (event) {
     //get product id
     const button = $(event.relatedTarget);
     const productId = button.data('id');
-
-    //fetch product details
-    //render details template
-    //insert in details modal
-
-    //add data-id to edit button
+    const formData = new FormData();
+    formData.append('id_products',productId);
+    //fetch('php/details-template.php',{method: 'post', body: formData}).then(res=>res.json()).then(data =>{
+        //const content = document.getElementById('details-content');
+        //content.innerHTML = data['content'];
+    //})
     const editBtn = document.getElementById('edit-btn');
-    editBtn.setAttribute('data-id',productId);
+    editBtn.setAttribute('data-id', productId);
 })
 
 //edit/create form modal trigger
 $('#formModal').on('show.bs.modal', function (event) {
     //check product id
     const button = $(event.relatedTarget);
-    const productId = button.data('id')
+    const productId = button.data('id');
+
     if (productId){//edit mode
-
-        //fetch edit-product.php
-        //render form template in 'Edit' mode with product details
-        //insert response in form modal
-
-    }else{
-
-        //fetch add-product.php
-        //render form template in 'Add' mode
-        //insert response in form modal
-
+        const formData = new FormData();
+        formData.append('id',productId);
+        fetch('php/edit-product.php',{method: 'post', body: formData}).then(res=>res.text()).then(data=>{
+            const formModal = document.getElementById('form-modal-content');
+            formModal.innerHTML = data;
+        });
+    }else{//create mode
+        fetch('php/edit-product.php').then(res=>res.text()).then(data=>{
+            const formModal = document.getElementById('form-modal-content');
+            formModal.innerHTML = data;
+        });
     }
 })
 
