@@ -6,13 +6,11 @@ $('#detailsModal').on('show.bs.modal', function (event) {
     const button = $(event.relatedTarget);
     const productId = button.data('id');
     const formData = new FormData();
-    formData.append('id_products',productId);
-    //fetch('php/details-template.php',{method: 'post', body: formData}).then(res=>res.json()).then(data =>{
-        //const content = document.getElementById('details-content');
-        //content.innerHTML = data['content'];
-    //})
-    const editBtn = document.getElementById('edit-btn');
-    editBtn.setAttribute('data-id', productId);
+    formData.append('id',productId);
+    fetch('php/view-details.php',{method: 'post', body: formData}).then(res=>res.text()).then(data =>{
+        const detailsModal = document.getElementById('details-modal-content');
+        detailsModal.innerHTML = data;
+    })
 })
 
 //edit/create form modal trigger
