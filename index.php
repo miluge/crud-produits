@@ -26,7 +26,7 @@
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                 <?php //load form template
-                    echo $twig->render( 'form.html.twig' , ['mode' => 'Add' , 'category1' => 'informatic' , 'category2' => 'vehicule' , 'name' => '' , 'buy-date' => '' , 'price' => '' , 'source' => '' , 'end_warranty' => '' , 'care_products' => '', 'image_product' => '' , 'manual_product' => '']);
+                    echo $twig->render( 'form.html.twig' , ['mode' => 'Add' , 'category1' => 'informatic' , 'category2' => 'vehicule' , 'id_products' => '' ,'name' => '' , 'buy-date' => '' , 'price' => '' , 'source' => '' , 'end_warranty' => '' , 'care_products' => '', 'image_product' => '' , 'manual_product' => '']);
                 ?>
                 </div>
             </div>
