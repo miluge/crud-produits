@@ -32,6 +32,18 @@
                 </div>
             </div>
         </div>
+
+        <!-- product details modal -->
+        <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <?php
+                    //load details
+                    echo $twig->render( 'details.html.twig' , ['name' => 'test' , 'reference_number' => '1234' , 'category' => 'informatic' ,  'buy_date' => '22-08-2016' , 'price' => '365€' , 'source_type' => 'Online' , 'source' => 'ebazaar' , 'end_warranty' => '14-11-2022' , 'care_products' => 'phezoyezoyvznpoeyvpoz', 'image_product' => 'receipt.jpg' , 'manual_product' => 'manual.pdf']);
+                ?>
+                </div>
+            </div>
+        </div>
     
         <header>
             <!-- top bar -->
