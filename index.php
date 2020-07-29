@@ -72,7 +72,7 @@
                         </p>
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#formModal">
                             Add product
                         </button>
                     </div>
