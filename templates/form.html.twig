@@ -21,8 +21,14 @@
                 <div class="col-3 form-group">
                     <label class="mb-1" for="categorySelect">Category</label>
                     <select class="form-control custom" name="category" id="categorySelect" required>
-                        <option value="{{ category1 }}">{{ category1 }}</option>
-                        <option value="{{ category2 }}">{{ category2 }}</option>
+                        {% for category in categories %}
+                            <option value="{{ category.id_category }}"
+                                {% if category.id_category == id_category %}
+                                    selected
+                                {% endif %}>
+                                {{ category.name }}
+                            </option>
+                        {% endfor %}
                     </select>
                     <div class="invalid-feedback">Please choose a category</div>
                 </div>
@@ -87,12 +93,12 @@
             <div class="form-row mb-">
                 <!-- edit image -->
                 <div class="col-4">
-                    {{ image_product }}
+                    {{ image }}
                 </div>
 
                 <!-- edit manual -->
                 <div class="col-4 offset-2">
-                    {{ manual_product }}
+                    {{ manual }}
                 </div>
             </div>
 
