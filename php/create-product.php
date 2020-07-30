@@ -11,7 +11,7 @@ if (!empty($_POST)) {
     // Post data not empty insert a new record
     // Check if POST variable "name" exists, if not default the value to blank, basically the same for all variables
     $image = isset($_POST['image_id']) ? $_POST['image_id'] : '';
-    $category = isset($_POST['category_id']) ? $_POST['vategory_id'] : '';
+    $category = isset($_POST['category_id']) ? $_POST['category_id'] : '';
     $manual = isset($_POST['manual_id']) ? $_POST['manual_id'] : '';
     $source = isset($_POST['source_id']) ? $_POST['source_id'] : '';
     $name = isset($_POST['name']) ? $_POST['name'] : '';
