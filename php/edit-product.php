@@ -4,7 +4,6 @@ ini_set('display_errors',1);
 
 include 'functions.php';
 $pdo = pdo_connect_mysql();
-$twig = load_twig();
 
 if (isset($_POST['id'])) {
     //get product by id
@@ -13,23 +12,6 @@ if (isset($_POST['id'])) {
     $stmt->execute([':id'=>$id]);
     $product = $stmt->setFetchMode(PDO::FETCH_ASSOC);
     $product = $stmt->fetch();
-
-    //fill form render
-    echo $twig->render( 'form.html.twig' , [
-        'mode' => 'Edit',
-        'id_products' => $product['id_products'],
-        'image_product' => $product['image_id'],
-        'category1' => 'informatic',
-        'category2' => 'vehicule',
-        'manual_product' => $product['manual_id'],
-        'source' => $product['source_id'],
-        'name' => $product['name'],
-        'reference_number' => $product['reference_number'],
-        'price' => $product['price'],
-        'buy_date' => $product['buy_date'],
-        'end_warranty' => $product['end_warranty'],
-        'care_products' => $product['care_products']  
-    ]);
 
     $image = isset($_POST['image_id']) ? $_POST['image_id'] : '';
     $category = isset($_POST['category_id']) ? $_POST['category_id'] : '';
@@ -55,21 +37,4 @@ if (isset($_POST['id'])) {
     $stmt->bindValue(':end_warranty', $end_warranty);
     $stmt->bindValue(':care_products', $care_products);
     $stmt->execute();
-}else {
-    //create form render
-    echo $twig->render( 'form.html.twig' , [
-        'mode' => 'Add',
-        'id_products' => '',
-        'image_product' => '',
-        'category1' => 'informatic',
-        'category2' => 'vehicule',
-        'manual_product' => '',
-        'source' => '',
-        'name' => '',
-        'reference_number' => '',
-        'price' => '',
-        'buy_date' => '',
-        'end_warranty' => '',
-        'care_products' => ''  
-    ]);
 }

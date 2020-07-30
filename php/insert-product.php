@@ -28,6 +28,7 @@ require_once 'dbconfig.php';
 
             if(isset($_POST['submit'])) {
                 // for input => ticket image
+               
                 $ticket = $_FILES['ticket'];
 
                 $ticketName = $_FILES['ticket']['name'];
@@ -56,4 +57,33 @@ require_once 'dbconfig.php';
             } else {
                 echo "You cannot upload files of this type!";
             }
+
+            $manual = $_FILES['manual'];
+
+            $manualName = $_FILES['manual']['name'];
+            $manualTmpname = $_FILES['manual']['tmp_name'];
+            $manualSize = $_FILES['manual']['size'];
+            $manualError = $_FILES['manual']['error'];
+            $manualType = $_FILES['manual']['type'];
+
+            $manualExt = explode('.', $manualName);
+            $manualActualExt = strtolower(end($fileExt));
+
+            $allowed = array('pdf', 'doc', 'txt');
+
+            if (in_array($manualActualExt, $allowed)){
+                if ($manualError === 0) {
+                    if ($manualSize < 500000 ) {
+                        $manualNameNew = uniqid(', true').".".$manualActualExt;
+                        $manualDestination = 'uploads/manuals/'.$manualNameNew;
+                        move_uploaded_file($manualTmpname, $manualDestination);
+                    } else {
+                        echo "file is too big";
+                    }
+                } else {
+                echo "Error uploading your file!";
+            }
+        } else {
+            echo "You cannot upload files of this type!";
+        }
 ?>
