@@ -106,7 +106,7 @@
 
                                 <tbody>
                                     <?php  //load table entries template
-                                        require_once('php/view-product.php');
+                                        require_once('php/view.php');
                                     ?>
                                 </tbody>
                             </table>

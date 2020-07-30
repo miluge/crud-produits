@@ -43,7 +43,8 @@ $('#deleteModal').on('show.bs.modal', function (event) {
     //fetch delete render
     const formData = new FormData();
     formData.append('id',productId);
-    fetch('php/view-delete.php',{method: 'post', body: formData}).then(res=>res.text()).then(data=>{
+    formData.append('mode','delete');
+    fetch('php/view.php',{method: 'post', body: formData}).then(res=>res.text()).then(data=>{
         const deleteModal = document.getElementById('delete-modal-content');
         deleteModal.innerHTML = data;
     });
