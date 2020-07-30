@@ -26,4 +26,34 @@ require_once 'dbconfig.php';
             // Close connection
             unset($conn);
 
+            if(isset($_POST['submit'])) {
+                // for input => ticket image
+                $ticket = $_FILES['ticket'];
+
+                $ticketName = $_FILES['ticket']['name'];
+                $ticketTmpname = $_FILES['ticket']['tmp_name'];
+                $ticketSize = $_FILES['ticket']['size'];
+                $ticketError = $_FILES['ticket']['error'];
+                $ticketType = $_FILES['ticket']['type'];
+
+                $ticketExt = explode('.', $ticketName);
+                $ticketActualExt = strtolower(end($fileExt));
+
+                $allowed = array('jpg', 'jpeg', 'png');
+
+                if (in_array($ticketActualExt, $allowed)){
+                    if ($ticketError === 0) {
+                        if ($ticketSize < 500000 ) {
+                            $ticketNameNew = uniqid(', true').".".$ticketActualExt;
+                            $ticketDestination = 'uploads/images/'.$ticketNameNew;
+                            move_uploaded_file($ticketTmpname, $ticketDestination);
+                        } else {
+                            echo "file is too big";
+                        }
+                    } else {
+                    echo "Error uploading your file!";
+                }
+            } else {
+                echo "You cannot upload files of this type!";
+            }
 ?>
