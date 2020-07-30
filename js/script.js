@@ -1,4 +1,4 @@
-//BUTTONS______________________________________________
+//MODALS______________________________________________
 
 //details modal trigger
 $('#detailsModal').on('show.bs.modal', function (event) {
@@ -6,36 +6,46 @@ $('#detailsModal').on('show.bs.modal', function (event) {
     const button = $(event.relatedTarget);
     const productId = button.data('id');
     //fetch details render
-    const formData = new FormData();
-    formData.append('id',productId);
-    formData.append('mode','details');
-    fetch('php/view.php',{method: 'post', body: formData}).then(res=>res.text()).then(data =>{
+    const postData = new FormData();
+    postData.append('id',productId);
+    postData.append('mode','details');
+    fetch('php/view.php',{method: 'post', body: postData}).then(res=>res.text()).then(data =>{
         const detailsModal = document.getElementById('details-modal-content');
         detailsModal.innerHTML = data;
     })
 })
 
-//edit/create form modal trigger
+//form modal trigger
 $('#formModal').on('show.bs.modal', function (event) {
     //check product id
     const button = $(event.relatedTarget);
     const productId = button.data('id');
-    const formData = new FormData();
-    formData.append('id',productId);
-
-    if (productId){//fetch form render in edit mode
-        formData.append('mode','Edit');
-        fetch('php/view.php',{method: 'post', body: formData}).then(res=>res.text()).then(data=>{
-            const formModal = document.getElementById('form-modal-content');
-            formModal.innerHTML = data;
-        });
-    }else{//fetch form render in add mode
-        formData.append('mode','Add');
-        fetch('php/view.php',{method: 'post', body: formData}).then(res=>res.text()).then(data=>{
-            const formModal = document.getElementById('form-modal-content');
-            formModal.innerHTML = data;
-        });
+    const postData = new FormData();
+    postData.append('id', productId);
+    let mode;
+    let url;
+    if (productId){//edit mode
+        mode = 'Edit';
+        url = 'php/edit-product.php';
+    }else{//add mode
+        mode = 'Add';
+        url = 'php/create-product.php';
     }
+
+    //fill modal
+    postData.append('mode',mode);
+    fetch('php/view.php',{method: 'post', body: postData}).then(res=>res.text()).then(data=>{
+        const formModal = document.getElementById('form-modal-content');
+        formModal.innerHTML = data;
+        //add submit button event
+        const submit = document.getElementById("form-submit");
+        submit.addEventListener('click',(e)=>{
+            const form = document.querySelector('form');
+            const formData = new FormData(form);
+            fetch(url,{method: 'post', body: formData})
+            // .then(location.reload());
+        });
+    });
 })
 
 //delete modal trigger
@@ -44,10 +54,10 @@ $('#deleteModal').on('show.bs.modal', function (event) {
     const button = $(event.relatedTarget);
     const productId = button.data('id');
     //fetch delete render
-    const formData = new FormData();
-    formData.append('id',productId);
-    formData.append('mode','delete');
-    fetch('php/view.php',{method: 'post', body: formData}).then(res=>res.text()).then(data=>{
+    const postData = new FormData();
+    postData.append('id',productId);
+    postData.append('mode','delete');
+    fetch('php/view.php',{method: 'post', body: postData}).then(res=>res.text()).then(data=>{
         const deleteModal = document.getElementById('delete-modal-content');
         deleteModal.innerHTML = data;
     });
