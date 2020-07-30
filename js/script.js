@@ -8,7 +8,8 @@ $('#detailsModal').on('show.bs.modal', function (event) {
     //fetch details render
     const formData = new FormData();
     formData.append('id',productId);
-    fetch('php/view-details.php',{method: 'post', body: formData}).then(res=>res.text()).then(data =>{
+    formData.append('mode','details');
+    fetch('php/view.php',{method: 'post', body: formData}).then(res=>res.text()).then(data =>{
         const detailsModal = document.getElementById('details-modal-content');
         detailsModal.innerHTML = data;
     })

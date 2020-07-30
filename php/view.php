@@ -10,7 +10,7 @@ if (isset($_POST['mode'])){
 
     if (isset($_POST['id'])){//get product by id
         $id = $_POST['id'];
-        $stmt = $pdo->prepare("SELECT name FROM products WHERE id_products = :id");
+        $stmt = $pdo->prepare("SELECT * FROM products WHERE id_products = :id");
         $stmt->execute([':id'=>$id]);
         $product = $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $product = $stmt->fetch();
@@ -20,6 +20,10 @@ if (isset($_POST['mode'])){
     
     if ($mode == 'delete'){//return delete render
         echo $twig->render( 'delete.html.twig' , $product);
+    }
+
+    if ($mode == 'details'){//return details render
+        echo $twig->render( 'details.html.twig' , $product);
     }
     
 }else{//if no $_POST['mode'], return products table entries for index.php
