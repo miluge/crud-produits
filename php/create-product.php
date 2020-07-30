@@ -26,4 +26,26 @@ if (!empty($_POST)) {
     // Output message
     $msg = 'Product Created Successfully!';
 }
+
+
+// For test purposes 
+
+                    $sql = "INSERT INTO products ( image_id, category_id, manual_id, source_id, name, reference_number, price, buy_date, end_warranty, care_products) VALUES (:image_id, :category_id, :manual_id, :source_id, :name, :reference_number, :price, :buy_date, :end_warranty, :care_products)";
+                    $stmt = $conn->prepare($sql);
+                    
+                    // Bind parameters to statement
+                    $stmt->bindParam(':image_id', $_REQUEST['image_id']);
+                    $stmt->bindParam(':category_id', $_REQUEST['category_id']);
+                    $stmt->bindParam(':manual_id', $_REQUEST['manual_id']);
+                    $stmt->bindParam(':source_id', $_REQUEST['source_id']);
+                    $stmt->bindParam(':name', $_REQUEST['name']);
+                    $stmt->bindParam(':reference_number', $_REQUEST['reference_number']);
+                    $stmt->bindParam(':price', $_REQUEST['price']);
+                    $stmt->bindParam(':buy_date', $_REQUEST['buy_date']);
+                    $stmt->bindParam(':end_warranty', $_REQUEST['end_warranty']);
+                    $stmt->bindParam(':care_products', $_REQUEST['care_products']);
+
+                    
+                    // Execute the prepared statement
+                    $stmt->execute();
 ?>
