@@ -12,3 +12,11 @@ function pdo_connect_mysql() {
     	exit('Failed to connect to database!');
     }
 }
+
+function load_twig(){
+    require_once '../vendor/autoload.php';
+    $loader = new \Twig\Loader\FilesystemLoader('../templates/');
+    return new \Twig\Environment($loader, [
+        'cache' => false,
+    ]);
+}

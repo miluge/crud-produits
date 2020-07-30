@@ -5,46 +5,46 @@ $('#detailsModal').on('show.bs.modal', function (event) {
     //get product id
     const button = $(event.relatedTarget);
     const productId = button.data('id');
-
-    //fetch product details
-    //render details template
-    //insert in details modal
-
-    //add data-id to edit button
-    const editBtn = document.getElementById('edit-btn');
-    editBtn.setAttribute('data-id',productId);
+    //fetch details render
+    const formData = new FormData();
+    formData.append('id',productId);
+    fetch('php/view-details.php',{method: 'post', body: formData}).then(res=>res.text()).then(data =>{
+        const detailsModal = document.getElementById('details-modal-content');
+        detailsModal.innerHTML = data;
+    })
 })
 
 //edit/create form modal trigger
 $('#formModal').on('show.bs.modal', function (event) {
     //check product id
     const button = $(event.relatedTarget);
-    const productId = button.data('id')
-    if (productId){//edit mode
+    const productId = button.data('id');
 
-        //fetch edit-product.php
-        //render form template in 'Edit' mode with product details
-        //insert response in form modal
-
-    }else{
-
-        //fetch add-product.php
-        //render form template in 'Add' mode
-        //insert response in form modal
-
+    if (productId){//fetch form render in edit mode
+        const formData = new FormData();
+        formData.append('id',productId);
+        fetch('php/edit-product.php',{method: 'post', body: formData}).then(res=>res.text()).then(data=>{
+            const formModal = document.getElementById('form-modal-content');
+            formModal.innerHTML = data;
+        });
+    }else{//fetch form render in add mode
+        fetch('php/edit-product.php').then(res=>res.text()).then(data=>{
+            const formModal = document.getElementById('form-modal-content');
+            formModal.innerHTML = data;
+        });
     }
 })
 
 //delete modal trigger
 $('#deleteModal').on('show.bs.modal', function (event) {
-    //get product name and id
+    //get product id
     const button = $(event.relatedTarget);
     const productId = button.data('id');
-    const productName = button.data('name');
-    //add product name
-    const name = document.getElementById('delete-name');
-    name.innerText = productName;
-    //add data-id to delete button
-    const deleteBtn = document.getElementById('delete-btn');
-    deleteBtn.setAttribute('data-id',productId);
+    //fetch delete render
+    const formData = new FormData();
+    formData.append('id',productId);
+    fetch('php/view-delete.php',{method: 'post', body: formData}).then(res=>res.text()).then(data=>{
+        const deleteModal = document.getElementById('delete-modal-content');
+        deleteModal.innerHTML = data;
+    });
 })

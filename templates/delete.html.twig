@@ -6,12 +6,12 @@
     </button>
 </div>
 <div class="modal-body">
-    <p class="text-center large">Are you sure you want to delete <span id="delete-name"></span> ?</p>
+    <p class="text-center large">Are you sure you want to delete {{ name }} ?</p>
 </div>
 <div class="modal-footer">
     <!-- confirm button -->
     <button id="delete-btn" type="button" class="btn btn-danger btn-lg btn-block">Delete</button>
 
     <!-- cancel button -->
-    <button type="button" class="btn btn-primary btn-lg btn-block" data-dismiss="modal">Cancel</button>
+    <button type="button" class="btn btn-primary btn-lg btn-block" data-dismiss="modal" data-id="{{ id_products }}">Cancel</button>
 </div>

@@ -24,21 +24,17 @@
         <!-- form modal -->
         <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalTitle" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <div class="modal-content">
-                <?php //load form template
-                    echo $twig->render( 'form.html.twig' , ['mode' => 'Add' , 'category1' => 'informatic' , 'category2' => 'vehicule' , 'id_products' => '' ,'name' => '' , 'buy-date' => '' , 'price' => '' , 'source' => '' , 'end_warranty' => '' , 'care_products' => '', 'image_product' => '' , 'manual_product' => '']);
-                ?>
+                <div id="form-modal-content" class="modal-content">
+                    <!-- include form template -->
                 </div>
             </div>
         </div>
 
-        <!-- product details modal -->
+        <!-- details modal -->
         <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalTitle" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <div class="modal-content">
-                <?php //load details template
-                    echo $twig->render( 'details.html.twig' , ['name' => 'test' , 'reference_number' => '1234' , 'category' => 'informatic' ,  'buy_date' => '22-08-2016' , 'price' => '365€' , 'source_type' => 'Online' , 'source' => 'ebazaar' , 'end_warranty' => '14-11-2022' , 'care_products' => 'phezoyezoyvznpoeyvpoz', 'image_product' => 'receipt.jpg' , 'manual_product' => 'manual.pdf']);
-                ?>
+                <div id="details-modal-content" class="modal-content">
+                    <!-- include details template -->
                 </div>
             </div>
         </div>
@@ -46,10 +42,8 @@
         <!-- delete modal -->
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                <?php //load delete template
-                    echo $twig->render( 'delete.html.twig');
-                ?>
+                <div id="delete-modal-content" class="modal-content">
+                    <!-- include delete template -->
                 </div>
             </div>
         </div>
