@@ -20,16 +20,18 @@ $('#formModal').on('show.bs.modal', function (event) {
     //check product id
     const button = $(event.relatedTarget);
     const productId = button.data('id');
+    const formData = new FormData();
+    formData.append('id',productId);
 
     if (productId){//fetch form render in edit mode
-        const formData = new FormData();
-        formData.append('id',productId);
-        fetch('php/edit-product.php',{method: 'post', body: formData}).then(res=>res.text()).then(data=>{
+        formData.append('mode','Edit');
+        fetch('php/view.php',{method: 'post', body: formData}).then(res=>res.text()).then(data=>{
             const formModal = document.getElementById('form-modal-content');
             formModal.innerHTML = data;
         });
     }else{//fetch form render in add mode
-        fetch('php/edit-product.php').then(res=>res.text()).then(data=>{
+        formData.append('mode','Add');
+        fetch('php/view.php',{method: 'post', body: formData}).then(res=>res.text()).then(data=>{
             const formModal = document.getElementById('form-modal-content');
             formModal.innerHTML = data;
         });
