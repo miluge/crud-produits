@@ -1,9 +1,9 @@
 <?php
 session_start();
 if(isset($_SESSION['sess_user_id']) && $_SESSION['sess_user_id'] == true) {
-    echo '<h1>Welcome '.$_SESSION['sess_name'].'</h1>';
+    $user = ['user' => $_SESSION['sess_name']];
 } else { 
-    header('location:../login.php');
+    header('location:login.php');
 }
 ?>
 <!DOCTYPE html>
@@ -64,7 +64,7 @@ if(isset($_SESSION['sess_user_id']) && $_SESSION['sess_user_id'] == true) {
                 <a class="navbar-brand" href="index.php">Home</a>
                 
                 <?php //load user template
-                    echo $twig->render( 'user.html.twig' , ['user' => 'Guillaume']);
+                    echo $twig->render( 'user.html.twig' , $user);
                 ?>
             </nav>
         </header>
