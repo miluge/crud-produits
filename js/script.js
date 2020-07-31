@@ -44,6 +44,11 @@ $('#formModal').on('show.bs.modal', function (event) {
             const formData = new FormData(form);
             fetch(url,{method: 'post', body: formData})
             // .then(location.reload());
+            // .then(res=>res.text())
+            // .then(entry=>{
+            //     const table = document.querySelector('#dataTable tbody');
+            //     table.prepend(entry);
+            // });
         });
     });
 })
