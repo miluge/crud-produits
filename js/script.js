@@ -40,8 +40,10 @@ $('#formModal').on('show.bs.modal', function (event) {
         //add submit button event
         const submit = document.getElementById("form-submit");
         submit.addEventListener('click',(e)=>{
+            const id = e.target.getAttribute('data-id');
             const form = document.querySelector('form');
             const formData = new FormData(form);
+            formData.append('id',id);
             fetch(url,{method: 'post', body: formData})
             .then(()=>location.reload());
         });
