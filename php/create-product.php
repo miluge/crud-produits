@@ -24,19 +24,4 @@ if (!empty($_POST)) {
     // Insert new record into the contacts table
     $stmt = $pdo->prepare('INSERT INTO products(image_id, category_id, manual_id, source, id_type, name, reference_number, price, buy_date, end_warranty, care_products) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
     $stmt->execute([$image, $category, $manual, $source, $source_type, $name, $reference_number, $price, $buy_date, $end_warranty, $care_products]);
-
-    // //load twig
-    // require_once '../vendor/autoload.php';
-    // $loader = new \Twig\Loader\FilesystemLoader('../templates/');
-    // $twig = new \Twig\Environment($loader, [
-    //     'cache' => false,
-    // ]);
-
-    // //return new entry
-    // $id = $pdo->lastInsertId();
-    // $stmt = $pdo->prepare("SELECT id_products, img.name AS image , cat.name AS category, man.name AS manual, source, type.name AS source_type, products.name AS name, reference_number, price, buy_date, end_warranty, care_products FROM products INNER JOIN image AS img ON products.image_id = img.id_image INNER JOIN category AS cat ON products.category_id = cat.id_category INNER JOIN manual AS man ON products.manual_id = man.id_manual INNER JOIN type ON products.id_type = type.id_type WHERE id_products = :id");
-    // $stmt->execute([':id'=>$id]);
-    // $product = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-    // $product = $stmt->fetch();
-    // echo $twig->render( 'entry.html.twig' , $product);
 }
