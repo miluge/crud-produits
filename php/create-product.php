@@ -4,15 +4,20 @@ ini_set('display_errors',1);
 
 include 'functions.php';
 
+var_dump($_FILES);
+
 //Connect to db
 $pdo = pdo_connect_mysql();
-// Check if POST data is not empty
-if (!empty($_POST)) {
-    // Post data not empty insert a new record
-    // Check if POST variable exists, if not default the value to blank, basically the same for all variables
-    $image = isset($_POST['image_url']) ? $_POST['image_url'] : '1';
+if (!empty($_POST)) {// Check if POST data is not empty
+
+    if (!empty($_FILES)) {//check if files sent
+        //UPLOAD
+    }
+    //INCLUDE FILE URL IN VARIABLE
+    $image = isset($_FILES['image_url']) ? $_FILES['image_url'] : '1';
+    $manual = isset($_FILES['manual_url']) ? $_FILES['manual_url'] : '1';
+
     $category = isset($_POST['category_id']) ? $_POST['category_id'] : '1';
-    $manual = isset($_POST['manual_url']) ? $_POST['manual_url'] : '1';
     $source_type = isset($_POST['source_type']) ? $_POST['source_type'] : '1';
     $source = isset($_POST['source']) ? $_POST['source'] : '1';
     $name = isset($_POST['name']) ? $_POST['name'] : '1';
