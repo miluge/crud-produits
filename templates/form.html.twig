@@ -93,12 +93,12 @@
             <div class="form-row mb-">
                 <!-- edit image -->
                 <div class="col-4">
-                    {{ image }}
+                    {{ image_url }}
                 </div>
 
                 <!-- edit manual -->
                 <div class="col-4 offset-2">
-                    {{ manual }}
+                    {{ manual_url }}
                 </div>
             </div>
 
@@ -106,14 +106,14 @@
 
                 <!-- receipt image upload -->
                 <div class="col-4 form-group custom-file">
-                    <input type="file" class="custom-file-input" id="image_productInput" name="image_product" required/>
+                    <input type="file" class="custom-file-input" id="image_productInput" name="image_url" required/>
                     <label class="custom-file-label" for="image_productInput">Upload receipt</label>
                     <div class="invalid-feedback">Please upload the receipt</div>
                 </div>
 
                 <!-- manual upload -->
                 <div class="col-4 offset-2 form-group custom-file">
-                    <input type="file" class="custom-file-input" id="manual_productInput" name="manual_product"/>
+                    <input type="file" class="custom-file-input" id="manual_productInput" name="manual_url"/>
                     <label class="custom-file-label" for="manual_productInput">Upload manual</label>
                 </div>
             </div>

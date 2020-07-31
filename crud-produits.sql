@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 31 juil. 2020 à 10:01
+-- Généré le :  ven. 31 juil. 2020 à 12:17
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.3.12
 
@@ -46,56 +46,15 @@ INSERT INTO `category` (`id_category`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `image`
---
-
-DROP TABLE IF EXISTS `image`;
-CREATE TABLE IF NOT EXISTS `image` (
-  `id_image` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `image` varchar(45) NOT NULL,
-  PRIMARY KEY (`id_image`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `image`
---
-
-INSERT INTO `image` (`id_image`, `name`, `image`) VALUES
-(1, 'image1', '');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `manual`
---
-
-DROP TABLE IF EXISTS `manual`;
-CREATE TABLE IF NOT EXISTS `manual` (
-  `id_manual` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id_manual`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `manual`
---
-
-INSERT INTO `manual` (`id_manual`, `name`) VALUES
-(1, 'manual1');
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `products`
 --
 
 DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (
   `id_products` int(11) NOT NULL AUTO_INCREMENT,
-  `image_id` int(11) NOT NULL,
+  `image_url` varchar(45) NOT NULL,
   `category_id` int(11) NOT NULL,
-  `manual_id` int(11) NOT NULL,
+  `manual_url` varchar(45) NOT NULL,
   `source` varchar(45) NOT NULL,
   `id_type` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
@@ -106,17 +65,15 @@ CREATE TABLE IF NOT EXISTS `products` (
   `care_products` text NOT NULL,
   PRIMARY KEY (`id_products`),
   KEY `category_id` (`category_id`),
-  KEY `image_id` (`image_id`),
-  KEY `manual_id` (`manual_id`),
   KEY `id_type` (`id_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `products`
 --
 
-INSERT INTO `products` (`id_products`, `image_id`, `category_id`, `manual_id`, `source`, `id_type`, `name`, `reference_number`, `price`, `buy_date`, `end_warranty`, `care_products`) VALUES
-(13, 1, 2, 1, 'e-shop', 2, 'Prod test', '1111', '499', '2020-07-07', '2020-08-01', 'attention fragile');
+INSERT INTO `products` (`id_products`, `image_url`, `category_id`, `manual_url`, `source`, `id_type`, `name`, `reference_number`, `price`, `buy_date`, `end_warranty`, `care_products`) VALUES
+(16, '1', 1, '1', 'ici', 1, 'TTESTT', '1234', '9000', '2020-07-01', '2020-07-16', 'très fragile');
 
 -- --------------------------------------------------------
 
