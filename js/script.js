@@ -43,7 +43,9 @@ $('#formModal').on('show.bs.modal', function (event) {
             const form = document.querySelector('form');
             const formData = new FormData(form);
             fetch(url,{method: 'post', body: formData})
-            // .then(location.reload());
+            .then(
+                //UPDATE DOM
+            );
         });
     });
 })

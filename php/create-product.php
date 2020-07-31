@@ -3,9 +3,9 @@ error_reporting(E_ALL);
 ini_set('display_errors',1);
 
 include 'functions.php';
+
 //Connect to db
 $pdo = pdo_connect_mysql();
-$msg = '';
 // Check if POST data is not empty
 if (!empty($_POST)) {
     // Post data not empty insert a new record
@@ -25,8 +25,7 @@ if (!empty($_POST)) {
     // Insert new record into the contacts table
     $stmt = $pdo->prepare('INSERT INTO products(image_id, category_id, manual_id, source_id, name, reference_number, price, buy_date, end_warranty, care_products, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
     $stmt->execute([$image, $category, $manual, $source, $name, $reference_number, $price, $buy_date, $end_warranty, $care_products, $user]);
-    // Output message
-    $msg = 'Product Created Successfully!';
+    //RESPONSE
 }
 
 
