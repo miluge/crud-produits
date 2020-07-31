@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 28 juil. 2020 à 15:11
+-- Généré le : ven. 31 juil. 2020 à 08:41
 -- Version du serveur :  10.4.11-MariaDB
 -- Version de PHP : 7.4.6
 
@@ -47,15 +47,16 @@ INSERT INTO `category` (`id_category`, `name`) VALUES
 
 CREATE TABLE `image` (
   `id_image` int(11) NOT NULL,
-  `name` varchar(255) DEFAULT NULL
+  `name` varchar(255) DEFAULT NULL,
+  `image` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `image`
 --
 
-INSERT INTO `image` (`id_image`, `name`) VALUES
-(1, 'Test');
+INSERT INTO `image` (`id_image`, `name`, `image`) VALUES
+(1, 'Test', '');
 
 -- --------------------------------------------------------
 
@@ -86,7 +87,8 @@ CREATE TABLE `products` (
   `image_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `manual_id` int(11) NOT NULL,
-  `source_id` int(11) NOT NULL,
+  `source` int(11) NOT NULL,
+  `id_type` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
   `reference_number` varchar(45) NOT NULL,
   `price` varchar(45) NOT NULL,
@@ -100,8 +102,8 @@ CREATE TABLE `products` (
 -- Déchargement des données de la table `products`
 --
 
-INSERT INTO `products` (`id_products`, `image_id`, `category_id`, `manual_id`, `source_id`, `name`, `reference_number`, `price`, `buy_date`, `end_warranty`, `care_products`, `user_id`) VALUES
-(1, 1, 1, 1, 1, 'Test', '1234', '100', '2020-07-01', '2020-07-02', 'Test care instructions', 0);
+INSERT INTO `products` (`id_products`, `image_id`, `category_id`, `manual_id`, `source`, `id_type`, `name`, `reference_number`, `price`, `buy_date`, `end_warranty`, `care_products`, `user_id`) VALUES
+(1, 1, 1, 1, 1, 0, 'Test', '1234', '100', '2020-07-01', '2020-07-02', 'Test care instructions', 0);
 
 -- --------------------------------------------------------
 
@@ -125,6 +127,17 @@ INSERT INTO `source` (`id_source`, `name`, `type`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `type`
+--
+
+CREATE TABLE `type` (
+  `id_type` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `users`
 --
 
@@ -134,6 +147,14 @@ CREATE TABLE `users` (
   `email` varchar(45) DEFAULT NULL,
   `password` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
+(2, 'John Doe', 'admin@login.com', '12345'),
+(3, 'John Doe', 'admin@login.com', '12345');
 
 --
 -- Index pour les tables déchargées
@@ -165,7 +186,8 @@ ALTER TABLE `products`
   ADD KEY `category_id` (`category_id`),
   ADD KEY `image_id` (`image_id`),
   ADD KEY `manual_id` (`manual_id`),
-  ADD KEY `source_id` (`source_id`),
+  ADD KEY `source_id` (`source`),
+  ADD KEY `id_type` (`id_type`),
   ADD KEY `user_id` (`user_id`);
 
 --
@@ -173,6 +195,12 @@ ALTER TABLE `products`
 --
 ALTER TABLE `source`
   ADD PRIMARY KEY (`id_source`);
+
+--
+-- Index pour la table `type`
+--
+ALTER TABLE `type`
+  ADD PRIMARY KEY (`id_type`);
 
 --
 -- Index pour la table `users`
@@ -215,10 +243,16 @@ ALTER TABLE `source`
   MODIFY `id_source` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT pour la table `type`
+--
+ALTER TABLE `type`
+  MODIFY `id_type` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Contraintes pour les tables déchargées
@@ -246,13 +280,13 @@ ALTER TABLE `manual`
 -- Contraintes pour la table `source`
 --
 ALTER TABLE `source`
-  ADD CONSTRAINT `source_ibfk_1` FOREIGN KEY (`id_source`) REFERENCES `products` (`source_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `source_ibfk_1` FOREIGN KEY (`id_source`) REFERENCES `products` (`source`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `users`
+-- Contraintes pour la table `type`
 --
-ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id`) REFERENCES `products` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `type`
+  ADD CONSTRAINT `type_ibfk_1` FOREIGN KEY (`id_type`) REFERENCES `products` (`id_type`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
