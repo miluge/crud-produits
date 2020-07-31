@@ -20,7 +20,7 @@
                 <!-- category select -->
                 <div class="col-3 form-group">
                     <label class="mb-1" for="categorySelect">Category</label>
-                    <select class="form-control custom" name="category" id="categorySelect" required>
+                    <select class="form-control custom" name="category_id" id="categorySelect" required>
                         {% for category in categories %}
                             <option value="{{ category.id_category }}"
                                 {% if category.id_category == id_category %}
@@ -60,8 +60,8 @@
                 <div class="col-2 form-group">
                 <label class="mb-1" for="source_typeSelect">Purchase type</label>
                     <select class="form-control custom" name="source_type" id="source_typeSelect" required>
-                        <option value="offline">Offline</option>
-                        <option value="online">Online</option>
+                        <option value="1">Offline</option>
+                        <option value="2">Online</option>
                     </select>
                     <div class="invalid-feedback">Please choose the purchase type</div>
                 </div>
@@ -122,5 +122,5 @@
 </div>
 <div class="modal-footer">
     <!-- submit button -->
-    <button type="button" name="submit" class="btn btn-primary btn-lg btn-block" data-mode={{ mode }} data-id={{ id_products }}>{{ mode }} product</button>
+    <button type="button" id="form-submit" class="btn btn-primary btn-lg btn-block" data-id={{ id_products }}>{{ mode }} product</button>
 </div>
