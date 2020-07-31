@@ -29,7 +29,6 @@ if (!empty($_POST)) {
 
 
 // For test purposes 
-
                     $sql = "INSERT INTO products ( image_id, category_id, manual_id, source_id, name, reference_number, price, buy_date, end_warranty, care_products) VALUES (:image_id, :category_id, :manual_id, :source_id, :name, :reference_number, :price, :buy_date, :end_warranty, :care_products)";
                     $stmt = $conn->prepare($sql);
                     

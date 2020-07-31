@@ -23,10 +23,12 @@ try {
                   )  
              );  
              $count = $statement->rowCount();  
+             
              if($count > 0)  
              {  
+                
                   $_SESSION["email"] = $_POST["email"];  
-                  header("location:dashboard.php");  
+                  header("location:index.php");  
              }  
              else  
              {  
