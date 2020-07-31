@@ -10196,9 +10196,6 @@ body {
 #product-list .card-body {
   padding: 2rem;
 }
-#product-list .custom-select {
-  background: none;
-}
 #product-list table.dataTable {
   margin-top: 1.25rem !important;
 }
