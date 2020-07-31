@@ -43,7 +43,7 @@ if (isset($_POST['mode'])){
 }else{//if no $_POST['mode'], return products table entries for index.php
 
     // Prepare the SQL statement and get records from products table
-    $stmt = $pdo->prepare('SELECT id_products, img.name AS image , cat.name AS category , man.name AS manual, src.name AS source, products.name, reference_number, price, buy_date, end_warranty, care_products FROM products INNER JOIN image AS img ON products.image_id = img.id_image INNER JOIN category AS cat ON products.category_id = cat.id_category INNER JOIN manual AS man ON products.manual_id = man.id_manual INNER JOIN source AS src ON products.source_id = src.id_source');
+    $stmt = $pdo->prepare('SELECT cat.name AS category , id_products, products.name AS name, reference_number, price, buy_date FROM products INNER JOIN category AS cat ON products.category_id = cat.id_category');
     $stmt->execute();
     // Fetch the records so we can display them in template
     $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
