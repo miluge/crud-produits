@@ -53,12 +53,20 @@ $('#deleteModal').on('show.bs.modal', function (event) {
     //get product id
     const button = $(event.relatedTarget);
     const productId = button.data('id');
-    //fetch delete render
+    //fill delete render
     const postData = new FormData();
-    postData.append('id',productId);
     postData.append('mode','delete');
+    postData.append('id',productId);
     fetch('php/view.php',{method: 'post', body: postData}).then(res=>res.text()).then(data=>{
         const deleteModal = document.getElementById('delete-modal-content');
         deleteModal.innerHTML = data;
+        //add delete button event
+        const deleteBtn = document.getElementById("delete-btn");
+        deleteBtn.addEventListener('click',(e)=>{
+            const formData = new FormData();
+            formData.append('id', productId);
+            fetch('php/delete-product.php',{method: 'post', body: formData})
+            .then(()=>location.reload());
+        });
     });
 })
