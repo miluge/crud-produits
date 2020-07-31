@@ -1,48 +1,78 @@
 <?php
 session_start();
-require_once 'php/dbconfig.php';
+// require_once 'php/dbconfig.php';
+require_once 'php/functions.php';
+$pdo = pdo_connect_mysql();
 $message="";
 
-try {
-    $connect = new PDO("mysql:host=$host; dbname=$db", $username, $password);
-    $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  
-      if(isset($_POST["login"])) 
-      {  
-        if(empty($_POST["email"]) || empty($_POST["password"]))  
-        {  
-             $message = '<label>All fields are required</label>';  
-        }  
-        else  
-        {  
-             $query = "SELECT * FROM users WHERE email = :email AND password = :password";  
-             $statement = $connect->prepare($query);  
-             $statement->execute(  
-                  array(  
-                       'email'     =>     $_POST["email"],  
-                       'password'     =>     $_POST["password"]  
-                  )  
-             );  
-             $count = $statement->rowCount();  
+// try {
+//     $connect = new PDO("mysql:host=$host; dbname=$db", $username, $password);
+//     $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  
+//       if(isset($_POST["login"])) 
+//       {  
+//         if(empty($_POST["email"]) || empty($_POST["password"]))  
+//         {  
+//              $message = '<label>All fields are required</label>';  
+//         }  
+//         else  
+//         {  
+//              $query = "SELECT * FROM users WHERE email = :email AND password = :password";  
+//              $statement = $connect->prepare($query);  
+//              $statement->execute(  
+//                   array(  
+//                        'email'     =>     $_POST["email"],  
+//                        'password'     =>     $_POST["password"]  
+//                   )  
+//              );  
+//              $count = $statement->rowCount();  
              
-             if($count > 0)  
-             {  
+//              if($count > 0)  
+//              {  
                 
-                  $_SESSION["email"] = $_POST["email"];  
-                  header("location:index.php");  
-             }  
-             else  
-             {  
-                  $message = '<label>Username and/or password is incorrect</label>';  
-             }  
-        }  
-   }  
-}  
-catch(PDOException $error)  
-{  
-   $message = $error->getMessage();  
-}  
-
-?>  
+//                   $_SESSION["email"] = $_POST["email"];  
+//                   header("location:index.php");  
+//              }  
+//              else  
+//              {  
+//                   $message = '<label>Username and/or password is incorrect</label>';  
+//              }  
+//         }  
+//    }  
+// }  
+// catch(PDOException $error)  
+// {  
+//    $message = $error->getMessage();  
+// }  
+if(isset($_POST['login'])) {
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
+    if($email != "" && $password != "") {
+      try {
+        $sql = "select * from `users` where `email`=:email and `password`=:password";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam('email', $email, PDO::PARAM_STR);
+        $stmt->bindValue('password', $password, PDO::PARAM_STR);
+        $stmt->execute();
+        $count = $stmt->rowCount();
+        $row   = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($count == 1 && !empty($row)) {
+          
+          $_SESSION['sess_user_id']   = $row['id'];
+          $_SESSION['sess_email'] = $row['email'];
+          $_SESSION['sess_name'] = $row['name'];
+          header("location:index.php"); 
+         
+        } else {
+          $msg = "Invalid username and password!";
+        }
+      } catch (PDOException $e) {
+        echo "Error : ".$e->getMessage();
+      }
+    } else {
+      $msg = "Both fields are required!";
+    }
+  }
+  ?> 
 <!DOCTYPE html>
 <html lang="en">
     <head>
