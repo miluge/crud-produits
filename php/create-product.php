@@ -14,38 +14,29 @@ if (!empty($_POST)) {
     $category = isset($_POST['category_id']) ? $_POST['category_id'] : '1';
     $manual = isset($_POST['manual_id']) ? $_POST['manual_id'] : '1';
     $source_type = isset($_POST['source_type']) ? $_POST['source_type'] : '1';
-    $source = isset($_POST['source_id']) ? $_POST['source_id'] : '1';
+    $source = isset($_POST['source']) ? $_POST['source'] : '1';
     $name = isset($_POST['name']) ? $_POST['name'] : '1';
     $reference_number = isset($_POST['reference_number']) ? $_POST['reference_number'] : '1';
     $price = isset($_POST['price']) ? $_POST['price'] : '1';
     $buy_date = isset($_POST['buy_date']) ? $_POST['buy_date'] : '2020-12-12';
     $end_warranty = isset($_POST['end_warranty']) ? $_POST['end_warranty'] : '2020-12-12';
     $care_products = isset($_POST['care_products']) ? $_POST['care_products'] : '1';
-    $user = '1';
     // Insert new record into the contacts table
-    $stmt = $pdo->prepare('INSERT INTO products(image_id, category_id, manual_id, source_id, name, reference_number, price, buy_date, end_warranty, care_products, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-    $stmt->execute([$image, $category, $manual, $source, $name, $reference_number, $price, $buy_date, $end_warranty, $care_products, $user]);
-    //RESPONSE
+    $stmt = $pdo->prepare('INSERT INTO products(image_id, category_id, manual_id, source, id_type, name, reference_number, price, buy_date, end_warranty, care_products) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $stmt->execute([$image, $category, $manual, $source, $source_type, $name, $reference_number, $price, $buy_date, $end_warranty, $care_products]);
+
+    // //load twig
+    // require_once '../vendor/autoload.php';
+    // $loader = new \Twig\Loader\FilesystemLoader('../templates/');
+    // $twig = new \Twig\Environment($loader, [
+    //     'cache' => false,
+    // ]);
+
+    // //return new entry
+    // $id = $pdo->lastInsertId();
+    // $stmt = $pdo->prepare("SELECT id_products, img.name AS image , cat.name AS category, man.name AS manual, source, type.name AS source_type, products.name AS name, reference_number, price, buy_date, end_warranty, care_products FROM products INNER JOIN image AS img ON products.image_id = img.id_image INNER JOIN category AS cat ON products.category_id = cat.id_category INNER JOIN manual AS man ON products.manual_id = man.id_manual INNER JOIN type ON products.id_type = type.id_type WHERE id_products = :id");
+    // $stmt->execute([':id'=>$id]);
+    // $product = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    // $product = $stmt->fetch();
+    // echo $twig->render( 'entry.html.twig' , $product);
 }
-
-
-// // For test purposes 
-
-// $sql = "INSERT INTO products ( image_id, category_id, manual_id, source_id, name, reference_number, price, buy_date, end_warranty, care_products) VALUES (:image_id, :category_id, :manual_id, :source_id, :name, :reference_number, :price, :buy_date, :end_warranty, :care_products)";
-// $stmt = $conn->prepare($sql);
-
-// // Bind parameters to statement
-// $stmt->bindParam(':image_id', $_REQUEST['image_id']);
-// $stmt->bindParam(':category_id', $_REQUEST['category_id']);
-// $stmt->bindParam(':manual_id', $_REQUEST['manual_id']);
-// $stmt->bindParam(':source_id', $_REQUEST['source_id']);
-// $stmt->bindParam(':name', $_REQUEST['name']);
-// $stmt->bindParam(':reference_number', $_REQUEST['reference_number']);
-// $stmt->bindParam(':price', $_REQUEST['price']);
-// $stmt->bindParam(':buy_date', $_REQUEST['buy_date']);
-// $stmt->bindParam(':end_warranty', $_REQUEST['end_warranty']);
-// $stmt->bindParam(':care_products', $_REQUEST['care_products']);
-
-
-// // Execute the prepared statement
-// $stmt->execute();
