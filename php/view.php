@@ -16,7 +16,7 @@ if (isset($_POST['mode'])){
 
     if (isset($_POST['id'])){//get product by id
         $id = $_POST['id'];
-        $stmt = $pdo->prepare("SELECT id_products, img.name AS image , cat.name AS category, cat.id_category AS id_category , man.name AS manual, src.name AS source, products.name, reference_number, price, buy_date, end_warranty, care_products FROM products INNER JOIN image AS img ON products.image_id = img.id_image INNER JOIN category AS cat ON products.category_id = cat.id_category INNER JOIN manual AS man ON products.manual_id = man.id_manual INNER JOIN source AS src ON products.source_id = src.id_source WHERE id_products = :id");
+        $stmt = $pdo->prepare("SELECT id_products, img.name AS image , cat.name AS category, man.name AS manual, source, type.name AS source_type, products.name AS name, reference_number, price, buy_date, end_warranty, care_products FROM products INNER JOIN image AS img ON products.image_id = img.id_image INNER JOIN category AS cat ON products.category_id = cat.id_category INNER JOIN manual AS man ON products.manual_id = man.id_manual INNER JOIN type ON products.id_type = type.id_type WHERE id_products = :id");
         $stmt->execute([':id'=>$id]);
         $product = $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $product = $stmt->fetch();
