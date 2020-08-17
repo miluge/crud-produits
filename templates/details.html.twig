@@ -1,107 +1,42 @@
 <div class="modal-header mb-2">
     <!-- product details title -->
-    <h2 class="modal-title">Product details</h2>
+    <h2 class="modal-title text-uppercase font-weight-bold text-primary">{{ name }}</h2>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
     <span aria-hidden="true">&times;</span>
     </button>
 </div>
 <div class="modal-body">
     <div class="container-fluid">
-        <div class="row mb-3">
-            <!-- name -->
-            <div class="col-5">
-                <div class="details-box">
-                    <p class="mb-1">Product name</p>
-                    <p class="large">{{ name }}</p>
-                </div>
-            </div>
-
-            <!-- category -->
-            <div class="col-3">
-                <div class="details-box">
-                    <p class="mb-1">Category</p>
-                    <p class="large">{{ category }}</p>
-                </div>
-            </div>
-            
-            <!-- reference -->
-            <div class="col-4">
-                <div class="details-box">
-                    <p class="mb-1">Reference number</p>
-                    <p class="large">{{ reference_number }}</p>
-                </div>
+        <!-- name reference category-->
+        <div class="pb-3 border-bottom">
+            <p class="h3 font-weight-bold">Reference</p>
+            <div class="d-flex justify-content-between">
+                <p class="h5"><span class="text-secondary">Category :</span> {{ category }}</p>
+                <p class="h5"><span class="text-secondary">Reference number :</span> {{ reference_number }}</p>
             </div>
         </div>
 
-        <div class="row mb-3">
-            <!-- buy date -->
-            <div class="col-3">
-                <div class="details-box">
-                    <p class="mb-1">Buy date</p>
-                    <p class="large">{{ buy_date }}</p>
-                </div>
-            </div>
-
-            <!-- price -->
-            <div class="col-2">
-                <div class="details-box">
-                    <p class="mb-1">Price</p>
-                    <p class="large">{{ price }}</p>
-                </div>
-            </div>
-
-            <!-- source type -->
-            <div class="col-3">
-                <div class="details-box">
-                    <p class="mb-1">Purchase type</p>
-                    <p class="large">{{ source_type }}</p>
-                </div>
-            </div>
-
-            <!-- source -->
-            <div class="col-4">
-                <div class="details-box">
-                    <p class="mb-1">Purchase location</p>
-                    <p class="large">{{ source }}</p>
-                </div>
+        <!-- purchase details -->
+        <div class="py-3 border-bottom">
+            <p class="h3 font-weight-bold">Purchase details</p>
+            <div class="d-flex justify-content-between">
+                <p class="h5">
+                    <span class="text-secondary">Purchase location :</span> {{ source }} ({{ source_type }})<br/>
+                    <span class="text-secondary">Price :</span> {{ price }} €
+                </p>
+                <p class="h5"><span class="text-secondary">Date :</span> {{ buy_date }}</p>
             </div>
         </div>
 
-        <div class="row mb-3">
-            <!-- end warranty -->
-            <div class="col-4">
-                <div class="details-box">
-                    <p class="mb-1">End of warranty date</p>
-                    <p class="large">{{ end_warranty }}</p>
-                </div>
+        <!-- product details -->
+        <div class="py-3">
+            <p class="h3 font-weight-bold">Product details</p>
+            <div class="d-flex justify-content-between">
+                <p class="h5"><span class="text-secondary">Receipt :</span> {{ image }}</p>
+                <p class="h5"><span class="text-secondary">Manual :</span> {{ manual }}</p>
             </div>
-
-            <!-- care products -->
-            <div class="col-8">
-                <div class="details-box">
-                    <p class="mb-1">Product maintenance advice</p>
-                    <p class="large">{{ care_products }}</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mb-2">
-            <!-- receipt image -->
-            <div class="col-4">
-                <div class="details-box">
-                    <p class="mb-1">Receipt</p>
-                    <p class="large">{{ image }}</p>
-                </div>
-            </div>
-
-
-            <!-- manual -->
-            <div class="col-4 offset-2">
-                <div class="details-box">
-                    <p class="mb-1">Manual</p>
-                    <p class="large">{{ manual }}</p>
-                </div>
-            </div>
+            <p class="h5"><span class="text-secondary">End of warranty :</span> {{ end_warranty }}</p>
+            <p class="h5"><span class="text-secondary">Maintenance advice :</span> {{ care_products }}</p>
         </div>
     </div>
 </div>
