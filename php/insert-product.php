@@ -2,7 +2,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors',1);
 
-var_dump($_FILES);
+require('vendor/autoload.php');
+use Respect\Validation\Validator as v;
 
 include 'functions.php';
 $pdo = pdo_connect_mysql();
@@ -24,82 +25,85 @@ $buy_date = isset($_POST['buy_date']) ? $_POST['buy_date'] : '';
 $end_warranty = isset($_POST['end_warranty']) ? $_POST['end_warranty'] : '';
 $care_products = isset($_POST['care_products']) ? $_POST['care_products'] : '';
 
+
+$is_name = v::alnum(' ')->validate($name);
+if ($is_name) {
+
+    echo "Validation passed";
+} else {
+
+    echo "Validation failed";
+}
+
+$is_category = v::alnum(' ')->validate($category);
+if ($is_category) {
+
+    echo "Validation passed";
+} else {
+
+    echo "Validation failed";
+}
+
+$is_price = v::number()->validate($price);
+if ($is_category) {
+
+    echo "Validation passed";
+} else {
+
+    echo "Validation failed";
+}
+
+$is_source = v::alnum()->validate($price);
+if ($is_category) {
+
+    echo "Validation passed";
+} else {
+
+    echo "Validation failed";
+}
+
+$is_buydate = v::date()->validate($buy_date);
+if ($is_buydate) {
+
+    echo "Validation passed";
+} else {
+
+    echo "Validation failed";
+}
+
+$is_endwarranty = v::date()->greaterThan($buy_date);
+$is_endwarranty->validate($end_warranty);
+if ($is_endwarranty) {
+
+    echo "Validation passed";
+} else {
+
+    echo "Validation failed";
+}
+
+$is_careproducts = v::alnum(' ')->validate($care_products);
+if ($is_careproducts) {
+
+    echo "Validation passed";
+} else {
+
+    echo "Validation failed";
+}
+
+$is_reference = v::alnum(' ')->validate($reference_number);
+if ($is_reference) {
+
+    echo "Validation passed";
+} else {
+
+    echo "Validation failed";
+}
+
+
 // Execute the prepared statement
 $stmt->execute();
 $msg = 'Created Successfully!'; 
 
-// if(isset($_POST['submit'])){
-
-//     // Prepared statement
-//     $sql = "INSERT INTO products (image_url) VALUES(?)";
-    
-  
-//     $statement = $pdo->prepare($sql);
-//       // File name
-//       $filename = $_FILES['image_url']['name'][$i];
-  
-//       // Location
-//       $target_file = 'uploads/images'.$filename;
-  
-//       // file extension
-//       $file_extension = pathinfo($target_file, PATHINFO_EXTENSION);
-//       $file_extension = strtolower($file_extension);
-  
-//       // Valid image extension
-//       $valid_extension_img = array("png","jpeg","jpg");
-  
-//       if(in_array($file_extension, $valid_extension)){
-  
-//          // Upload file
-//          if(move_uploaded_file($_FILES['image_url']['tmp_name'][$i],$target_file)){
-
-//         $image_url = isset($_POST['image_url']) ? $_POST['image_url'] : '';  
-//             // Execute query
-//         $statement->execute(array($filename,$target_file));
-  
-//       }
-//     }
-//     echo "File upload successfully";
-//   }
-
-// ----------------------------------------------------------------------------------------------------------------------------
-
-//   if(isset($_POST['submit'])){
-
-//     // Prepared statement
-//     $sql = "INSERT INTO manual (name) VALUES(?)";
-    
-  
-//     $statement = $conn->prepare($sql)
-  
-//       // File name
-//       $filename = $_FILES['manual_url']['name'][$i];
-  
-//       // Location
-//       $target_file = 'uploads/manuals'.$filename;
-  
-//       // file extension
-//       $file_extension = pathinfo($target_file, PATHINFO_EXTENSION);
-//       $file_extension = strtolower($file_extension);
-  
-//       // Valid image extension
-//       $valid_extension_img = array("pdf","txt");
-  
-//       if(in_array($file_extension, $valid_extension)){
-  
-//          // Upload file
-//          if(move_uploaded_file($_FILES['files']['tmp_name'][$i],$target_file)){
-  
-//             // Execute query
-//         $statement->execute(array($filename,$target_file));
-  
-//       }
-//     }
-//     echo "File upload successfully";
-//   }
-// }
-
-if(isset($_POST["submit"])) {
   // Set image placement folder
   $target_dir = "uploads/images";
   // Get file path
@@ -148,4 +152,3 @@ if(isset($_POST["submit"])) {
       }
   }
 
-}
