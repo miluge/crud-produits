@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 31 juil. 2020 à 12:17
+-- Généré le :  lun. 17 août 2020 à 09:32
 -- Version du serveur :  10.4.10-MariaDB
--- Version de PHP :  7.3.12
+-- Version de PHP :  7.4.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -66,14 +66,22 @@ CREATE TABLE IF NOT EXISTS `products` (
   PRIMARY KEY (`id_products`),
   KEY `category_id` (`category_id`),
   KEY `id_type` (`id_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `products`
 --
 
 INSERT INTO `products` (`id_products`, `image_url`, `category_id`, `manual_url`, `source`, `id_type`, `name`, `reference_number`, `price`, `buy_date`, `end_warranty`, `care_products`) VALUES
-(16, '1', 1, '1', 'ici', 1, 'TTESTT', '1234', '9000', '2020-07-01', '2020-07-16', 'très fragile');
+(16, '1', 1, '1', 'ici', 1, 'TTESTT', '1234', '9000', '2020-07-01', '2020-07-16', 'très fragile'),
+(19, '1', 1, '1', 'evhuia', 1, 'Guillaume', '1212', '123', '2020-07-16', '2020-07-11', 'rvrzvr'),
+(20, '1', 1, '1', 'qvqeb', 1, 'excursion test', '1212', '111', '2020-07-01', '2020-07-29', 'zefe'),
+(21, '1', 1, '1', 'qvqeb', 1, 'excursion test', '1212', '111', '2020-07-01', '2020-07-29', 'zefe'),
+(22, '1', 1, '1', 'qvqeb', 1, 'excursion test', '1212', '111', '2020-07-01', '2020-07-29', 'zefe'),
+(23, '1', 1, '1', 'qvqeb', 1, 'excursion test', '1212', '111', '2020-07-01', '2020-07-29', 'zefe'),
+(24, 'Array', 2, 'Array', 'efaevea', 1, 'OYUDONPZYD', '1233', '222', '2020-08-27', '2020-08-30', 'eavveve'),
+(25, 'Array', 1, 'Array', 'cav', 1, 'TEEEEEETS', 'evaev', '344', '2020-08-07', '2020-08-21', 'aeveav'),
+(26, 'Array', 2, 'Array', 'here.com', 2, 'local test', '777', '233', '2020-08-21', '2020-09-06', 'fragile');
 
 -- --------------------------------------------------------
 
@@ -86,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `type` (
   `id_type` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`id_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `type`
