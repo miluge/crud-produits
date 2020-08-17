@@ -55,7 +55,7 @@ if(isset($_POST['login'])) {
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                                    <div class="card-header"><h3 class="h1 font-weight-bold text-primary text-center my-4">Login</h3></div>
                                     <div class="card-body">
                                         <form method="post" action="">
                                             <div class="form-group">
