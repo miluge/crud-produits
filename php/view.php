@@ -1,10 +1,5 @@
 <?php
-
-include 'functions.php';
-//database connection
-$pdo = pdo_connect_mysql();
-
-if (isset($_POST['mode'])){
+if (isset($_POST['mode'])){//if $_POST['mode] via AJAX, echo twig template for modal
     $mode = $_POST['mode'];
     
     //load twig
@@ -13,6 +8,10 @@ if (isset($_POST['mode'])){
     $twig = new \Twig\Environment($loader, [
         'cache' => false,
     ]);
+
+    //connect to db
+    require_once('functions.php');
+    $pdo = pdo_connect_mysql();
 
     if (isset($_POST['id'])){//get product by id
         $id = $_POST['id'];

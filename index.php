@@ -1,9 +1,17 @@
 <?php
-session_start();
-if(isset($_SESSION['sess_user_id']) && $_SESSION['sess_user_id'] == true) {
-    $user = ['user' => $_SESSION['sess_name']];
-} else { 
+require_once('php/functions.php');
+$user = check_user();
+if(!$user) {//if not connected: redirect to login
     header('location:login.php');
+}else{
+    //load twig
+    require_once 'vendor/autoload.php';
+    $loader = new \Twig\Loader\FilesystemLoader('templates/');
+    $twig = new \Twig\Environment($loader, [
+        'cache' => false,
+    ]);
+    //connect to db
+    $pdo = pdo_connect_mysql();
 }
 ?>
 <!DOCTYPE html>
@@ -20,14 +28,6 @@ if(isset($_SESSION['sess_user_id']) && $_SESSION['sess_user_id'] == true) {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
-        <?php
-        // load twig
-        require_once 'vendor/autoload.php';
-        $loader = new \Twig\Loader\FilesystemLoader('templates/');
-        $twig = new \Twig\Environment($loader, [
-            'cache' => false,
-        ]);
-        ?>
 
         <!-- form modal -->
         <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalTitle" aria-hidden="true">

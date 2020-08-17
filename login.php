@@ -4,7 +4,7 @@ require_once 'php/functions.php';
 $pdo = pdo_connect_mysql();
 $msg="";
 
-if(isset($_POST['login'])) {
+if(isset($_POST['login'])) {//check if login is successfull
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
     if($email != "" && $password != "") {
@@ -17,12 +17,7 @@ if(isset($_POST['login'])) {
         $count = $stmt->rowCount();
         $row   = $stmt->fetch(PDO::FETCH_ASSOC);
         if($count == 1 && !empty($row)) {
-          
-          $_SESSION['sess_user_id']   = $row['id'];
-          $_SESSION['sess_email'] = $row['email'];
           $_SESSION['sess_name'] = $row['name'];
-          header("location:index.php"); 
-         
         } else {
           $msg = "Invalid username and password!";
         }
@@ -32,6 +27,10 @@ if(isset($_POST['login'])) {
     } else {
       $msg = "Both fields are required!";
     }
+}
+
+if (isset($_SESSION['sess_name'])){//if logged, redirect to index.php
+    header("location:index.php"); 
 }
 ?> 
 
@@ -73,7 +72,7 @@ if(isset($_POST['login'])) {
                                                 </div>
                                             </div>
                                             <div class="form-group mt-4 mb-0">
-                                                <input class="btn btn-primary btn-lg btn-block" name="login" href="index.php" type="submit" value="Login"/>
+                                                <input class="btn btn-primary btn-lg btn-block" name="login" type="submit" value="Login"/>
                                             </div>
                                         </form>
                                     </div>
