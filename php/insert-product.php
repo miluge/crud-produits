@@ -12,30 +12,6 @@ $id = isset($_POST['id']) && !empty($_POST['id']) && $_POST['id'] != 'auto' ? $_
 $sql = "INSERT INTO products ( image_url, category_id, manual_url, source_id, name, reference_number, price, buy_date, end_warranty, care_products) VALUES (:image_url, :category_id, :manual_url, :source_id, :name, :reference_number, :price, :buy_date, :end_warranty, :care_products)";
 $stmt = $pdo->prepare($sql);
 
-$filename = $_FILES['image_url']['name'][$i];
-  
-      // Location
-      $target_file = 'uploads/images'.$filename;
-  
-      // file extension
-      $file_extension = pathinfo($target_file, PATHINFO_EXTENSION);
-      $file_extension = strtolower($file_extension);
-  
-      // Valid image extension
-      $valid_extension_img = array("png","jpeg","jpg");
-  
-      if(in_array($file_extension, $valid_extension)){
-  
-         // Upload file
-         if(move_uploaded_file($_FILES['image_url']['tmp_name'][$i],$target_file)){
-
-        $image_url = isset($_POST['image_url']) ? $_POST['image_url'] : '';  
-            // Execute query
-        $statement->execute(array($filename,$target_file));
-  
-      }
-    }
-
 // Bind parameters to statement
 $image_url = isset($_POST['image_url']) ? $_POST['image_url'] : '';
 $category = isset($_POST['category_id']) ? $_POST['category_id'] : '';
@@ -144,7 +120,7 @@ if(isset($_POST["submit"])) {
           "status" => "alert-danger",
           "message" => "Allowed file formats .jpg, .jpeg and .png."
       );            
-  } else if ($_FILES["fileUpload"]["size"] > 2097152) {
+  } else if ($_FILES["image_url"]["size"] > 2097152) {
       $resMessage = array(
           "status" => "alert-danger",
           "message" => "File is too large. File size should be less than 2 megabytes."
