@@ -167,3 +167,4 @@ if(isset($_POST['submit'])){
     }
     echo "File upload successfully";
   }
+}
