@@ -1,48 +1,9 @@
 <?php
 session_start();
-// require_once 'php/dbconfig.php';
 require_once 'php/functions.php';
 $pdo = pdo_connect_mysql();
-$message="";
+$msg="";
 
-// try {
-//     $connect = new PDO("mysql:host=$host; dbname=$db", $username, $password);
-//     $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  
-//       if(isset($_POST["login"])) 
-//       {  
-//         if(empty($_POST["email"]) || empty($_POST["password"]))  
-//         {  
-//              $message = '<label>All fields are required</label>';  
-//         }  
-//         else  
-//         {  
-//              $query = "SELECT * FROM users WHERE email = :email AND password = :password";  
-//              $statement = $connect->prepare($query);  
-//              $statement->execute(  
-//                   array(  
-//                        'email'     =>     $_POST["email"],  
-//                        'password'     =>     $_POST["password"]  
-//                   )  
-//              );  
-//              $count = $statement->rowCount();  
-             
-//              if($count > 0)  
-//              {  
-                
-//                   $_SESSION["email"] = $_POST["email"];  
-//                   header("location:index.php");  
-//              }  
-//              else  
-//              {  
-//                   $message = '<label>Username and/or password is incorrect</label>';  
-//              }  
-//         }  
-//    }  
-// }  
-// catch(PDOException $error)  
-// {  
-//    $message = $error->getMessage();  
-// }  
 if(isset($_POST['login'])) {
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
@@ -71,8 +32,9 @@ if(isset($_POST['login'])) {
     } else {
       $msg = "Both fields are required!";
     }
-  }
-  ?> 
+}
+?> 
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -114,9 +76,6 @@ if(isset($_POST['login'])) {
                                                 <input class="btn btn-primary btn-lg btn-block" name="login" href="index.php" type="submit" value="Login"/>
                                             </div>
                                         </form>
-                                    </div>
-                                    <div class="card-footer text-center">
-                                        <div class="small"><a href="register.php">Need an account? Sign up!</a></div>
                                     </div>
                                 </div>
                             </div>
