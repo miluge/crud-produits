@@ -65,12 +65,6 @@ if (isset($_SESSION['sess_name'])){//if logged, redirect to index.php
                                                 <label class="mb-1" for="inputPassword">Password</label>
                                                 <input class="form-control py-4" id="inputPassword" name="password" type="password" placeholder="Enter password" />
                                             </div>
-                                            <div class="form-group">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox"/>
-                                                    <label class="custom-control-label" for="rememberPasswordCheck">Remember password</label>
-                                                </div>
-                                            </div>
                                             <div class="form-group mt-4 mb-0">
                                                 <input class="btn btn-primary btn-lg btn-block" name="login" type="submit" value="Login"/>
                                             </div>
