@@ -13,9 +13,9 @@ $sql = "INSERT INTO products ( image_url, category_id, manual_url, source_id, na
 $stmt = $pdo->prepare($sql);
             
 // Bind parameters to statement
-$image = isset($_POST['image_url']) ? $_POST['image_url'] : '';
+$image_url = isset($_POST['image_url']) ? $_POST['image_url'] : '';
 $category = isset($_POST['category_id']) ? $_POST['category_id'] : '';
-$manual = isset($_POST['manual_url']) ? $_POST['manual_url'] : '';
+$manual_url = isset($_POST['manual_url']) ? $_POST['manual_url'] : '';
 $source = isset($_POST['source_id']) ? $_POST['source_id'] : '';
 $name = isset($_POST['name']) ? $_POST['name'] : '';
 $reference_number = isset($_POST['reference_number']) ? $_POST['reference_number'] : '';
@@ -34,7 +34,7 @@ if(isset($_POST['submit'])){
     $sql = "INSERT INTO products (image_url) VALUES(?)";
     
   
-    $statement = $conn->prepare($sql);
+    $statement = $pdo->prepare($sql);
       // File name
       $filename = $_FILES['image_url']['name'][$i];
   
@@ -52,7 +52,8 @@ if(isset($_POST['submit'])){
   
          // Upload file
          if(move_uploaded_file($_FILES['image_url']['tmp_name'][$i],$target_file)){
-  
+
+        $image_url = isset($_POST['image_url']) ? $_POST['image_url'] : '';  
             // Execute query
         $statement->execute(array($filename,$target_file));
   
