@@ -12,3 +12,12 @@ function pdo_connect_mysql() {
     	exit('Failed to connect to database!');
     }
 }
+
+function check_user(){
+    session_start();
+    if(isset($_SESSION['sess_name'])) {
+        return ['user' => $_SESSION['sess_name']];
+    } else { 
+        return false;
+    }
+}
