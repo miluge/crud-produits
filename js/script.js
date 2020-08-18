@@ -153,7 +153,7 @@ $('#formModal').on('show.bs.modal', function (event) {
                     }
 
                     //manage care_products error notification
-                    const care_productsInput = document.getElementById("nameInput");
+                    const care_productsInput = document.getElementById("care_productsInput");
                     if (errors.care_products){
                         care_productsInput.classList.add("is-invalid");
                         care_productsInput.nextElementSibling.innerHTML = errors.care_products;
