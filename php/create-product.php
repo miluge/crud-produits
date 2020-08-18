@@ -107,8 +107,12 @@ if (!empty($_POST)) {// Check if POST data is not empty
 $stmt->execute();
 $msg = 'Created Successfully!'; 
 
+
+
+
+
   // Set image placement folder
-  $target_dir = "uploads/images";
+  $target_dir = "../uploads/images";
   // Get file path
   $target_file = $target_dir . basename($_FILES["image_url"]["name"]);
   // Get file extension
@@ -140,7 +144,7 @@ $msg = 'Created Successfully!';
   } else {
       if (move_uploaded_file($_FILES["image_url"]["tmp_name"], $target_file)) {
           $sql = "INSERT INTO products (image_url) VALUES ('$target_file')";
-          $stmt = $conn->prepare($sql);
+          $stmt = $pdo->prepare($sql);
            if($stmt->execute()){
               $resMessage = array(
                   "status" => "alert-success",

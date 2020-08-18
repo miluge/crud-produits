@@ -104,51 +104,51 @@ if ($is_reference) {
 $stmt->execute();
 $msg = 'Created Successfully!'; 
 
-  // Set image placement folder
-  $target_dir = "uploads/images";
-  // Get file path
-  $target_file = $target_dir . basename($_FILES["image_url"]["name"]);
-  // Get file extension
-  $imageExt = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-  // Allowed file types
-  $allowd_file_ext = array("jpg", "jpeg", "png");
+//   // Set image placement folder
+//   $target_dir = "uploads/images";
+//   // Get file path
+//   $target_file = $target_dir . basename($_FILES["image_url"]["name"]);
+//   // Get file extension
+//   $imageExt = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+//   // Allowed file types
+//   $allowd_file_ext = array("jpg", "jpeg", "png");
   
 
-  if (!file_exists($_FILES["image_url"]["tmp_name"])) {
-     $resMessage = array(
-         "status" => "alert-danger",
-         "message" => "Select image to upload."
-     );
-  } else if (!in_array($imageExt, $allowd_file_ext)) {
-      $resMessage = array(
-          "status" => "alert-danger",
-          "message" => "Allowed file formats .jpg, .jpeg and .png."
-      );            
-  } else if ($_FILES["image_url"]["size"] > 2097152) {
-      $resMessage = array(
-          "status" => "alert-danger",
-          "message" => "File is too large. File size should be less than 2 megabytes."
-      );
-  } else if (file_exists($target_file)) {
-      $resMessage = array(
-          "status" => "alert-danger",
-          "message" => "File already exists."
-      );
-  } else {
-      if (move_uploaded_file($_FILES["image_url"]["tmp_name"], $target_file)) {
-          $sql = "INSERT INTO products (image_url) VALUES ('$target_file')";
-          $stmt = $conn->prepare($sql);
-           if($stmt->execute()){
-              $resMessage = array(
-                  "status" => "alert-success",
-                  "message" => "Image uploaded successfully."
-              );                 
-           }
-      } else {
-          $resMessage = array(
-              "status" => "alert-danger",
-              "message" => "Image coudn't be uploaded."
-          );
-      }
+//   if (!file_exists($_FILES["image_url"]["tmp_name"])) {
+//      $resMessage = array(
+//          "status" => "alert-danger",
+//          "message" => "Select image to upload."
+//      );
+//   } else if (!in_array($imageExt, $allowd_file_ext)) {
+//       $resMessage = array(
+//           "status" => "alert-danger",
+//           "message" => "Allowed file formats .jpg, .jpeg and .png."
+//       );            
+//   } else if ($_FILES["image_url"]["size"] > 2097152) {
+//       $resMessage = array(
+//           "status" => "alert-danger",
+//           "message" => "File is too large. File size should be less than 2 megabytes."
+//       );
+//   } else if (file_exists($target_file)) {
+//       $resMessage = array(
+//           "status" => "alert-danger",
+//           "message" => "File already exists."
+//       );
+//   } else {
+//       if (move_uploaded_file($_FILES["image_url"]["tmp_name"], $target_file)) {
+//           $sql = "INSERT INTO products (image_url) VALUES ('$target_file')";
+//           $stmt = $conn->prepare($sql);
+//            if($stmt->execute()){
+//               $resMessage = array(
+//                   "status" => "alert-success",
+//                   "message" => "Image uploaded successfully."
+//               );                 
+//            }
+//       } else {
+//           $resMessage = array(
+//               "status" => "alert-danger",
+//               "message" => "Image coudn't be uploaded."
+//           );
+//       }
   }
 
