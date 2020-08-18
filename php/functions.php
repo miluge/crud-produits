@@ -14,7 +14,6 @@ function pdo_connect_mysql() {
 }
 
 function check_user(){
-    session_start();
     if(isset($_SESSION['sess_name'])) {
         return ['user' => $_SESSION['sess_name']];
     } else { 

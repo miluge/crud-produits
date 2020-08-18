@@ -1,7 +1,8 @@
 <?php
+session_start();
 require_once('php/functions.php');
 $user = check_user();
-if(!$user) {//if not connected: redirect to login
+if($user === false) {//if not connected: redirect to login
     header('location:login.php');
 }else{
     //load twig

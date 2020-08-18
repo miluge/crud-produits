@@ -1,35 +1,8 @@
 <?php
+//if already logged => redirect to index.php
 session_start();
 require_once 'php/functions.php';
-$pdo = pdo_connect_mysql();
-$msg="";
-
-if(isset($_POST['login'])) {//check if login is successfull
-    $email = trim($_POST['email']);
-    $password = trim($_POST['password']);
-    if($email != "" && $password != "") {
-      try {
-        $sql = "select * from `users` where `email`=:email and `password`=:password";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam('email', $email, PDO::PARAM_STR);
-        $stmt->bindValue('password', $password, PDO::PARAM_STR);
-        $stmt->execute();
-        $count = $stmt->rowCount();
-        $row   = $stmt->fetch(PDO::FETCH_ASSOC);
-        if($count == 1 && !empty($row)) {
-          $_SESSION['sess_name'] = $row['name'];
-        } else {
-          $msg = "Invalid username and password!";
-        }
-      } catch (PDOException $e) {
-        echo "Error : ".$e->getMessage();
-      }
-    } else {
-      $msg = "Both fields are required!";
-    }
-}
-
-if (isset($_SESSION['sess_name'])){//if logged, redirect to index.php
+if (check_user() !== false){
     header("location:index.php"); 
 }
 ?> 
@@ -60,13 +33,16 @@ if (isset($_SESSION['sess_name'])){//if logged, redirect to index.php
                                             <div class="form-group">
                                                 <label class="mb-1" for="inputEmailAddress">Email</label>
                                                 <input class="form-control py-4" id="inputEmailAddress" name="email" type="email" placeholder="Enter email address" />
+                                                <div class="invalid-feedback"></div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="mb-1" for="inputPassword">Password</label>
                                                 <input class="form-control py-4" id="inputPassword" name="password" type="password" placeholder="Enter password" />
+                                                <div class="invalid-feedback"></div>
                                             </div>
                                             <div class="form-group mt-4 mb-0">
-                                                <input class="btn btn-primary btn-lg btn-block" name="login" type="submit" value="Login"/>
+                                                <input class="btn btn-primary btn-lg btn-block" type="submit" value="Login"/>
+                                                <div id="error" class="invalid-feedback"></div>
                                             </div>
                                         </form>
                                     </div>
@@ -79,5 +55,6 @@ if (isset($_SESSION['sess_name'])){//if logged, redirect to index.php
         </div>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/login.js"></script>
     </body>
 </html>
