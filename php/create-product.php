@@ -57,10 +57,18 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
 
     //check if $_POST['buy_date'] is a date in the past
     if (v::key('buy_date')->validate($_POST)) {
-        $buy_date = date('Y-m-d',strtotime($_POST['buy_date']));
-        $today = date('Y-m-d');
-        if (! v::date()->lessThan($today)->validate($buy_date)){
-            $errors['buy_date'] = "Please enter a puchase date in the past";
+        $buy_date = $_POST['buy_date'];
+        if (v::date()->validate($buy_date)){
+            //if buy_date is a date, convert to timestamp and compare to now
+            $buy_date = strtotime($buy_date);
+            if(v::lessThan(time())->validate($buy_date)){
+                //date format
+                $buy_date = date('Y-m-d',$buy_date);
+            }else{
+                $errors['buy_date'] = "Please enter a puchase date in future";
+            }
+        }else{
+            $errors['buy_date'] = "Please enter a puchase date";
         }
     } else {
         $errors['buy_date'] = "Please enter a purchase date";
