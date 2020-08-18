@@ -129,16 +129,8 @@ if($user === false) {//if not connected: redirect to login
         <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid">
                 <div class="d-flex align-items-center justify-content-between small">
-
-                    <!-- copyright -->
-                    <div class="text-muted">Copyright &copy; Your Website 2020</div>
-
-                    <!-- terms -->
-                    <div>
-                        <a href="#">Privacy Policy</a>
-                        &middot;
-                        <a href="#">Terms &amp; Conditions</a>
-                    </div>
+                    <div class="text-muted">ACS Besançon promo 2020</div>
+                    <div class="text-muted">Guillaume Perbet (Front) et Guillaume Blondel (Back)</div>
                 </div>
             </div>
         </footer>
