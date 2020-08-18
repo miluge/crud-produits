@@ -2,6 +2,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors',1);
 
+require('vendor/autoload.php');
+use Respect\Validation\Validator as v;
 include 'functions.php';
 $pdo = pdo_connect_mysql();
 
@@ -15,9 +17,9 @@ if (isset($_POST['id'])) {
     // var_dump($_POST);
 
     $id = $_POST['id'];
-    $image = isset($_POST['image_url']) ? $_POST['image_url'] : '1';
+    $image_url = isset($_POST['image_url']) ? $_POST['image_url'] : '1';
     $category = isset($_POST['category_id']) ? $_POST['category_id'] : '1';
-    $manual = isset($_POST['manual_url']) ? $_POST['manual_url'] : '1';
+    $manual_url = isset($_POST['manual_url']) ? $_POST['manual_url'] : '1';
     $source = isset($_POST['source']) ? $_POST['source'] : '';
     $id_type = isset($_POST['source_type']) ? $_POST['source_type'] : '1';
     $name = isset($_POST['name']) ? $_POST['name'] : '1';
@@ -26,6 +28,79 @@ if (isset($_POST['id'])) {
     $buy_date = isset($_POST['buy_date']) ? $_POST['buy_date'] : '2020-12-12';
     $end_warranty = isset($_POST['end_warranty']) ? $_POST['end_warranty'] : '2020-12-12';
     $care_products = isset($_POST['care_products']) ? $_POST['care_products'] : '1';
+
+    $is_name = v::alnum(' ')->validate($name);
+if ($is_name) {
+
+    echo "Validation passed";
+} else {
+
+    echo "Validation failed";
+}
+
+$is_category = v::alnum(' ')->validate($category);
+if ($is_category) {
+
+    echo "Validation passed";
+} else {
+
+    echo "Validation failed";
+}
+
+$is_price = v::number()->validate($price);
+if ($is_category) {
+
+    echo "Validation passed";
+} else {
+
+    echo "Validation failed";
+}
+
+$is_source = v::alnum()->validate($price);
+if ($is_category) {
+
+    echo "Validation passed";
+} else {
+
+    echo "Validation failed";
+}
+
+$is_buydate = v::date()->validate($buy_date);
+if ($is_buydate) {
+
+    echo "Validation passed";
+} else {
+
+    echo "Validation failed";
+}
+
+$is_endwarranty = v::date()->greaterThan($buy_date);
+$is_endwarranty->validate($end_warranty);
+if ($is_endwarranty) {
+
+    echo "Validation passed";
+} else {
+
+    echo "Validation failed";
+}
+
+$is_careproducts = v::alnum(' ')->validate($care_products);
+if ($is_careproducts) {
+
+    echo "Validation passed";
+} else {
+
+    echo "Validation failed";
+}
+
+$is_reference = v::alnum(' ')->validate($reference_number);
+if ($is_reference) {
+
+    echo "Validation passed";
+} else {
+
+    echo "Validation failed";
+}
 
     // Update the record
     $stmt = $pdo->prepare('UPDATE products SET image_url = :image_url, category_id = :category_id, manual_url = :manual_url, source = :source, id_type = :id_type, name = :name, reference_number = :reference_number, price = :price, buy_date = :buy_date, end_warranty = :end_warranty, care_products = :care_products WHERE id_products = :id');
