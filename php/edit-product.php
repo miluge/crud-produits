@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors',1);
 
-require('vendor/autoload.php');
+require('../vendor/autoload.php');
 use Respect\Validation\Validator as v;
 include 'functions.php';
 $pdo = pdo_connect_mysql();
@@ -105,9 +105,9 @@ if ($is_reference) {
     // Update the record
     $stmt = $pdo->prepare('UPDATE products SET image_url = :image_url, category_id = :category_id, manual_url = :manual_url, source = :source, id_type = :id_type, name = :name, reference_number = :reference_number, price = :price, buy_date = :buy_date, end_warranty = :end_warranty, care_products = :care_products WHERE id_products = :id');
     $stmt->bindValue(':id', $id);
-    $stmt->bindValue(':image_url', $image);
+    $stmt->bindValue(':image_url', $image_url);
     $stmt->bindValue(':category_id', $category);
-    $stmt->bindValue(':manual_url', $manual);
+    $stmt->bindValue(':manual_url', $manual_url);
     $stmt->bindValue(':source', $source);
     $stmt->bindValue(':id_type', $id_type);
     $stmt->bindValue(':name', $name);
