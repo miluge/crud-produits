@@ -25,7 +25,7 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
 
     //check if $_POST['category_id'] is an id from category table
     if (v::key('category_id')->validate($_POST)) {
-        $category_id = $_POST['$category_id'];
+        $category_id = $_POST['category_id'];
         $stmt = $pdo->query('SELECT id_category from category');
         $category_ids = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if (! v::contains($category_id)->validate($category_ids)){
@@ -37,7 +37,7 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
 
     //check if $_POST['price'] is a positive number with max 2 decimals
     if (v::key('price')->validate($_POST)) {
-        $price = $_POST['price'];
+        $price = (float) $_POST['price'];
         if (! v::intVal()->positive()->digit()->validate($price*100)){
             $errors['price'] = "Please enter a valid price (ex: 39.99)";
         }
@@ -57,7 +57,7 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
 
     //check if $_POST['buy_date'] is a date in the past
     if (v::key('buy_date')->validate($_POST)) {
-        $buy_date = date_format($_POST['buy_date'],'Y-m-d');
+        $buy_date = date('Y-m-d',strtotime($_POST['buy_date']));
         $today = date('Y-m-d');
         if (! v::date()->lessThan($today)->validate($buy_date)){
             $errors['buy_date'] = "Please enter a puchase date in the past";
@@ -68,7 +68,7 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
 
     //check if $_POST['end_warranty'] is a date
     if (v::key('end_warranty')->validate($_POST)) {
-        $end_warranty = date_format($_POST['end_warranty'],'Y-m-d');
+        $end_warranty = date('Y-m-d',strtotime($_POST['end_warranty']));
         if (! v::date()->validate($end_warranty)){
             $errors['end_warranty'] = "Please enter an end of warranty date";
         }
@@ -98,7 +98,7 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
 
     //check if $_POST['id_type'] is an id from type table
     if (v::key('id_type')->validate($_POST)) {
-        $id_type = $_POST['$id_type'];
+        $id_type = $_POST['id_type'];
         $stmt = $pdo->query('SELECT id_type from type');
         $id_types = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if (! v::contains($id_type)->validate($id_types)){
