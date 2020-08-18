@@ -12,7 +12,7 @@ if (!empty($_POST) && check_user()) {// Check if POST data is not empty and if u
     $image_url = isset($_FILES['image_url']) ? $_FILES['image_url'] : '1';
     $manual_url = isset($_FILES['manual_url']) ? $_FILES['manual_url'] : '1';
     $category_id = isset($_POST['category_id']) ? $_POST['category_id'] : '1';
-    $source_type = isset($_POST['source_type']) ? $_POST['source_type'] : '1';
+    $id_type = isset($_POST['id_type']) ? $_POST['id_type'] : '1';
     $source = isset($_POST['source']) ? $_POST['source'] : '1';
     $name = isset($_POST['name']) ? $_POST['name'] : '1';
     $reference_number = isset($_POST['reference_number']) ? $_POST['reference_number'] : '1';
@@ -95,6 +95,8 @@ if (!empty($_POST) && check_user()) {// Check if POST data is not empty and if u
         echo "Validation failed";
     }
 
+//---------- Image Upload ------------//
+
   // Set image placement folder
   $target_dir = "../uploads/images";
   // Get file path
@@ -131,7 +133,43 @@ if (!empty($_POST) && check_user()) {// Check if POST data is not empty and if u
       }
   }
 
-  $manual_url =  "1";
+  //------ Manual Upload ---------//
+
+  // Set manual placement folder
+  $target_dir = "../uploads/manuals";
+  // Get file path
+  $manual_url = $target_dir . basename($_FILES["manual_url"]["name"]);
+  // Get file extension
+  $manualExt = strtolower(pathinfo($manual_url, PATHINFO_EXTENSION));
+  // Allowed file types
+  $allowd_file_ext = array("pdf", "txt");
+  
+
+  if (!file_exists($_FILES["manual_url"]["tmp_name"])) {
+     $resMessage = array(
+         "status" => "alert-danger",
+         "message" => "Select image to upload."
+     );
+  } else if (!in_array($manualExt, $allowd_file_ext)) {
+      $resMessage = array(
+          "status" => "alert-danger",
+          "message" => "Allowed file formats .jpg, .jpeg and .png."
+      );            
+  } else if ($_FILES["manual_url"]["size"] > 2097152) {
+      $resMessage = array(
+          "status" => "alert-danger",
+          "message" => "File is too large. File size should be less than 2 megabytes."
+      );
+  } else if (file_exists($manual_url)) {
+      $resMessage = array(
+          "status" => "alert-danger",
+          "message" => "File already exists."
+      );
+  } else {
+      if(!move_uploaded_file($_FILES["manual_url"]["tmp_name"], $manual_url)) {
+          $errors["file"] = "File cannot be moved";
+      }
+  }
 
     if (empty($errors)){
         //If no errors insert product in database
