@@ -23,7 +23,7 @@
                     <select class="form-control custom" name="category_id" id="categorySelect" required>
                         {% for category in categories %}
                             <option value="{{ category.id_category }}"
-                                {% if category.id_category == id_category %}
+                                {% if category.id_category == category_id %}
                                     selected
                                 {% endif %}>
                                 {{ category.name }}
