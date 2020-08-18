@@ -165,9 +165,11 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         $stmt->bindValue(':end_warranty', $end_warranty);
         $stmt->bindValue(':care_products', $care_products);
         $stmt->execute();
+    }else{
+        $errors["global"] = "Failed to add product !";
     }
 }else{
-    $errors["global"] = true;
+    $errors["global"] = "Failed to add product !";
 }
 
 //AJAX response
