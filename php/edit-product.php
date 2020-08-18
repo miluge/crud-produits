@@ -48,7 +48,7 @@ if ($is_category) {
 }
 
 $is_price = v::number()->validate($price);
-if ($is_category) {
+if ($is_price) {
 
     echo "Validation passed";
 } else {
@@ -56,8 +56,8 @@ if ($is_category) {
     echo "Validation failed";
 }
 
-$is_source = v::alnum()->validate($price);
-if ($is_category) {
+$is_source = v::alnum()->validate($source);
+if ($is_source) {
 
     echo "Validation passed";
 } else {
