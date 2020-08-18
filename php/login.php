@@ -1,8 +1,8 @@
 <?php
 session_start();
 if(isset($_POST['email']) && $_POST['email']!="" && isset($_POST['password'])) {
-    $email = trim($_POST['email']);
-    $password = trim($_POST['password']);
+    $email = trim($_POST['email'], " \t\n\r\0\x0B");
+    $password = trim($_POST['password'], " \t\n\r\0\x0B");
     $error = [];
     try {//connect to database
         require_once("functions.php");
