@@ -14,7 +14,7 @@
                 <div class="col-6 form-group">
                     <label class="mb-1" for="nameInput">Product name</label>
                     <input class="form-control py-4" id="nameInput" name="name" type="text" placeholder="Enter product name" value="{{ name }}" required/>
-                    <div class="invalid-feedback">Please enter the product name</div>
+                    <div class="invalid-feedback"></div>
                 </div>
 
                 <!-- category select -->
@@ -30,14 +30,14 @@
                             </option>
                         {% endfor %}
                     </select>
-                    <div class="invalid-feedback">Please choose a category</div>
+                    <div class="invalid-feedback"></div>
                 </div>
                 
                 <!-- reference input -->
                 <div class="col-3 form-group">
                     <label class="mb-1" for="reference_numberInput">Reference number</label>
                     <input class="form-control py-4" id="reference_numberInput" name="reference_number" type="text" placeholder="Enter reference" value="{{ reference_number }}" required/>
-                    <div class="invalid-feedback">Please enter the product reference</div>
+                    <div class="invalid-feedback"></div>
                 </div>
             </div>
 
@@ -46,31 +46,31 @@
                 <div class="col-4 form-group">
                     <label class="mb-1" for="buy_dateInput">Buy date</label>
                     <input class="form-control py-4" id="buy_dateInput" name="buy_date" type="text"  placeholder="Enter buy date" value="{{ buy_date }}" onfocus="(this.type='date')" onblur="(this.type='text')" required/>
-                    <div class="invalid-feedback">Please enter the buy date</div>
+                    <div class="invalid-feedback"></div>
                 </div>
 
                 <!-- price input -->
                 <div class="col-2 form-group">
                     <label class="mb-1" for="priceInput">Price</label>
                     <input class="form-control py-4" id="priceInput" name="price" type="number" placeholder="Enter price" value="{{ price }}" required/>
-                    <div class="invalid-feedback">Please enter the price</div>
+                    <div class="invalid-feedback"></div>
                 </div>
 
                 <!-- source type input -->
                 <div class="col-2 form-group">
                 <label class="mb-1" for="source_typeSelect">Purchase type</label>
-                    <select class="form-control custom" name="source_type" id="source_typeSelect" required>
+                    <select class="form-control custom" name="id_type" id="typeSelect" required>
                         <option value="1">Offline</option>
                         <option value="2">Online</option>
                     </select>
-                    <div class="invalid-feedback">Please choose the purchase type</div>
+                    <div class="invalid-feedback"></div>
                 </div>
 
                 <!-- source input -->
                 <div class="col-4 form-group">
                     <label class="mb-1" for="sourceInput">Purchase location</label>
                     <input class="form-control py-4" id="sourceInput" name="source" type="text" placeholder="Enter purchase location" value="{{ source }}" required/>
-                    <div class="invalid-feedback">Please enter the purchase location</div>
+                    <div class="invalid-feedback"></div>
                 </div>
             </div>
 
@@ -79,18 +79,18 @@
                 <div class="col-4 form-group">
                     <label class="mb-1" for="end_warrantyInput">End of warranty date</label>
                     <input class="form-control py-4" id="end_warrantyInput" name="end_warranty" type="text"  placeholder="Enter end of warranty date" value="{{ end_warranty }}" onfocus="(this.type='date')" onblur="(this.type='text')" required/>
-                    <div class="invalid-feedback">Please enter the end of warranty date</div>
+                    <div class="invalid-feedback"></div>
                 </div>
 
                 <!-- care products input -->
                 <div class="col-8 form-group">
                     <label class="mb-1" for="care_productsInput">Product maintenance advice</label>
                     <textarea class="form-control" id="care_productsInput" name="care_products" type="text" placeholder="Enter product maintenance advice" required>{{ care_products }}</textarea>
-                    <div class="invalid-feedback">Please enter maintenance advice</div>
+                    <div class="invalid-feedback"></div>
                 </div>
             </div>
 
-            <div class="form-row mb-">
+            <div class="form-row mb-2">
                 <!-- edit image -->
                 <div class="col-4">
                     {{ image_url }}
@@ -106,15 +106,16 @@
 
                 <!-- receipt image upload -->
                 <div class="col-4 form-group custom-file">
-                    <input type="file" class="custom-file-input" id="image_productInput" name="image_url" required/>
                     <label class="custom-file-label" for="image_productInput">Upload receipt</label>
+                    <input type="file" class="custom-file-input" id="image_productInput" name="image_url" required/>
                     <div class="invalid-feedback">Please upload the receipt</div>
                 </div>
 
                 <!-- manual upload -->
                 <div class="col-4 offset-2 form-group custom-file">
-                    <input type="file" class="custom-file-input" id="manual_productInput" name="manual_url"/>
                     <label class="custom-file-label" for="manual_productInput">Upload manual</label>
+                    <input type="file" class="custom-file-input" id="manual_productInput" name="manual_url"/>
+                    <div class="invalid-feedback"></div>
                 </div>
             </div>
         </form>
@@ -123,4 +124,5 @@
 <div class="modal-footer">
     <!-- submit button -->
     <button type="button" id="form-submit" data-dismiss="modal" aria-label="Close" class="btn btn-primary btn-lg btn-block" name="submit" data-id={{ id_products }}>{{ mode }} product</button>
+    <div id="formError" class="invalid-feedback"></div>
 </div>
