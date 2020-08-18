@@ -179,6 +179,9 @@ if ($is_reference) {
   }
 
     // Update the record
+if (empty($errors)){
+    //If no errors insert product in database
+    $errors["none"] = true;
     $stmt = $pdo->prepare('UPDATE products SET image_url = :image_url, category_id = :category_id, manual_url = :manual_url, source = :source, id_type = :id_type, name = :name, reference_number = :reference_number, price = :price, buy_date = :buy_date, end_warranty = :end_warranty, care_products = :care_products WHERE id_products = :id');
     $stmt->bindValue(':id', $id);
     $stmt->bindValue(':image_url', $image_url);
@@ -193,4 +196,8 @@ if ($is_reference) {
     $stmt->bindValue(':end_warranty', $end_warranty);
     $stmt->bindValue(':care_products', $care_products);
     $stmt->execute();
+    
+    }
+    //AJAX response
+    echo json_encode($errors);
 }
