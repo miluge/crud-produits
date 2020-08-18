@@ -1,23 +1,17 @@
 <?php
+session_start();
+require_once('functions.php');
 error_reporting(E_ALL);
 ini_set('display_errors',1);
-require('../vendor/autoload.php');
+require_once('../vendor/autoload.php');
 use Respect\Validation\Validator as v;
-include 'functions.php';
 
-var_dump($_FILES);
-
-//Connect to db
-$pdo = pdo_connect_mysql();
-if (!empty($_POST)) {// Check if POST data is not empty
-
-    if (!empty($_FILES)) {//check if files sent
-        //UPLOAD
-    }
-    //INCLUDE FILE URL IN VARIABLE
+if (!empty($_POST) && check_user()) {// Check if POST data is not empty and if user is connected
+    $errors = [];
+    
     $image_url = isset($_FILES['image_url']) ? $_FILES['image_url'] : '1';
     $manual_url = isset($_FILES['manual_url']) ? $_FILES['manual_url'] : '1';
-    $category = isset($_POST['category_id']) ? $_POST['category_id'] : '1';
+    $category_id = isset($_POST['category_id']) ? $_POST['category_id'] : '1';
     $source_type = isset($_POST['source_type']) ? $_POST['source_type'] : '1';
     $source = isset($_POST['source']) ? $_POST['source'] : '1';
     $name = isset($_POST['name']) ? $_POST['name'] : '1';
@@ -26,9 +20,7 @@ if (!empty($_POST)) {// Check if POST data is not empty
     $buy_date = isset($_POST['buy_date']) ? $_POST['buy_date'] : '2020-12-12';
     $end_warranty = isset($_POST['end_warranty']) ? $_POST['end_warranty'] : '2020-12-12';
     $care_products = isset($_POST['care_products']) ? $_POST['care_products'] : '1';
-    // Insert new record into the contacts table
-    $stmt = $pdo->prepare('INSERT INTO products(image_url, category_id, manual_url, source, id_type, name, reference_number, price, buy_date, end_warranty, care_products) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-    $stmt->execute([$image, $category, $manual, $source, $source_type, $name, $reference_number, $price, $buy_date, $end_warranty, $care_products]);
+
 
     $is_name = v::alnum(' ')->validate($name);
     if ($is_name) {
@@ -39,7 +31,7 @@ if (!empty($_POST)) {// Check if POST data is not empty
         echo "Validation failed";
     }
 
-    $is_category = v::alnum(' ')->validate($category);
+    $is_category = v::alnum(' ')->validate($category_id);
     if ($is_category) {
 
         echo "Validation passed";
@@ -103,55 +95,74 @@ if (!empty($_POST)) {// Check if POST data is not empty
         echo "Validation failed";
     }
 
-// Execute the prepared statement
-$stmt->execute();
-$msg = 'Created Successfully!'; 
 
-  // Set image placement folder
-  $target_dir = "uploads/images";
-  // Get file path
-  $target_file = $target_dir . basename($_FILES["image_url"]["name"]);
-  // Get file extension
-  $imageExt = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-  // Allowed file types
-  $allowd_file_ext = array("jpg", "jpeg", "png");
-  
+    if (empty($errors)){
+        //If no errors insert product in database
+        $errors["none"] = true;
+        $pdo = pdo_connect_mysql();
+        $stmt = $pdo->prepare('INSERT INTO products(image_url, category_id, manual_url, source, id_type, name, reference_number, price, buy_date, end_warranty, care_products) VALUES (:image_url, :category_id, :manual_url, :source, :id_type, :name, :reference_number, :price, :buy_date, :end_warranty, :care_products)');
+        $stmt->bindValue(':image_url', $image_url);
+        $stmt->bindValue(':category_id', $category_id);
+        $stmt->bindValue(':manual_url', $manual_url);
+        $stmt->bindValue(':source', $source);
+        $stmt->bindValue(':id_type', $id_type);
+        $stmt->bindValue(':name', $name);
+        $stmt->bindValue(':reference_number', $reference_number);
+        $stmt->bindValue(':price', $price);
+        $stmt->bindValue(':buy_date', $buy_date);
+        $stmt->bindValue(':end_warranty', $end_warranty);
+        $stmt->bindValue(':care_products', $care_products);
+        $stmt->execute();
+    }
 
-  if (!file_exists($_FILES["image_url"]["tmp_name"])) {
-     $resMessage = array(
-         "status" => "alert-danger",
-         "message" => "Select image to upload."
-     );
-  } else if (!in_array($imageExt, $allowd_file_ext)) {
-      $resMessage = array(
-          "status" => "alert-danger",
-          "message" => "Allowed file formats .jpg, .jpeg and .png."
-      );            
-  } else if ($_FILES["image_url"]["size"] > 2097152) {
-      $resMessage = array(
-          "status" => "alert-danger",
-          "message" => "File is too large. File size should be less than 2 megabytes."
-      );
-  } else if (file_exists($target_file)) {
-      $resMessage = array(
-          "status" => "alert-danger",
-          "message" => "File already exists."
-      );
-  } else {
-      if (move_uploaded_file($_FILES["image_url"]["tmp_name"], $target_file)) {
-          $sql = "INSERT INTO products (image_url) VALUES ('$target_file')";
-          $stmt = $conn->prepare($sql);
-           if($stmt->execute()){
-              $resMessage = array(
-                  "status" => "alert-success",
-                  "message" => "Image uploaded successfully."
-              );                 
-           }
-      } else {
-          $resMessage = array(
-              "status" => "alert-danger",
-              "message" => "Image coudn't be uploaded."
-          );
-      }
-  }
+    //AJAX response
+    echo json_encode($errors);
+    
+    //   // Set image placement folder
+    //   $target_dir = "uploads/images";
+    //   // Get file path
+    //   $target_file = $target_dir . basename($_FILES["image_url"]["name"]);
+    //   // Get file extension
+    //   $imageExt = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    //   // Allowed file types
+    //   $allowd_file_ext = array("jpg", "jpeg", "png");
+    
+
+    //   if (!file_exists($_FILES["image_url"]["tmp_name"])) {
+    //      $resMessage = array(
+    //          "status" => "alert-danger",
+    //          "message" => "Select image to upload."
+    //      );
+    //   } else if (!in_array($imageExt, $allowd_file_ext)) {
+    //       $resMessage = array(
+    //           "status" => "alert-danger",
+    //           "message" => "Allowed file formats .jpg, .jpeg and .png."
+    //       );            
+    //   } else if ($_FILES["image_url"]["size"] > 2097152) {
+    //       $resMessage = array(
+    //           "status" => "alert-danger",
+    //           "message" => "File is too large. File size should be less than 2 megabytes."
+    //       );
+    //   } else if (file_exists($target_file)) {
+    //       $resMessage = array(
+    //           "status" => "alert-danger",
+    //           "message" => "File already exists."
+    //       );
+    //   } else {
+    //       if (move_uploaded_file($_FILES["image_url"]["tmp_name"], $target_file)) {
+    //           $sql = "INSERT INTO products (image_url) VALUES ('$target_file')";
+    //           $stmt = $conn->prepare($sql);
+    //            if($stmt->execute()){
+    //               $resMessage = array(
+    //                   "status" => "alert-success",
+    //                   "message" => "Image uploaded successfully."
+    //               );                 
+    //            }
+    //       } else {
+    //           $resMessage = array(
+    //               "status" => "alert-danger",
+    //               "message" => "Image coudn't be uploaded."
+    //           );
+    //       }
+    //   }
 }
