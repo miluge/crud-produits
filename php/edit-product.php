@@ -102,7 +102,86 @@ if ($is_reference) {
     echo "Validation failed";
 }
 
+//---------- Image Upload ------------//
+
+  // Set image placement folder
+  $target_dir = "../uploads/images";
+  // Get file path
+  $image_url = $target_dir . basename($_FILES["image_url"]["name"]);
+  // Get file extension
+  $imageExt = strtolower(pathinfo($image_url, PATHINFO_EXTENSION));
+  // Allowed file types
+  $allowd_file_ext = array("jpg", "jpeg", "png");
+  
+
+  if (!file_exists($_FILES["image_url"]["tmp_name"])) {
+     $resMessage = array(
+         "status" => "alert-danger",
+         "message" => "Select image to upload."
+     );
+  } else if (!in_array($imageExt, $allowd_file_ext)) {
+      $resMessage = array(
+          "status" => "alert-danger",
+          "message" => "Allowed file formats .jpg, .jpeg and .png."
+      );            
+  } else if ($_FILES["image_url"]["size"] > 2097152) {
+      $resMessage = array(
+          "status" => "alert-danger",
+          "message" => "File is too large. File size should be less than 2 megabytes."
+      );
+  } else if (file_exists($image_url)) {
+      $resMessage = array(
+          "status" => "alert-danger",
+          "message" => "File already exists."
+      );
+  } else {
+      if(!move_uploaded_file($_FILES["image_url"]["tmp_name"], $image_url)) {
+          $errors["file"] = "File cannot be moved";
+      }
+  }
+
+  //------ Manual Upload ---------//
+
+  // Set manual placement folder
+  $target_dir = "../uploads/manuals";
+  // Get file path
+  $manual_url = $target_dir . basename($_FILES["manual_url"]["name"]);
+  // Get file extension
+  $manualExt = strtolower(pathinfo($manual_url, PATHINFO_EXTENSION));
+  // Allowed file types
+  $allowd_file_ext = array("pdf", "txt");
+  
+
+  if (!file_exists($_FILES["manual_url"]["tmp_name"])) {
+     $resMessage = array(
+         "status" => "alert-danger",
+         "message" => "Select image to upload."
+     );
+  } else if (!in_array($manualExt, $allowd_file_ext)) {
+      $resMessage = array(
+          "status" => "alert-danger",
+          "message" => "Allowed file formats .jpg, .jpeg and .png."
+      );            
+  } else if ($_FILES["manual_url"]["size"] > 2097152) {
+      $resMessage = array(
+          "status" => "alert-danger",
+          "message" => "File is too large. File size should be less than 2 megabytes."
+      );
+  } else if (file_exists($manual_url)) {
+      $resMessage = array(
+          "status" => "alert-danger",
+          "message" => "File already exists."
+      );
+  } else {
+      if(!move_uploaded_file($_FILES["manual_url"]["tmp_name"], $manual_url)) {
+          $errors["file"] = "File cannot be moved";
+      }
+  }
+
     // Update the record
+if (empty($errors)){
+    //If no errors insert product in database
+    $errors["none"] = true;
     $stmt = $pdo->prepare('UPDATE products SET image_url = :image_url, category_id = :category_id, manual_url = :manual_url, source = :source, id_type = :id_type, name = :name, reference_number = :reference_number, price = :price, buy_date = :buy_date, end_warranty = :end_warranty, care_products = :care_products WHERE id_products = :id');
     $stmt->bindValue(':id', $id);
     $stmt->bindValue(':image_url', $image_url);
@@ -117,4 +196,8 @@ if ($is_reference) {
     $stmt->bindValue(':end_warranty', $end_warranty);
     $stmt->bindValue(':care_products', $care_products);
     $stmt->execute();
+    
+    }
+    //AJAX response
+    echo json_encode($errors);
 }

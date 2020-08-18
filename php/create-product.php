@@ -116,45 +116,81 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         $errors['id_type'] = "Please select a purchase type";
     }
 
+//---------- Image Upload ------------//
 
-//   // Set image placement folder
-//   $target_dir = "../uploads/images";
-//   // Get file path
-//   $image_url = $target_dir . basename($_FILES["image_url"]["name"]);
-//   // Get file extension
-//   $imageExt = strtolower(pathinfo($image_url, PATHINFO_EXTENSION));
-//   // Allowed file types
-//   $allowd_file_ext = array("jpg", "jpeg", "png");
+  // Set image placement folder
+  $target_dir = "../uploads/images";
+  // Get file path
+  $image_url = $target_dir . basename($_FILES["image_url"]["name"]);
+  // Get file extension
+  $imageExt = strtolower(pathinfo($image_url, PATHINFO_EXTENSION));
+  // Allowed file types
+  $allowd_file_ext = array("jpg", "jpeg", "png");
   
 
-//   if (!file_exists($_FILES["image_url"]["tmp_name"])) {
-//      $resMessage = array(
-//          "status" => "alert-danger",
-//          "message" => "Select image to upload."
-//      );
-//   } else if (!in_array($imageExt, $allowd_file_ext)) {
-//       $resMessage = array(
-//           "status" => "alert-danger",
-//           "message" => "Allowed file formats .jpg, .jpeg and .png."
-//       );            
-//   } else if ($_FILES["image_url"]["size"] > 2097152) {
-//       $resMessage = array(
-//           "status" => "alert-danger",
-//           "message" => "File is too large. File size should be less than 2 megabytes."
-//       );
-//   } else if (file_exists($image_url)) {
-//       $resMessage = array(
-//           "status" => "alert-danger",
-//           "message" => "File already exists."
-//       );
-//   } else {
-//       if(!move_uploaded_file($_FILES["image_url"]["tmp_name"], $image_url)) {
-//           $errors["file"] = "File cannot be moved";
-//       }
-//   }
+  if (!file_exists($_FILES["image_url"]["tmp_name"])) {
+     $resMessage = array(
+         "status" => "alert-danger",
+         "message" => "Select image to upload."
+     );
+  } else if (!in_array($imageExt, $allowd_file_ext)) {
+      $resMessage = array(
+          "status" => "alert-danger",
+          "message" => "Allowed file formats .jpg, .jpeg and .png."
+      );            
+  } else if ($_FILES["image_url"]["size"] > 2097152) {
+      $resMessage = array(
+          "status" => "alert-danger",
+          "message" => "File is too large. File size should be less than 2 megabytes."
+      );
+  } else if (file_exists($image_url)) {
+      $resMessage = array(
+          "status" => "alert-danger",
+          "message" => "File already exists."
+      );
+  } else {
+      if(!move_uploaded_file($_FILES["image_url"]["tmp_name"], $image_url)) {
+          $errors["file"] = "File cannot be moved";
+      }
+  }
 
-    $image_url =  "1";
-    $manual_url =  "1";
+  //------ Manual Upload ---------//
+
+  // Set manual placement folder
+  $target_dir = "../uploads/manuals";
+  // Get file path
+  $manual_url = $target_dir . basename($_FILES["manual_url"]["name"]);
+  // Get file extension
+  $manualExt = strtolower(pathinfo($manual_url, PATHINFO_EXTENSION));
+  // Allowed file types
+  $allowd_file_ext = array("pdf", "txt");
+  
+
+  if (!file_exists($_FILES["manual_url"]["tmp_name"])) {
+     $resMessage = array(
+         "status" => "alert-danger",
+         "message" => "Select image to upload."
+     );
+  } else if (!in_array($manualExt, $allowd_file_ext)) {
+      $resMessage = array(
+          "status" => "alert-danger",
+          "message" => "Allowed file formats .jpg, .jpeg and .png."
+      );            
+  } else if ($_FILES["manual_url"]["size"] > 2097152) {
+      $resMessage = array(
+          "status" => "alert-danger",
+          "message" => "File is too large. File size should be less than 2 megabytes."
+      );
+  } else if (file_exists($manual_url)) {
+      $resMessage = array(
+          "status" => "alert-danger",
+          "message" => "File already exists."
+      );
+  } else {
+      if(!move_uploaded_file($_FILES["manual_url"]["tmp_name"], $manual_url)) {
+          $errors["file"] = "File cannot be moved";
+      }
+  }
 
     if (empty($errors)){
         //if no errors insert product in database
