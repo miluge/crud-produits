@@ -15,7 +15,7 @@ if (isset($_POST['mode'])){//if $_POST['mode] via AJAX, echo twig template for m
 
     if (isset($_POST['id'])){//get product by id
         $id = $_POST['id'];
-        $stmt = $pdo->prepare("SELECT id_products, image_url , cat.name AS category, manual_url, source, type.name AS source_type, products.name AS name, reference_number, price, buy_date, end_warranty, care_products FROM products INNER JOIN category AS cat ON products.category_id = cat.id_category INNER JOIN type ON products.id_type = type.id_type WHERE id_products = :id");
+        $stmt = $pdo->prepare("SELECT id_products, image_url , cat.name AS category, category_id, manual_url, source, type.name AS source_type, products.name AS name, reference_number, price, buy_date, end_warranty, care_products FROM products INNER JOIN category AS cat ON products.category_id = cat.id_category INNER JOIN type ON products.id_type = type.id_type WHERE id_products = :id");
         $stmt->execute([':id'=>$id]);
         $product = $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $product = $stmt->fetch();
