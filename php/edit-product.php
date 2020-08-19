@@ -10,6 +10,18 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
     $pdo = pdo_connect_mysql();
     $errors = [];
 
+    //check if $_POST['id'] is an id from products table
+    if (v::key('id')->validate($_POST) && v::notEmpty()->validate($_POST['id'])) {
+        $id = $_POST['id'];
+        $stmt = $pdo->query('SELECT id_products from products');
+        $products_ids = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if (! v::contains($id)->validate(array_map(function($value){return $value["id_products"];},$products_ids))){
+            $errors['global'] = "Product not found";
+        }
+    } else {
+        $errors['global'] = "Product not found";
+    }
+
     //check if $_POST['name'] is a non empty non blank string
     if (v::key('name')->validate($_POST) && v::notEmpty()->validate($_POST['name'])) {
         $name = trim($_POST['name']," \t\n\r\0\x0B");
@@ -132,9 +144,10 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
             $errors["image"] = "Allowed formats: .jpg .jpeg .png";         
         } else if ($_FILES["image_url"]["size"] > 2097152) {
             $errors["image"] = "File is to big";
-        } else if (file_exists($image_url)) {
-            $errors["image"] = "File already exists, try to change its name";
         }
+        // } else if (file_exists($image_url)) {
+        //     $errors["image"] = "File already exists, try to change its name";
+        // }
     } else {
         $errors["image"] = "Please upload receipt";
     }
@@ -156,9 +169,10 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
             $errors["manual"] = "Allowed formats: .pdf .txt";         
         } else if ($_FILES["manual_url"]["size"] > 2097152) {
             $errors["manual"] = "File is to big";
-        } else if (file_exists($manual_url)) {
-            $errors["manual"] = "File already exists, try to change its name";
         }
+        // } else if (file_exists($manual_url)) {
+        //     $errors["manual"] = "File already exists, try to change its name";
+        // }
     }
 
     if (empty($errors)){
@@ -167,6 +181,7 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
 
         $stmt = $pdo->prepare('UPDATE products SET image_url = :image_url, category_id = :category_id, manual_url = :manual_url, source = :source, id_type = :id_type, name = :name, reference_number = :reference_number, price = :price, buy_date = :buy_date, end_warranty = :end_warranty, care_products = :care_products WHERE id_products = :id');
         move_uploaded_file($_FILES["image_url"]["tmp_name"], $image_url);
+        $stmt->bindValue(':id', $id);
         $stmt->bindValue(':image_url', $image_url);
         $stmt->bindValue(':category_id', $category_id);
         if(isset($manual_url)){

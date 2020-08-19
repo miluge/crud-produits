@@ -132,9 +132,10 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
             $errors["image"] = "Allowed formats: .jpg .jpeg .png";         
         } else if ($_FILES["image_url"]["size"] > 2097152) {
             $errors["image"] = "File is to big";
-        } else if (file_exists($image_url)) {
-            $errors["image"] = "File already exists, try to change its name";
         }
+        // } else if (file_exists($image_url)) {
+        //     $errors["image"] = "File already exists, try to change its name";
+        // }
     } else {
         $errors["image"] = "Please upload receipt";
     }
@@ -156,9 +157,10 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
             $errors["manual"] = "Allowed formats: .pdf .txt";         
         } else if ($_FILES["manual_url"]["size"] > 2097152) {
             $errors["manual"] = "File is to big";
-        } else if (file_exists($manual_url)) {
-            $errors["manual"] = "File already exists, try to change its name";
         }
+        // } else if (file_exists($manual_url)) {
+        //     $errors["manual"] = "File already exists, try to change its name";
+        // }
     }
 
     if (empty($errors)){
