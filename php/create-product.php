@@ -28,7 +28,7 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         $category_id = $_POST['category_id'];
         $stmt = $pdo->query('SELECT id_category from category');
         $category_ids = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if (! v::contains($category_id)->validate($category_ids)){
+        if (! v::contains($category_id)->validate(array_map(function($value){return $value["id_category"];},$category_ids))){
             $errors['category_id'] = "Please select a category";
         }
     } else {
@@ -109,7 +109,7 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         $id_type = $_POST['id_type'];
         $stmt = $pdo->query('SELECT id_type from type');
         $id_types = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if (! v::contains($id_type)->validate($id_types)){
+        if (! v::contains($id_type)->validate(array_map(function($value){return $value["id_type"];},$id_types))){
             $errors['id_type'] = "Please select a purchase type";
         }
     } else {
