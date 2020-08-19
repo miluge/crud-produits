@@ -10173,6 +10173,10 @@ body {
   background-color: #e9ecef;
 }
 
+#layoutAuthentication_content > main {
+  height: 100vh;
+}
+
 .sb-topnav {
   height: 6rem;
   padding-left: 1rem;
@@ -10198,10 +10202,6 @@ body {
 }
 #product-list table.dataTable {
   margin-top: 1.25rem !important;
-}
-
-#layoutAuthentication_content > main {
-  height: 100vh;
 }
 
 select.custom {

@@ -28,7 +28,7 @@ if($user === false) {//if not connected: redirect to login
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    <body class="sb-nav-fixed">
+    <body class="sb-nav-fixed h-auto">
 
         <!-- form modal -->
         <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalTitle" aria-hidden="true">
@@ -70,7 +70,7 @@ if($user === false) {//if not connected: redirect to login
             </nav>
         </header>
 
-        <main>
+        <main class="pb-5">
             <div class="container">
 
                 <!-- table -->
@@ -126,9 +126,9 @@ if($user === false) {//if not connected: redirect to login
         </main>
 
         <!-- footer -->
-        <footer class="py-4 bg-light mt-auto">
+        <footer class="py-4 bg-light fixed-bottom">
             <div class="container-fluid">
-                <div class="d-flex align-items-center justify-content-between small">
+                <div class="d-flex justify-content-between small">
                     <div class="text-muted">ACS Besançon promo 2020</div>
                     <div class="text-muted">Guillaume Perbet (Front) et Guillaume Blondel (Back)</div>
                 </div>

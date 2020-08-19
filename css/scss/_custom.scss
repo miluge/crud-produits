@@ -1,3 +1,8 @@
+//LOGIN PAGE___________________________________________
+#layoutAuthentication_content>main{
+    height: 100vh;
+}
+
 //TOP BAR_________________________________________
 .sb-topnav{//top bar size
     height: 6rem;
@@ -31,12 +36,6 @@
         margin-top: 1.25rem !important;
     }
 }
-
-//LOGIN PAGE___________________________________________
-#layoutAuthentication_content>main{
-    height: 100vh;
-}
-
 
 //CUSTOM SELECT_________________________________________
 select.custom {
@@ -95,3 +94,5 @@ textarea.form-control{
 .large{
     font-size: 1.25rem;
 }
+
+//FOOTER
