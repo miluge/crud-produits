@@ -92,28 +92,28 @@
 
             <div class="form-row mb-2">
                 <!-- edit image -->
-                <div class="col-4">
-                    {{ image_url }}
+                <div class="col-5">
+                    Upload receipt
                 </div>
 
                 <!-- edit manual -->
-                <div class="col-4 offset-2">
-                    {{ manual_url }}
+                <div class="col-5 offset-2">
+                    Upload manual
                 </div>
             </div>
 
             <div class="form-row mb-2">
 
                 <!-- receipt image upload -->
-                <div class="col-4 form-group custom-file">
-                    <label class="custom-file-label" for="imageInput">Upload receipt</label>
+                <div class="col-5 form-group custom-file">
+                    <label class="custom-file-label" for="imageInput">{{ image_url }}</label>
                     <input type="file" class="custom-file-input" id="imageInput" name="image_url" required/>
                     <div class="invalid-feedback"></div>
                 </div>
 
                 <!-- manual upload -->
-                <div class="col-4 offset-2 form-group custom-file">
-                    <label class="custom-file-label" for="manualInput">Upload manual</label>
+                <div class="col-5 offset-2 form-group custom-file">
+                    <label class="custom-file-label" for="manualInput">{{ manual_url }}</label>
                     <input type="file" class="custom-file-input" id="manualInput" name="manual_url"/>
                     <div class="invalid-feedback"></div>
                 </div>
