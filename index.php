@@ -142,12 +142,7 @@ if($user === false) {//if not connected: redirect to login
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="js/datatables-demo.js"></script>
-        <script src="js/form-validation.js"></script>
         <script src="js/script.js"></script>
-        <script>
-             $(document).ready(function () {
-                bsCustomFileInput.init()
-                });
-        </script>
+
     </body>
 </html>
