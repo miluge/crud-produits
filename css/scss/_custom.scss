@@ -94,3 +94,9 @@ textarea.form-control{
 .large{
     font-size: 1.25rem;
 }
+
+//TABLE_________________________
+th.sorting:nth-child(6)::before {
+    display: none;
+}
+

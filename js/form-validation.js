@@ -1,7 +1,7 @@
 // Wait for the DOM to be ready
 $(function() {
     // Initialize form validation on the registration form.
-    $("form[name='form']").validate({
+    $("#form").validate({
       // Specify validation rules
       rules: {
         // The key name on the left side is the name attribute

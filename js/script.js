@@ -1,5 +1,11 @@
 //MODALS______________________________________________
 
+//label name for file upload
+// $('.custom-file-input').on('change', function() { 
+//     let fileName = $(this).val().split('\\').pop(); 
+//     $(this).next('.custom-file-label').addClass("selected").html(fileName); 
+//  });
+
 //details modal trigger
 $('#detailsModal').on('show.bs.modal', function (event) {
     //get product id
