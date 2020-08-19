@@ -129,16 +129,8 @@ if($user === false) {//if not connected: redirect to login
         <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid">
                 <div class="d-flex align-items-center justify-content-between small">
-
-                    <!-- copyright -->
-                    <div class="text-muted">Copyright &copy; Your Website 2020</div>
-
-                    <!-- terms -->
-                    <div>
-                        <a href="#">Privacy Policy</a>
-                        &middot;
-                        <a href="#">Terms &amp; Conditions</a>
-                    </div>
+                    <div class="text-muted">ACS Besançon promo 2020</div>
+                    <div class="text-muted">Guillaume Perbet (Front) et Guillaume Blondel (Back)</div>
                 </div>
             </div>
         </footer>
@@ -150,12 +142,15 @@ if($user === false) {//if not connected: redirect to login
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="js/datatables-demo.js"></script>
-        <script src="js/form-validation.js"></script>
         <script src="js/script.js"></script>
+<<<<<<< HEAD
         <script>
             $(document).ready(function () {
             bsCustomFileInput.init()
             })
         </script>
+=======
+
+>>>>>>> 11c5e25a8d66faf0510a80a8a3d53e1651ba8a7b
     </body>
 </html>
