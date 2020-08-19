@@ -131,8 +131,10 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
     if(v::key('image_url')->validate($_FILES) && v::notEmpty()->validate($_FILES['image_url']["name"])){
         // Set image placement folder
         $target_dir = "../uploads/images/";
+        //Get file name
+        $image = basename($_FILES["image_url"]["name"]);
         // Get file path
-        $image_url = $target_dir . basename($_FILES["image_url"]["name"]);
+        $image_url = $target_dir . $image;
         // Get file extension
         $imageExt = strtolower(pathinfo($image_url, PATHINFO_EXTENSION));
         // Allowed file types
@@ -156,8 +158,10 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
     if(v::key('manual_url')->validate($_FILES) && v::notEmpty()->validate($_FILES['manual_url']["name"])){
         // Set manual placement folder
         $target_dir = "../uploads/manuals/";
+        //Get file name
+        $manual = basename($_FILES["manual_url"]["name"]);
         // Get file path
-        $manual_url = $target_dir . basename($_FILES["manual_url"]["name"]);
+        $manual_url = $target_dir . $manual;
         // Get file extension
         $manualExt = strtolower(pathinfo($manual_url, PATHINFO_EXTENSION));
         // Allowed file types
@@ -182,10 +186,10 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         $stmt = $pdo->prepare('UPDATE products SET image_url = :image_url, category_id = :category_id, manual_url = :manual_url, source = :source, id_type = :id_type, name = :name, reference_number = :reference_number, price = :price, buy_date = :buy_date, end_warranty = :end_warranty, care_products = :care_products WHERE id_products = :id');
         move_uploaded_file($_FILES["image_url"]["tmp_name"], $image_url);
         $stmt->bindValue(':id', $id);
-        $stmt->bindValue(':image_url', $image_url);
+        $stmt->bindValue(':image_url', $image);
         $stmt->bindValue(':category_id', $category_id);
         if(isset($manual_url)){
-            move_uploaded_file($_FILES["manual_url"]["tmp_name"], $manual_url);
+            move_uploaded_file($_FILES["manual_url"]["tmp_name"], $manual);
         }else{
             $manual_url="";
         }
