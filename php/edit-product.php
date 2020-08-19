@@ -56,16 +56,6 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         $errors['price'] = "Please enter a price";
     }
 
-    //check if $_POST['source'] is a non empty non blank string
-    if (v::key('source')->validate($_POST)  && v::notEmpty()->validate($_POST['source'])) {
-        $source = trim($_POST['source']," \t\n\r\0\x0B");
-        if (! v::stringType()->notEmpty()->validate($source)){
-            $errors['source'] = "Please enter a purchase location";
-        }
-    } else {
-        $errors['source'] = "Please enter a purchase location";
-    }
-
     //check if $_POST['buy_date'] is a date in the past
     if (v::key('buy_date')->validate($_POST) && v::notEmpty()->validate($_POST['buy_date'])) {
         $buy_date = $_POST['buy_date'];
@@ -125,6 +115,20 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         }
     } else {
         $errors['id_type'] = "Please select a purchase option";
+    }
+
+    //check if $_POST['source'] is a non empty non blank string
+    if (v::key('source')->validate($_POST)  && v::notEmpty()->validate($_POST['source'])) {
+        $source = trim($_POST['source']," \t\n\r\0\x0B");
+        if ( v::stringType()->notEmpty()->validate($source)){
+            if($id_type == 2 && !(v::domain()->validate($source) || v::url()->validate($source))){
+                $errors['source'] = "Please enter an url";
+            }
+        }else{
+            $errors['source'] = "Please enter a purchase location";
+        }
+    } else {
+        $errors['source'] = "Please enter a purchase location";
     }
 
     //---------- Image Upload ------------//
