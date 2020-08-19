@@ -127,16 +127,16 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         $allowd_file_ext = array("jpg", "jpeg", "png");
         
         if (!file_exists($_FILES["image_url"]["tmp_name"])) {
-            $errors["image_url"] = "File not uploaded";
+            $errors["image"] = "File not uploaded";
         } else if (!in_array($imageExt, $allowd_file_ext)) {
-            $errors["image_url"] = "Allowed formats: .jpg .jpeg .png";         
+            $errors["image"] = "Allowed formats: .jpg .jpeg .png";         
         } else if ($_FILES["image_url"]["size"] > 2097152) {
-            $errors["image_url"] = "File is to big";
+            $errors["image"] = "File is to big";
         } else if (file_exists($image_url)) {
-            $errors["image_url"] = "File already exists, try to change its name";
+            $errors["image"] = "File already exists, try to change its name";
         }
     } else {
-        $errors["image_url"] = "Please upload receipt";
+        $errors["image"] = "Please upload receipt";
     }
 
     //------ Manual Upload ---------//
@@ -151,13 +151,13 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         $allowd_file_ext = array("pdf", "txt");
         
         if (!file_exists($_FILES["manual_url"]["tmp_name"])) {
-            $errors["manual_url"] = "File not uploaded";
+            $errors["manual"] = "File not uploaded";
         } else if (!in_array($manualExt, $allowd_file_ext)) {
-            $errors["manual_url"] = "Allowed formats: .pdf .txt";         
+            $errors["manual"] = "Allowed formats: .pdf .txt";         
         } else if ($_FILES["manual_url"]["size"] > 2097152) {
-            $errors["manual_url"] = "File is to big";
+            $errors["manual"] = "File is to big";
         } else if (file_exists($manual_url)) {
-            $errors["manual_url"] = "File already exists, try to change its name";
+            $errors["manual"] = "File already exists, try to change its name";
         }
     }
 

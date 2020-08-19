@@ -55,6 +55,8 @@ function resetForm(){
     resetInput("source");
     resetInput("end_warranty");
     resetInput("care_products");
+    resetInput("image");
+    resetInput("manual");
     resetSelect("category");
     resetSelect("type");
 }
@@ -177,6 +179,24 @@ $('#formModal').on('show.bs.modal', function (event) {
                         typeSelect.nextElementSibling.innerHTML = errors.id_type;
                     } else {
                         typeSelect.classList.add("is-valid");
+                    }
+
+                    //manage image error notification
+                    const imageInput = document.getElementById("imageInput");
+                    if (errors.image){
+                        imageInput.classList.add("is-invalid");
+                        imageInput.nextElementSibling.innerHTML = errors.image;
+                    } else {
+                        imageInput.classList.add("is-valid");
+                    }
+
+                    //manage manual error notification
+                    const manualInput = document.getElementById("manualInput");
+                    if (errors.manual){
+                        manualInput.classList.add("is-invalid");
+                        manualInput.nextElementSibling.innerHTML = errors.manual;
+                    } else {
+                        manualInput.classList.add("is-valid");
                     }
                 }
             });
