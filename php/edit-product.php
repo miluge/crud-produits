@@ -1,203 +1,195 @@
 <?php
+require_once('../vendor/autoload.php');
+use Respect\Validation\Validator as v;
+session_start();
+require_once('functions.php');
 error_reporting(E_ALL);
 ini_set('display_errors',1);
 
-require('../vendor/autoload.php');
-use Respect\Validation\Validator as v;
-include 'functions.php';
-$pdo = pdo_connect_mysql();
+if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if POST data is not empty and if user is connected
+    $pdo = pdo_connect_mysql();
+    $errors = [];
 
-if (isset($_POST['id'])) {
-    // //get product by id
-    // $id = $_POST['id'];
-    // $stmt = $pdo->prepare("SELECT id_products, image.name, category.name, manual.name, source, products.name, reference_number, price, buy_date, end_warranty, care_products FROM products INNER JOIN image ON products.image_id = image.id_image INNER JOIN category ON products.category_id = category.id_category INNER JOIN manual ON products.manual_id = manual.id_manual INNER JOIN type ON products.id_type = type.id_type WHERE id_products = :id");
-    // $stmt->execute([':id'=>$id]);
-    // $product = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-    // $product = $stmt->fetch();
-    // var_dump($_POST);
-
-    $id = $_POST['id'];
-    $image_url = isset($_POST['image_url']) ? $_POST['image_url'] : '1';
-    $category = isset($_POST['category_id']) ? $_POST['category_id'] : '1';
-    $manual_url = isset($_POST['manual_url']) ? $_POST['manual_url'] : '1';
-    $source = isset($_POST['source']) ? $_POST['source'] : '';
-    $id_type = isset($_POST['source_type']) ? $_POST['source_type'] : '1';
-    $name = isset($_POST['name']) ? $_POST['name'] : '1';
-    $reference_number = isset($_POST['reference_number']) ? $_POST['reference_number'] : '1';
-    $price = isset($_POST['price']) ? $_POST['price'] : '1';
-    $buy_date = isset($_POST['buy_date']) ? $_POST['buy_date'] : '2020-12-12';
-    $end_warranty = isset($_POST['end_warranty']) ? $_POST['end_warranty'] : '2020-12-12';
-    $care_products = isset($_POST['care_products']) ? $_POST['care_products'] : '1';
-
-    $is_name = v::alnum(' ')->validate($name);
-if ($is_name) {
-
-    echo "Validation passed";
-} else {
-
-    echo "Validation failed";
-}
-
-$is_category = v::alnum(' ')->validate($category);
-if ($is_category) {
-
-    echo "Validation passed";
-} else {
-
-    echo "Validation failed";
-}
-
-$is_price = v::number()->validate($price);
-if ($is_price) {
-
-    echo "Validation passed";
-} else {
-
-    echo "Validation failed";
-}
-
-$is_source = v::alnum()->validate($source);
-if ($is_source) {
-
-    echo "Validation passed";
-} else {
-
-    echo "Validation failed";
-}
-
-$is_buydate = v::date()->validate($buy_date);
-if ($is_buydate) {
-
-    echo "Validation passed";
-} else {
-
-    echo "Validation failed";
-}
-
-$is_endwarranty = v::date()->greaterThan($buy_date);
-$is_endwarranty->validate($end_warranty);
-if ($is_endwarranty) {
-
-    echo "Validation passed";
-} else {
-
-    echo "Validation failed";
-}
-
-$is_careproducts = v::alnum(' ')->validate($care_products);
-if ($is_careproducts) {
-
-    echo "Validation passed";
-} else {
-
-    echo "Validation failed";
-}
-
-$is_reference = v::alnum(' ')->validate($reference_number);
-if ($is_reference) {
-
-    echo "Validation passed";
-} else {
-
-    echo "Validation failed";
-}
-
-//---------- Image Upload ------------//
-
-  // Set image placement folder
-  $target_dir = "../uploads/images";
-  // Get file path
-  $image_url = $target_dir . basename($_FILES["image_url"]["name"]);
-  // Get file extension
-  $imageExt = strtolower(pathinfo($image_url, PATHINFO_EXTENSION));
-  // Allowed file types
-  $allowd_file_ext = array("jpg", "jpeg", "png");
-  
-
-  if (!file_exists($_FILES["image_url"]["tmp_name"])) {
-     $resMessage = array(
-         "status" => "alert-danger",
-         "message" => "Select image to upload."
-     );
-  } else if (!in_array($imageExt, $allowd_file_ext)) {
-      $resMessage = array(
-          "status" => "alert-danger",
-          "message" => "Allowed file formats .jpg, .jpeg and .png."
-      );            
-  } else if ($_FILES["image_url"]["size"] > 2097152) {
-      $resMessage = array(
-          "status" => "alert-danger",
-          "message" => "File is too large. File size should be less than 2 megabytes."
-      );
-  } else if (file_exists($image_url)) {
-      $resMessage = array(
-          "status" => "alert-danger",
-          "message" => "File already exists."
-      );
-  } else {
-      if(!move_uploaded_file($_FILES["image_url"]["tmp_name"], $image_url)) {
-          $errors["file"] = "File cannot be moved";
-      }
-  }
-
-  //------ Manual Upload ---------//
-
-  // Set manual placement folder
-  $target_dir = "../uploads/manuals";
-  // Get file path
-  $manual_url = $target_dir . basename($_FILES["manual_url"]["name"]);
-  // Get file extension
-  $manualExt = strtolower(pathinfo($manual_url, PATHINFO_EXTENSION));
-  // Allowed file types
-  $allowd_file_ext = array("pdf", "txt");
-  
-
-  if (!file_exists($_FILES["manual_url"]["tmp_name"])) {
-     $resMessage = array(
-         "status" => "alert-danger",
-         "message" => "Select image to upload."
-     );
-  } else if (!in_array($manualExt, $allowd_file_ext)) {
-      $resMessage = array(
-          "status" => "alert-danger",
-          "message" => "Allowed file formats .jpg, .jpeg and .png."
-      );            
-  } else if ($_FILES["manual_url"]["size"] > 2097152) {
-      $resMessage = array(
-          "status" => "alert-danger",
-          "message" => "File is too large. File size should be less than 2 megabytes."
-      );
-  } else if (file_exists($manual_url)) {
-      $resMessage = array(
-          "status" => "alert-danger",
-          "message" => "File already exists."
-      );
-  } else {
-      if(!move_uploaded_file($_FILES["manual_url"]["tmp_name"], $manual_url)) {
-          $errors["file"] = "File cannot be moved";
-      }
-  }
-
-    // Update the record
-if (empty($errors)){
-    //If no errors insert product in database
-    $errors["none"] = true;
-    $stmt = $pdo->prepare('UPDATE products SET image_url = :image_url, category_id = :category_id, manual_url = :manual_url, source = :source, id_type = :id_type, name = :name, reference_number = :reference_number, price = :price, buy_date = :buy_date, end_warranty = :end_warranty, care_products = :care_products WHERE id_products = :id');
-    $stmt->bindValue(':id', $id);
-    $stmt->bindValue(':image_url', $image_url);
-    $stmt->bindValue(':category_id', $category);
-    $stmt->bindValue(':manual_url', $manual_url);
-    $stmt->bindValue(':source', $source);
-    $stmt->bindValue(':id_type', $id_type);
-    $stmt->bindValue(':name', $name);
-    $stmt->bindValue(':reference_number', $reference_number);
-    $stmt->bindValue(':price', $price);
-    $stmt->bindValue(':buy_date', $buy_date);
-    $stmt->bindValue(':end_warranty', $end_warranty);
-    $stmt->bindValue(':care_products', $care_products);
-    $stmt->execute();
-    
+    //check if $_POST['name'] is a non empty non blank string
+    if (v::key('name')->validate($_POST) && v::notEmpty()->validate($_POST['name'])) {
+        $name = trim($_POST['name']," \t\n\r\0\x0B");
+        if (! v::stringType()->notEmpty()->validate($name)){
+            $errors['name'] = "Please enter a product name";
+        }
+    } else {
+        $errors['name'] = "Please enter a product name";
     }
-    //AJAX response
-    echo json_encode($errors);
+
+    //check if $_POST['category_id'] is an id from category table
+    if (v::key('category_id')->validate($_POST) && v::notEmpty()->validate($_POST['category_id'])) {
+        $category_id = $_POST['category_id'];
+        $stmt = $pdo->query('SELECT id_category from category');
+        $category_ids = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if (! v::contains($category_id)->validate(array_map(function($value){return $value["id_category"];},$category_ids))){
+            $errors['category_id'] = "Please select among category options";
+        }
+    } else {
+        $errors['category_id'] = "Please select a category";
+    }
+
+    //check if $_POST['price'] is a positive number with max 2 decimals
+    if (v::key('price')->validate($_POST) && (v::notEmpty()->validate($_POST['price']) || $_POST['price']==='0')){
+        $price = $_POST['price'];
+        if (v::floatVal()->notEmpty()->not(v::negative())->validate($price) || $price==='0') {
+            $price = (int) $price;
+        }else{
+            $errors['price'] = "Please enter a valid price";
+        }
+    } else {
+        $errors['price'] = "Please enter a price";
+    }
+
+    //check if $_POST['source'] is a non empty non blank string
+    if (v::key('source')->validate($_POST)  && v::notEmpty()->validate($_POST['source'])) {
+        $source = trim($_POST['source']," \t\n\r\0\x0B");
+        if (! v::stringType()->notEmpty()->validate($source)){
+            $errors['source'] = "Please enter a purchase location";
+        }
+    } else {
+        $errors['source'] = "Please enter a purchase location";
+    }
+
+    //check if $_POST['buy_date'] is a date in the past
+    if (v::key('buy_date')->validate($_POST) && v::notEmpty()->validate($_POST['buy_date'])) {
+        $buy_date = $_POST['buy_date'];
+        if (v::date()->validate($buy_date)){
+            //if buy_date is a date, convert to timestamp and compare to now
+            $buy_date = strtotime($buy_date);
+            if(v::lessThan(time())->validate($buy_date)){
+                //date format
+                $buy_date = date('Y-m-d',$buy_date);
+            }else{
+                $errors['buy_date'] = "Please enter a puchase date in the past";
+            }
+        }else{
+            $errors['buy_date'] = "Please enter a puchase date";
+        }
+    } else {
+        $errors['buy_date'] = "Please enter a purchase date";
+    }
+
+    //check if $_POST['end_warranty'] is a date
+    if (v::key('end_warranty')->validate($_POST) && v::notEmpty()->validate($_POST['end_warranty'])) {
+        $end_warranty = date('Y-m-d',strtotime($_POST['end_warranty']));
+        if (! v::date()->validate($end_warranty)){
+            $errors['end_warranty'] = "Please enter an end of warranty date";
+        }
+    } else {
+        $errors['end_warranty'] = "Please enter an end of warranty date";
+    }
+
+    //check if $_POST['care_products'] is a non empty non blank string
+    if (v::key('care_products')->validate($_POST) && v::notEmpty()->validate($_POST['care_products'])) {
+        $care_products = trim($_POST['care_products']," \t\n\r\0\x0B");
+        if (! v::stringType()->notEmpty()->validate($care_products)){
+            $errors['care_products'] = "Please enter maintenance advice";
+        }
+    } else {
+        $errors['care_products'] = "Please enter maintenance advice";
+    }
+
+    //check if $_POST['reference_number'] is a non empty non blank string
+    if (v::key('reference_number')->validate($_POST) && v::notEmpty()->validate($_POST['reference_number'])) {
+        $reference_number = trim($_POST['reference_number']," \t\n\r\0\x0B");
+        if (! v::stringType()->notEmpty()->validate($reference_number)){
+            $errors['reference_number'] = "Please enter a product reference";
+        }
+    } else {
+        $errors['reference_number'] = "Please enter a product reference";
+    }
+
+    //check if $_POST['id_type'] is an id from type table
+    if (v::key('id_type')->validate($_POST) && v::notEmpty()->validate($_POST['id_type'])) {
+        $id_type = $_POST['id_type'];
+        $stmt = $pdo->query('SELECT id_type from type');
+        $id_types = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if (! v::contains($id_type)->validate(array_map(function($value){return $value["id_type"];},$id_types))){
+            $errors['id_type'] = "Please select among purchase options";
+        }
+    } else {
+        $errors['id_type'] = "Please select a purchase option";
+    }
+
+    //---------- Image Upload ------------//
+    if(v::key('image_url')->validate($_FILES) && v::notEmpty()->validate($_FILES['image_url']["name"])){
+        // Set image placement folder
+        $target_dir = "../uploads/images/";
+        // Get file path
+        $image_url = $target_dir . basename($_FILES["image_url"]["name"]);
+        // Get file extension
+        $imageExt = strtolower(pathinfo($image_url, PATHINFO_EXTENSION));
+        // Allowed file types
+        $allowd_file_ext = array("jpg", "jpeg", "png");
+        
+        if (!file_exists($_FILES["image_url"]["tmp_name"])) {
+            $errors["image_url"] = "File not uploaded";
+        } else if (!in_array($imageExt, $allowd_file_ext)) {
+            $errors["image_url"] = "Allowed formats: .jpg .jpeg .png";         
+        } else if ($_FILES["image_url"]["size"] > 2097152) {
+            $errors["image_url"] = "File is to big";
+        } else if (file_exists($image_url)) {
+            $errors["image_url"] = "File already exists, try to change its name";
+        }
+    } else {
+        $errors["image_url"] = "Please upload receipt";
+    }
+
+    //------ Manual Upload ---------//
+    if(v::key('manual_url')->validate($_FILES) && v::notEmpty()->validate($_FILES['manual_url']["name"])){
+        // Set manual placement folder
+        $target_dir = "../uploads/manuals/";
+        // Get file path
+        $manual_url = $target_dir . basename($_FILES["manual_url"]["name"]);
+        // Get file extension
+        $manualExt = strtolower(pathinfo($manual_url, PATHINFO_EXTENSION));
+        // Allowed file types
+        $allowd_file_ext = array("pdf", "txt");
+        
+        if (!file_exists($_FILES["manual_url"]["tmp_name"])) {
+            $errors["manual_url"] = "File not uploaded";
+        } else if (!in_array($manualExt, $allowd_file_ext)) {
+            $errors["manual_url"] = "Allowed formats: .pdf .txt";         
+        } else if ($_FILES["manual_url"]["size"] > 2097152) {
+            $errors["manual_url"] = "File is to big";
+        } else if (file_exists($manual_url)) {
+            $errors["manual_url"] = "File already exists, try to change its name";
+        }
+    }
+
+    if (empty($errors)){
+        //If no errors insert product in database
+        $errors["global"] = false;
+
+        $stmt = $pdo->prepare('UPDATE products SET image_url = :image_url, category_id = :category_id, manual_url = :manual_url, source = :source, id_type = :id_type, name = :name, reference_number = :reference_number, price = :price, buy_date = :buy_date, end_warranty = :end_warranty, care_products = :care_products WHERE id_products = :id');
+        move_uploaded_file($_FILES["image_url"]["tmp_name"], $image_url);
+        $stmt->bindValue(':image_url', $image_url);
+        $stmt->bindValue(':category_id', $category_id);
+        if(isset($manual_url)){
+            move_uploaded_file($_FILES["manual_url"]["tmp_name"], $manual_url);
+        }else{
+            $manual_url="";
+        }
+        $stmt->bindValue(':manual_url', $manual_url);
+        $stmt->bindValue(':source', $source);
+        $stmt->bindValue(':id_type', $id_type);
+        $stmt->bindValue(':name', $name);
+        $stmt->bindValue(':reference_number', $reference_number);
+        $stmt->bindValue(':price', $price);
+        $stmt->bindValue(':buy_date', $buy_date);
+        $stmt->bindValue(':end_warranty', $end_warranty);
+        $stmt->bindValue(':care_products', $care_products);
+        $stmt->execute();
+    }else{
+        $errors["global"] = "Failed to add product !";
+    }
+}else{
+    $errors["global"] = "Failed to add product !";
 }
+
+//AJAX response
+echo json_encode($errors);
