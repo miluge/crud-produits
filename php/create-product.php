@@ -9,9 +9,6 @@ ini_set('display_errors',1);
 if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if POST data is not empty and if user is connected
     $pdo = pdo_connect_mysql();
     $errors = [];
-    
-    $image_url = isset($_FILES['image_url']) ? $_FILES['image_url'] : '1';
-    $manual_url = isset($_FILES['manual_url']) ? $_FILES['manual_url'] : '1';
 
     //check if $_POST['name'] is a non empty non blank string
     if (v::key('name')->validate($_POST) && v::notEmpty()->validate($_POST['name'])) {
@@ -121,7 +118,7 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
 //---------- Image Upload ------------//
 
   // Set image placement folder
-  $target_dir = "../uploads/images";
+  $target_dir = "../uploads/images/";
   // Get file path
   $image_url = $target_dir . basename($_FILES["image_url"]["name"]);
   // Get file extension
@@ -159,7 +156,7 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
   //------ Manual Upload ---------//
 
   // Set manual placement folder
-  $target_dir = "../uploads/manuals";
+  $target_dir = "../uploads/manuals/";
   // Get file path
   $manual_url = $target_dir . basename($_FILES["manual_url"]["name"]);
   // Get file extension
