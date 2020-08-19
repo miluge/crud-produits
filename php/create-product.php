@@ -166,8 +166,14 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         $errors["global"] = false;
         
         $stmt = $pdo->prepare('INSERT INTO products(image_url, category_id, manual_url, source, id_type, name, reference_number, price, buy_date, end_warranty, care_products) VALUES (:image_url, :category_id, :manual_url, :source, :id_type, :name, :reference_number, :price, :buy_date, :end_warranty, :care_products)');
+        move_uploaded_file($_FILES["image_url"]["tmp_name"], $image_url);
         $stmt->bindValue(':image_url', $image_url);
         $stmt->bindValue(':category_id', $category_id);
+        if(isset($manual_url)){
+            move_uploaded_file($_FILES["manual_url"]["tmp_name"], $manual_url);
+        }else{
+            $manual_url="";
+        }
         $stmt->bindValue(':manual_url', $manual_url);
         $stmt->bindValue(':source', $source);
         $stmt->bindValue(':id_type', $id_type);
@@ -178,10 +184,6 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         $stmt->bindValue(':end_warranty', $end_warranty);
         $stmt->bindValue(':care_products', $care_products);
         $stmt->execute();
-        move_uploaded_file($_FILES["image_url"]["tmp_name"], $image_url);
-        if(isset($manual_url)){
-            move_uploaded_file($_FILES["manual_url"]["tmp_name"], $manual_url);
-        }
     }else{
         $errors["global"] = "Failed to add product !";
     }
