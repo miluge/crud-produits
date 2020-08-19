@@ -22,11 +22,11 @@ if (check_user() !== false){
     <body class="bg-primary">
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
-                <main>
+                <main class="d-flex align-items-center">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
-                                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                <div class="card shadow-lg border-0 rounded-lg">
                                     <div class="card-header"><h3 class="h1 font-weight-bold text-primary text-center my-4">Login</h3></div>
                                     <div class="card-body">
                                         <form method="post" action="">

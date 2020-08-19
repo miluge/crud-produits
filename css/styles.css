@@ -10200,8 +10200,8 @@ body {
   margin-top: 1.25rem !important;
 }
 
-h3 {
-  font-size: 2.5rem;
+#layoutAuthentication_content > main {
+  height: 100vh;
 }
 
 select.custom {
