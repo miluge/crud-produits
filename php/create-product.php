@@ -36,10 +36,12 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
     }
 
     //check if $_POST['price'] is a positive number with max 2 decimals
-    if (v::key('price')->validate($_POST)) {
-        $price = (float) $_POST['price'];
-        if (! v::intVal()->positive()->digit()->validate($price*100)){
-            $errors['price'] = "Please enter a valid price (ex: 39.99)";
+    if (v::key('price')->validate($_POST)){
+        $price = $_POST['price'];
+        if (v::floatVal()->notEmpty()->not(v::negative())->validate($price) || $price==='0') {
+            $price = (int) $price;
+        }else{
+            $errors['price'] = "Please enter a valid price";
         }
     } else {
         $errors['price'] = "Please enter a price";
