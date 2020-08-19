@@ -62,7 +62,7 @@ if($user === false) {//if not connected: redirect to login
             <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark d-flex justify-content-between">
     
                 <!-- top bar nav -->
-                <a class="navbar-brand" href="index.php">Home</a>
+                <a class="navbar-brand pl-1 pl-sm-5" href="index.php">Home</a>
                 
                 <?php //load user template
                     echo $twig->render( 'user.html.twig' , $user);
@@ -74,15 +74,21 @@ if($user === false) {//if not connected: redirect to login
             <div class="container">
 
                 <!-- table -->
-                <div id="product-list" class="card mb-4">
-                    <div class="card-header mb-2 p-4 d-flex justify-content-between">
-                        <!-- table title -->
-                        <p><em class="fas fa-table mr-1"></em>Products</p>
-
-                        <!-- add modal button -->
-                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#formModal">
-                            Add product
-                        </button>
+                <div id="product-list" class="card mb-5">
+                    <div class="container card-header mb-2 p-4">
+                        <div class="row">
+                            <!-- table title -->
+                            <div class="col-6">
+                                <p class="d-none d-sm-block"><em class="fas fa-table mr-1"></em>Products</p>
+                            </div>
+                            
+                            <!-- add modal button -->
+                            <div class="col-sm-5 offset-sm-1 col-md-4 offset-md-2 col-lg-3 offset-lg-3">
+                                <button type="button" class="btn btn-primary btn-lg w-100" data-toggle="modal" data-target="#formModal">
+                                    Add product
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -92,24 +98,24 @@ if($user === false) {//if not connected: redirect to login
                                 <!-- table top legend -->
                                 <thead>
                                     <tr>
-                                        <th scope="reference_number">Reference</th>
+                                        <th scope="reference_number" class="d-none d-sm-table-cell">Reference</th>
                                         <th scope="name">Name</th>
-                                        <th scope="category">Category</th>
-                                        <th scope="price">Price</th>
-                                        <th scope="buy_date">Buy date</th>
-                                        <th scope="action">Action</th>
+                                        <th scope="category" class="d-none d-md-table-cell">Category</th>
+                                        <th scope="price" class="d-none d-md-table-cell">Price</th>
+                                        <th scope="buy_date" class="d-none d-lg-table-cell">Buy date</th>
+                                        <th scope="action" class="d-none d-sm-table-cell">Action</th>
                                     </tr>
                                 </thead>
 
                                 <!-- table bottom legend -->
                                 <tfoot>
                                     <tr>
-                                        <th scope="reference_number">Reference</th>
-                                        <th scope="name">Name</th>
-                                        <th scope="category">Category</th>
-                                        <th scope="price">Price</th>
-                                        <th scope="buy_date">Buy date</th>
-                                        <th scope="action">Action</th>
+                                        <th scope="reference_number" class="d-none d-sm-table-cell">Reference</th>
+                                        <th scope="name" class="d-none d-sm-table-cell">Name</th>
+                                        <th scope="category" class="d-none d-md-table-cell">Category</th>
+                                        <th scope="price" class="d-none d-md-table-cell">Price</th>
+                                        <th scope="buy_date" class="d-none d-lg-table-cell">Buy date</th>
+                                        <th scope="action" class="d-none d-sm-table-cell">Action</th>
                                     </tr>
                                 </tfoot>
 
@@ -126,11 +132,11 @@ if($user === false) {//if not connected: redirect to login
         </main>
 
         <!-- footer -->
-        <footer class="py-4 bg-light fixed-bottom">
+        <footer class="py-4 px-1 px-sm-3 bg-light fixed-bottom">
             <div class="container-fluid">
-                <div class="d-flex justify-content-between small">
-                    <div class="text-muted">ACS Besançon promo 2020</div>
-                    <div class="text-muted">Guillaume Perbet (Front) et Guillaume Blondel (Back)</div>
+                <div class="row small">
+                    <div class="text-muted col-5">ACS Besançon<br/> promo 2020</div>
+                    <div class="text-muted col-7 text-right text-bottom">Guillaume Blondel (Back)<br/>Guillaume Perbet (Front) </div>
                 </div>
             </div>
         </footer>
