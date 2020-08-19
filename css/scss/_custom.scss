@@ -95,4 +95,29 @@ textarea.form-control{
     font-size: 1.25rem;
 }
 
-//FOOTER
+//SEARCH INPUT 
+input[type=search]{
+    @media (max-width: 348px){
+        max-width: 136px;
+    }
+}
+
+//PAGINATE
+#dataTable_info{
+    @media(max-width: 768px){
+        padding-bottom: 24px;
+    }
+}
+
+#dataTable_paginate{
+    @media(max-width: 768px){
+        display: flex;
+        justify-content: center;
+    }
+}
+
+div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:last-child{
+    @media(max-width: 768px){
+        padding-left: 0;
+    }
+}
