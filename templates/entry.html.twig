@@ -4,12 +4,12 @@
     <td>{{ category }}</td>
     <td>{{ price }}</td>
     <td>{{ buy_date }}</td>
-    <td>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detailsModal" data-id="{{ id_products }}">
+    <td class="d-flex">
+        <button type="button" class="btn btn-primary flex-fill mx-1" data-toggle="modal" data-target="#detailsModal" data-id="{{ id_products }}">
             Details
         </button>
 
-        <button type="button" class="btn btn-primary btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{ id_products }}">
+        <button type="button" class="btn btn-danger flex-fill mx-1" data-toggle="modal" data-target="#deleteModal" data-id="{{ id_products }}">
             Delete
         </button>
     </td>
