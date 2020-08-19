@@ -115,81 +115,51 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         $errors['id_type'] = "Please select a purchase option";
     }
 
-//---------- Image Upload ------------//
+    //---------- Image Upload ------------//
+    if(v::key('image_url')->validate($_FILES) && v::notEmpty()->validate($_FILES['image_url']["name"])){
+        // Set image placement folder
+        $target_dir = "../uploads/images/";
+        // Get file path
+        $image_url = $target_dir . basename($_FILES["image_url"]["name"]);
+        // Get file extension
+        $imageExt = strtolower(pathinfo($image_url, PATHINFO_EXTENSION));
+        // Allowed file types
+        $allowd_file_ext = array("jpg", "jpeg", "png");
+        
+        if (!file_exists($_FILES["image_url"]["tmp_name"])) {
+            $errors["image_url"] = "File not uploaded";
+        } else if (!in_array($imageExt, $allowd_file_ext)) {
+            $errors["image_url"] = "Allowed formats: .jpg .jpeg .png";         
+        } else if ($_FILES["image_url"]["size"] > 2097152) {
+            $errors["image_url"] = "File is to big";
+        } else if (file_exists($image_url)) {
+            $errors["image_url"] = "File already exists, try to change its name";
+        }
+    } else {
+        $errors["image_url"] = "Please upload receipt";
+    }
 
-  // Set image placement folder
-  $target_dir = "../uploads/images/";
-  // Get file path
-  $image_url = $target_dir . basename($_FILES["image_url"]["name"]);
-  // Get file extension
-  $imageExt = strtolower(pathinfo($image_url, PATHINFO_EXTENSION));
-  // Allowed file types
-  $allowd_file_ext = array("jpg", "jpeg", "png");
-  
-
-  if (!file_exists($_FILES["image_url"]["tmp_name"])) {
-     $resMessage = array(
-         "status" => "alert-danger",
-         "message" => "Select image to upload."
-     );
-  } else if (!in_array($imageExt, $allowd_file_ext)) {
-      $resMessage = array(
-          "status" => "alert-danger",
-          "message" => "Allowed file formats .jpg, .jpeg and .png."
-      );            
-  } else if ($_FILES["image_url"]["size"] > 2097152) {
-      $resMessage = array(
-          "status" => "alert-danger",
-          "message" => "File is too large. File size should be less than 2 megabytes."
-      );
-  } else if (file_exists($image_url)) {
-      $resMessage = array(
-          "status" => "alert-danger",
-          "message" => "File already exists."
-      );
-  } else {
-      if(!move_uploaded_file($_FILES["image_url"]["tmp_name"], $image_url)) {
-          $errors["file"] = "File cannot be moved";
-      }
-  }
-
-  //------ Manual Upload ---------//
-
-  // Set manual placement folder
-  $target_dir = "../uploads/manuals/";
-  // Get file path
-  $manual_url = $target_dir . basename($_FILES["manual_url"]["name"]);
-  // Get file extension
-  $manualExt = strtolower(pathinfo($manual_url, PATHINFO_EXTENSION));
-  // Allowed file types
-  $allowd_file_ext = array("pdf", "txt");
-  
-
-  if (!file_exists($_FILES["manual_url"]["tmp_name"])) {
-     $resMessage = array(
-         "status" => "alert-danger",
-         "message" => "Select image to upload."
-     );
-  } else if (!in_array($manualExt, $allowd_file_ext)) {
-      $resMessage = array(
-          "status" => "alert-danger",
-          "message" => "Allowed file formats .jpg, .jpeg and .png."
-      );            
-  } else if ($_FILES["manual_url"]["size"] > 2097152) {
-      $resMessage = array(
-          "status" => "alert-danger",
-          "message" => "File is too large. File size should be less than 2 megabytes."
-      );
-  } else if (file_exists($manual_url)) {
-      $resMessage = array(
-          "status" => "alert-danger",
-          "message" => "File already exists."
-      );
-  } else {
-      if(!move_uploaded_file($_FILES["manual_url"]["tmp_name"], $manual_url)) {
-          $errors["file"] = "File cannot be moved";
-      }
-  }
+    //------ Manual Upload ---------//
+    if(v::key('manual_url')->validate($_FILES) && v::notEmpty()->validate($_FILES['manual_url']["name"])){
+        // Set manual placement folder
+        $target_dir = "../uploads/manuals/";
+        // Get file path
+        $manual_url = $target_dir . basename($_FILES["manual_url"]["name"]);
+        // Get file extension
+        $manualExt = strtolower(pathinfo($manual_url, PATHINFO_EXTENSION));
+        // Allowed file types
+        $allowd_file_ext = array("pdf", "txt");
+        
+        if (!file_exists($_FILES["manual_url"]["tmp_name"])) {
+            $errors["manual_url"] = "File not uploaded";
+        } else if (!in_array($manualExt, $allowd_file_ext)) {
+            $errors["manual_url"] = "Allowed formats: .pdf .txt";         
+        } else if ($_FILES["manual_url"]["size"] > 2097152) {
+            $errors["manual_url"] = "File is to big";
+        } else if (file_exists($manual_url)) {
+            $errors["manual_url"] = "File already exists, try to change its name";
+        }
+    }
 
     if (empty($errors)){
         //if no errors insert product in database
@@ -208,6 +178,10 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         $stmt->bindValue(':end_warranty', $end_warranty);
         $stmt->bindValue(':care_products', $care_products);
         $stmt->execute();
+        move_uploaded_file($_FILES["image_url"]["tmp_name"], $image_url);
+        if(isset($manual_url)){
+            move_uploaded_file($_FILES["manual_url"]["tmp_name"], $manual_url);
+        }
     }else{
         $errors["global"] = "Failed to add product !";
     }
