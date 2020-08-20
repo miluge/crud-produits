@@ -106,15 +106,15 @@
 
                 <!-- receipt image upload -->
                 <div class="col-5 form-group custom-file">
-                    <label class="custom-file-label" for="imageInput">{{ image_url }}</label>
-                    <input type="file" class="custom-file-input" id="imageInput" name="image_url" required/>
+                    <input type="file" class="custom-file-input text-truncate" id="imageInput" name="image_url"  onchange="$(this).next().after().text($(this).val().split('\\').slice(-1)[0])" required/>
+                    <label class="custom-file-label text-truncate" for="imageInput">{{ image_url }}</label>
                     <div class="invalid-feedback"></div>
                 </div>
 
                 <!-- manual upload -->
                 <div class="col-5 offset-2 form-group custom-file">
-                    <label class="custom-file-label" for="manualInput">{{ manual_url }}</label>
-                    <input type="file" class="custom-file-input" id="manualInput" name="manual_url"/>
+                    <input type="file" class="custom-file-input text-truncate" id="manualInput" onchange="$(this).next().after().text($(this).val().split('\\').slice(-1)[0])" name="manual_url"/>
+                    <label class="custom-file-label text-truncate" for="manualInput">{{ manual_url }}</label>
                     <div class="invalid-feedback"></div>
                 </div>
             </div>

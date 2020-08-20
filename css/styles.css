@@ -9617,6 +9617,7 @@ button.bg-dark:focus {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  max-width: 200px;
 }
 
 .text-left {
@@ -10264,4 +10265,7 @@ textarea.form-control {
 #action::after {
   display: none;
 }
+
+
+
 /*# sourceMappingURL=styles.css.map */
