@@ -56,16 +56,6 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         $errors['price'] = "Please enter a price";
     }
 
-    //check if $_POST['source'] is a non empty non blank string
-    if (v::key('source')->validate($_POST)  && v::notEmpty()->validate($_POST['source'])) {
-        $source = trim($_POST['source']," \t\n\r\0\x0B");
-        if (! v::stringType()->notEmpty()->validate($source)){
-            $errors['source'] = "Please enter a purchase location";
-        }
-    } else {
-        $errors['source'] = "Please enter a purchase location";
-    }
-
     //check if $_POST['buy_date'] is a date in the past
     if (v::key('buy_date')->validate($_POST) && v::notEmpty()->validate($_POST['buy_date'])) {
         $buy_date = $_POST['buy_date'];
@@ -127,6 +117,20 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         $errors['id_type'] = "Please select a purchase option";
     }
 
+    //check if $_POST['source'] is a non empty non blank string
+    if (v::key('source')->validate($_POST)  && v::notEmpty()->validate($_POST['source'])) {
+        $source = trim($_POST['source']," \t\n\r\0\x0B");
+        if ( v::stringType()->notEmpty()->validate($source)){
+            if($id_type == 2 && !(v::domain()->validate($source) || v::url()->validate($source))){
+                $errors['source'] = "Please enter an url";
+            }
+        }else{
+            $errors['source'] = "Please enter a purchase location";
+        }
+    } else {
+        $errors['source'] = "Please enter a purchase location";
+    }
+
     //---------- Image Upload ------------//
     if(v::key('image_url')->validate($_FILES) && v::notEmpty()->validate($_FILES['image_url']["name"])){
         // Set image placement folder
@@ -147,9 +151,6 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         } else if ($_FILES["image_url"]["size"] > 2097152) {
             $errors["image"] = "File is to big";
         }
-        // } else if (file_exists($image_url)) {
-        //     $errors["image"] = "File already exists, try to change its name";
-        // }
     } else {
         $errors["image"] = "Please upload receipt";
     }
@@ -174,9 +175,6 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         } else if ($_FILES["manual_url"]["size"] > 2097152) {
             $errors["manual"] = "File is to big";
         }
-        // } else if (file_exists($manual_url)) {
-        //     $errors["manual"] = "File already exists, try to change its name";
-        // }
     }
 
     if (empty($errors)){

@@ -44,10 +44,27 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         $errors['price'] = "Please enter a price";
     }
 
+    
+    //check if $_POST['id_type'] is an id from type table
+    if (v::key('id_type')->validate($_POST) && v::notEmpty()->validate($_POST['id_type'])) {
+        $id_type = $_POST['id_type'];
+        $stmt = $pdo->query('SELECT id_type from type');
+        $id_types = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if (! v::contains($id_type)->validate(array_map(function($value){return $value["id_type"];},$id_types))){
+            $errors['id_type'] = "Please select among purchase options";
+        }
+    } else {
+        $errors['id_type'] = "Please select a purchase option";
+    }
+
     //check if $_POST['source'] is a non empty non blank string
     if (v::key('source')->validate($_POST)  && v::notEmpty()->validate($_POST['source'])) {
         $source = trim($_POST['source']," \t\n\r\0\x0B");
-        if (! v::stringType()->notEmpty()->validate($source)){
+        if ( v::stringType()->notEmpty()->validate($source)){
+            if($id_type == 2 && !(v::domain()->validate($source) || v::url()->validate($source))){
+                $errors['source'] = "Please enter an url";
+            }
+        }else{
             $errors['source'] = "Please enter a purchase location";
         }
     } else {
@@ -103,18 +120,6 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         $errors['reference_number'] = "Please enter a product reference";
     }
 
-    //check if $_POST['id_type'] is an id from type table
-    if (v::key('id_type')->validate($_POST) && v::notEmpty()->validate($_POST['id_type'])) {
-        $id_type = $_POST['id_type'];
-        $stmt = $pdo->query('SELECT id_type from type');
-        $id_types = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if (! v::contains($id_type)->validate(array_map(function($value){return $value["id_type"];},$id_types))){
-            $errors['id_type'] = "Please select among purchase options";
-        }
-    } else {
-        $errors['id_type'] = "Please select a purchase option";
-    }
-
     //---------- Image Upload ------------//
     if(v::key('image_url')->validate($_FILES) && v::notEmpty()->validate($_FILES['image_url']["name"])){
         // Set image placement folder
@@ -135,9 +140,6 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         } else if ($_FILES["image_url"]["size"] > 2097152) {
             $errors["image"] = "File is to big";
         }
-        // } else if (file_exists($image_url)) {
-        //     $errors["image"] = "File already exists, try to change its name";
-        // }
     } else {
         $errors["image"] = "Please upload receipt";
     }
@@ -162,9 +164,6 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         } else if ($_FILES["manual_url"]["size"] > 2097152) {
             $errors["manual"] = "File is to big";
         }
-        // } else if (file_exists($manual_url)) {
-        //     $errors["manual"] = "File already exists, try to change its name";
-        // }
     }
 
     if (empty($errors)){

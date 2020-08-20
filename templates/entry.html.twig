@@ -1,15 +1,26 @@
 <tr>
-    <td>{{ reference_number }}</td>
-    <td>{{ name }}</td>
-    <td>{{ category }}</td>
-    <td>{{ price }}</td>
-    <td>{{ buy_date }}</td>
-    <td class="d-flex">
-        <button type="button" class="btn btn-primary flex-fill mx-1" data-toggle="modal" data-target="#detailsModal" data-id="{{ id_products }}">
+    <td class="d-none d-sm-table-cell">{{ reference_number }}</td>
+    <td>
+        {{ name }}
+        <div class="d-flex d-sm-none">
+            <button type="button" class="btn btn-primary flex-fill m-1" data-toggle="modal" data-target="#detailsModal" data-id="{{ id_products }}">
+                Details
+            </button>
+    
+            <button type="button" class="btn btn-danger flex-fill m-1" data-toggle="modal" data-target="#deleteModal" data-id="{{ id_products }}">
+                Delete
+            </button>
+        </div>
+    </td>
+    <td class="d-none d-md-table-cell">{{ category }}</td>
+    <td class="d-none d-md-table-cell">{{ price }}</td>
+    <td class="d-none d-lg-table-cell">{{ buy_date }}</td>
+    <td class="d-none d-sm-flex">
+        <button type="button" class="btn btn-primary flex-fill m-1" data-toggle="modal" data-target="#detailsModal" data-id="{{ id_products }}">
             Details
         </button>
 
-        <button type="button" class="btn btn-danger flex-fill mx-1" data-toggle="modal" data-target="#deleteModal" data-id="{{ id_products }}">
+        <button type="button" class="btn btn-danger flex-fill m-1" data-toggle="modal" data-target="#deleteModal" data-id="{{ id_products }}">
             Delete
         </button>
     </td>

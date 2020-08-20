@@ -1,3 +1,8 @@
+//LOGIN PAGE___________________________________________
+#layoutAuthentication_content>main{
+    height: 100vh;
+}
+
 //TOP BAR_________________________________________
 .sb-topnav{//top bar size
     height: 6rem;
@@ -30,11 +35,6 @@
     table.dataTable{//table
         margin-top: 1.25rem !important;
     }
-}
-
-//LOGIN PAGE___________________________________________
-h3{
-    font-size: 2.5rem;
 }
 
 //CUSTOM SELECT_________________________________________
@@ -95,8 +95,37 @@ textarea.form-control{
     font-size: 1.25rem;
 }
 
+<<<<<<< HEAD
 //TABLE_________________________
 th.sorting:nth-child(6)::before {
     display: none;
 }
 
+=======
+//SEARCH INPUT 
+input[type=search]{
+    @media (max-width: 348px){
+        max-width: 136px;
+    }
+}
+
+//PAGINATE
+#dataTable_info{
+    @media(max-width: 768px){
+        padding-bottom: 24px;
+    }
+}
+
+#dataTable_paginate{
+    @media(max-width: 768px){
+        display: flex;
+        justify-content: center;
+    }
+}
+
+div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:last-child{
+    @media(max-width: 768px){
+        padding-left: 0;
+    }
+}
+>>>>>>> 118ec9a9c6b9046b4e21132647ecd8c586cb08b8

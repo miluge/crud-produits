@@ -22,3 +22,13 @@
 
 // Custom
 @import "custom.scss";
+
+/* Table sort */
+
+#action::before {
+    display: none;
+  }
+  
+  #action::after {
+    display: none;
+  }
