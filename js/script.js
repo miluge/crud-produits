@@ -32,6 +32,19 @@ function resetInput(input){
     });
 }
 
+//take file input name argument and reset validation notifications
+function resetFile(input){
+    const inputElt = document.getElementById(`${input}Input`);
+    inputElt.classList.remove("is-valid");
+    inputElt.classList.remove("is-invalid");
+    inputElt.nextElementSibling.nextElementSibling.innerHTML = "";
+    //reset notifications on input
+    inputElt.addEventListener("input",()=>{
+        resetFile(input);
+        resetGlobal();
+    });
+}
+
 //take select name argument and reset validation notifications
 function resetSelect(select){
     const selectElt = document.getElementById(`${select}Select`);
@@ -55,8 +68,8 @@ function resetForm(){
     resetInput("source");
     resetInput("end_warranty");
     resetInput("care_products");
-    resetInput("image");
-    resetInput("manual");
+    resetFile("image");
+    resetFile("manual");
     resetSelect("category");
     resetSelect("type");
 }
@@ -185,7 +198,7 @@ $('#formModal').on('show.bs.modal', function (event) {
                     const imageInput = document.getElementById("imageInput");
                     if (errors.image){
                         imageInput.classList.add("is-invalid");
-                        imageInput.nextElementSibling.innerHTML = errors.image;
+                        imageInput.nextElementSibling.nextElementSibling.innerHTML = errors.image;
                     } else {
                         imageInput.classList.add("is-valid");
                     }
@@ -194,7 +207,7 @@ $('#formModal').on('show.bs.modal', function (event) {
                     const manualInput = document.getElementById("manualInput");
                     if (errors.manual){
                         manualInput.classList.add("is-invalid");
-                        manualInput.nextElementSibling.innerHTML = errors.manual;
+                        manualInput.nextElementSibling.nextElementSibling.innerHTML = errors.manual;
                     } else {
                         manualInput.classList.add("is-valid");
                     }
