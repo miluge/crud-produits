@@ -126,3 +126,16 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:las
         padding-left: 0;
     }
 }
+
+//ACTION SORT
+#action::before {
+    display: none;
+}
+  
+#action::after {
+    display: none;
+}
+
+th.sorting:nth-child(6)::before {
+    display: none;
+}
