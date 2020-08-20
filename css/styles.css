@@ -9617,7 +9617,6 @@ button.bg-dark:focus {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 200px;
 }
 
 .text-left {
@@ -10256,19 +10255,10 @@ textarea.form-control {
   font-size: 1.25rem;
 }
 
-<<<<<<< HEAD
-/* TH sorting */
-
-#action::before {
+th.sorting:nth-child(6)::before {
   display: none;
 }
 
-#action::after {
-  display: none;
-}
-
-
-=======
 @media (max-width: 348px) {
   input[type=search] {
     max-width: 136px;
@@ -10293,6 +10283,14 @@ textarea.form-control {
     padding-left: 0;
   }
 }
->>>>>>> 118ec9a9c6b9046b4e21132647ecd8c586cb08b8
+
+/* Table sort */
+#action::before {
+  display: none;
+}
+
+#action::after {
+  display: none;
+}
 
 /*# sourceMappingURL=styles.css.map */

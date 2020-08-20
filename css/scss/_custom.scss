@@ -95,13 +95,11 @@ textarea.form-control{
     font-size: 1.25rem;
 }
 
-<<<<<<< HEAD
 //TABLE_________________________
 th.sorting:nth-child(6)::before {
     display: none;
 }
 
-=======
 //SEARCH INPUT 
 input[type=search]{
     @media (max-width: 348px){
@@ -128,4 +126,3 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:las
         padding-left: 0;
     }
 }
->>>>>>> 118ec9a9c6b9046b4e21132647ecd8c586cb08b8

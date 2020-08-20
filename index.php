@@ -103,7 +103,7 @@ if($user === false) {//if not connected: redirect to login
                                         <th scope="category" class="d-none d-md-table-cell">Category</th>
                                         <th scope="price" class="d-none d-md-table-cell">Price</th>
                                         <th scope="buy_date" class="d-none d-lg-table-cell">Buy date</th>
-                                        <th scope="action" class="d-none d-sm-table-cell">Action</th>
+                                        <th id="action" scope="action" class="d-none d-sm-table-cell">Action</th>
                                     </tr>
                                 </thead>
 
