@@ -122,14 +122,9 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
 
     //---------- Image Upload ------------//
     if(v::key('image_url')->validate($_FILES) && v::notEmpty()->validate($_FILES['image_url']["name"])){
-        // Set image placement folder
-        $target_dir = "../uploads/images/";
-        //Get file name
         $image = basename($_FILES["image_url"]["name"]);
-        // Get file path
-        $image_url = $target_dir . $image;
         // Get file extension
-        $imageExt = strtolower(pathinfo($image_url, PATHINFO_EXTENSION));
+        $imageExt = strtolower(pathinfo($image, PATHINFO_EXTENSION));
         // Allowed file types
         $allowd_file_ext = array("jpg", "jpeg", "png");
         
@@ -146,14 +141,9 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
 
     //------ Manual Upload ---------//
     if(v::key('manual_url')->validate($_FILES) && v::notEmpty()->validate($_FILES['manual_url']["name"])){
-        // Set manual placement folder
-        $target_dir = "../uploads/manuals/";
-        //Get file name
         $manual = basename($_FILES["manual_url"]["name"]);
-        // Get file path
-        $manual_url = $target_dir . $manual;
         // Get file extension
-        $manualExt = strtolower(pathinfo($manual_url, PATHINFO_EXTENSION));
+        $manualExt = strtolower(pathinfo($manual, PATHINFO_EXTENSION));
         // Allowed file types
         $allowd_file_ext = array("pdf", "txt");
         
@@ -164,22 +154,16 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         } else if ($_FILES["manual_url"]["size"] > 2097152) {
             $errors["manual"] = "File is to big";
         }
+    } else {
+        $manual = "";
     }
 
     if (empty($errors)){
         //if no errors insert product in database
         $errors["global"] = false;
         
-        $stmt = $pdo->prepare('INSERT INTO products(image_url, category_id, manual_url, source, id_type, name, reference_number, price, buy_date, end_warranty, care_products) VALUES (:image_url, :category_id, :manual_url, :source, :id_type, :name, :reference_number, :price, :buy_date, :end_warranty, :care_products)');
-        move_uploaded_file($_FILES["image_url"]["tmp_name"], $image_url);
-        $stmt->bindValue(':image_url', $image);
+        $stmt = $pdo->prepare('INSERT INTO products(category_id, source, id_type, name, reference_number, price, buy_date, end_warranty, care_products, image_url, manual_url) VALUES (:category_id, :source, :id_type, :name, :reference_number, :price, :buy_date, :end_warranty, :care_products, :image_url, :manual_url)');
         $stmt->bindValue(':category_id', $category_id);
-        if(isset($manual_url)){
-            move_uploaded_file($_FILES["manual_url"]["tmp_name"], $manual_url);
-        }else{
-            $manual_url="";
-        }
-        $stmt->bindValue(':manual_url', $manual);
         $stmt->bindValue(':source', $source);
         $stmt->bindValue(':id_type', $id_type);
         $stmt->bindValue(':name', $name);
@@ -188,7 +172,18 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         $stmt->bindValue(':buy_date', $buy_date);
         $stmt->bindValue(':end_warranty', $end_warranty);
         $stmt->bindValue(':care_products', $care_products);
+        $stmt->bindValue(':image_url', $image);
+        $stmt->bindValue(':manual_url', $manual);
         $stmt->execute();
+
+        //add id- to file names and upload it
+        $new_id = $pdo->lastInsertId();
+        $image_url = "../uploads/images/".$new_id.'-'.$image;
+        move_uploaded_file($_FILES["image_url"]["tmp_name"], $image_url);
+        if($manual !== ""){
+            $manual_url = "../uploads/manuals/".$new_id.'-'.$manual;
+            move_uploaded_file($_FILES["manual_url"]["tmp_name"], $manual_url);
+        }
     }else{
         $errors["global"] = "Failed to add product !";
     }
