@@ -97,7 +97,8 @@ if($user === false) {//if not connected: redirect to login
                                         <th scope="category">Category</th>
                                         <th scope="price">Price</th>
                                         <th scope="buy_date">Buy date</th>
-                                        <th scope="action">Action</th>
+                                        <th id="action"
+                                        scope="action">Action</th>
                                     </tr>
                                 </thead>
 
@@ -136,21 +137,11 @@ if($user === false) {//if not connected: redirect to login
         </footer>
 
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="js/datatables-demo.js"></script>
         <script src="js/script.js"></script>
-<<<<<<< HEAD
-        <script>
-            $(document).ready(function () {
-            bsCustomFileInput.init()
-            })
-        </script>
-=======
-
->>>>>>> 11c5e25a8d66faf0510a80a8a3d53e1651ba8a7b
     </body>
 </html>
