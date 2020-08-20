@@ -188,7 +188,7 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         $errors["global"] = "Failed to add product !";
     }
 }else{
-    $errors["global"] = "Failed to add product !";
+    header('Location:../login.php');
 }
 
 //AJAX response
