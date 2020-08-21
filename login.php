@@ -17,6 +17,7 @@ if (check_user() !== false){
         <meta name="author" content="" />
         <title>Products manager - Login</title>
         <link href="css/styles.css" rel="stylesheet" />
+        <link rel="icon" href="favicon.ico" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="bg-primary">
