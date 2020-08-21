@@ -143,7 +143,7 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
             $errors["image"] = "File not uploaded";
         } else if (!in_array($imageExt, $allowd_file_ext)) {
             $errors["image"] = "Allowed formats: .jpg .jpeg .png";         
-        } else if ($_FILES["image_url"]["size"] > 2097152) {
+        } else if ($_FILES["image_url"]["size"] > 10485760) {
             $errors["image"] = "File is to big";
         }
     } else {
@@ -162,7 +162,7 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
             $errors["manual"] = "File not uploaded";
         } else if (!in_array($manualExt, $allowd_file_ext)) {
             $errors["manual"] = "Allowed formats: .pdf .txt";         
-        } else if ($_FILES["manual_url"]["size"] > 2097152) {
+        } else if ($_FILES["manual_url"]["size"] > 10485760) {
             $errors["manual"] = "File is to big";
         }
     } else {
