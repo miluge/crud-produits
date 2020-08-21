@@ -10,7 +10,7 @@ $('#detailsModal').on('show.bs.modal', function (event) {
     fetch('php/view.php',{method: 'post', body: postData}).then(res=>res.text()).then(data =>{
         const detailsModal = document.getElementById('details-modal-content');
         detailsModal.innerHTML = data;
-    })
+    });
 })
 
 //reset form validation global notification
@@ -216,6 +216,10 @@ $('#formModal').on('show.bs.modal', function (event) {
         });
     });
 })
+$('#formModal').on('shown.bs.modal', function () {
+    const body = document.querySelector("body");
+    body.classList.add("modal-open");
+});
 
 //delete modal trigger
 $('#deleteModal').on('show.bs.modal', function (event) {

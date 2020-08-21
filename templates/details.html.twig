@@ -10,21 +10,19 @@
         <!-- name reference category-->
         <div class="pb-3 border-bottom">
             <p class="h3 font-weight-bold">Reference</p>
-            <div class="d-flex justify-content-between">
+            <div class="d-flex flex-column flex-sm-row justify-content-between">
                 <p class="h5"><span class="text-secondary">Category :</span> {{ category }}</p>
-                <p class="h5"><span class="text-secondary">Reference number :</span> {{ reference_number }}</p>
+                <p class="h5"><span class="text-secondary">Reference :</span> {{ reference_number }}</p>
             </div>
         </div>
 
         <!-- purchase details -->
         <div class="py-3 border-bottom">
             <p class="h3 font-weight-bold">Purchase details</p>
-            <div class="d-flex justify-content-between">
-                <p class="h5">
-                    <span class="text-secondary">Purchase location :</span> {{ source }} ({{ source_type }})<br/>
-                    <span class="text-secondary">Price :</span> {{ price }} €
-                </p>
-                <p class="h5"><span class="text-secondary">Date :</span> {{ buy_date }}</p>
+            <p class="h5"><span class="text-secondary">Purchase address :</span> {{ source }} ({{ source_type }})</p>
+            <div class="d-flex flex-column flex-sm-row justify-content-between">
+                <p class="h5"><span class="text-secondary">Purchase date :</span> {{ buy_date }}</p>
+                <p class="h5"><span class="text-secondary">Price :</span> {{ price }} €</p>
             </div>
         </div>
 

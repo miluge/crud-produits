@@ -1,2 +1,2 @@
 # crud-produits
-A simple CRUD simple for an online shop
+A simple CRUD for an online shop

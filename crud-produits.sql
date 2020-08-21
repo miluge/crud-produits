@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 17 août 2020 à 09:32
+-- Généré le :  jeu. 20 août 2020 à 15:16
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.4.0
 
@@ -33,15 +33,18 @@ CREATE TABLE IF NOT EXISTS `category` (
   `id_category` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_category`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `category`
 --
 
 INSERT INTO `category` (`id_category`, `name`) VALUES
-(1, 'cat1'),
-(2, 'cat2');
+(1, 'Home Appliances'),
+(2, 'Tv, Video, Audio'),
+(3, 'Tools'),
+(4, 'Vehicle'),
+(5, 'Electronics');
 
 -- --------------------------------------------------------
 
@@ -66,22 +69,16 @@ CREATE TABLE IF NOT EXISTS `products` (
   PRIMARY KEY (`id_products`),
   KEY `category_id` (`category_id`),
   KEY `id_type` (`id_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `products`
 --
 
 INSERT INTO `products` (`id_products`, `image_url`, `category_id`, `manual_url`, `source`, `id_type`, `name`, `reference_number`, `price`, `buy_date`, `end_warranty`, `care_products`) VALUES
-(16, '1', 1, '1', 'ici', 1, 'TTESTT', '1234', '9000', '2020-07-01', '2020-07-16', 'très fragile'),
-(19, '1', 1, '1', 'evhuia', 1, 'Guillaume', '1212', '123', '2020-07-16', '2020-07-11', 'rvrzvr'),
-(20, '1', 1, '1', 'qvqeb', 1, 'excursion test', '1212', '111', '2020-07-01', '2020-07-29', 'zefe'),
-(21, '1', 1, '1', 'qvqeb', 1, 'excursion test', '1212', '111', '2020-07-01', '2020-07-29', 'zefe'),
-(22, '1', 1, '1', 'qvqeb', 1, 'excursion test', '1212', '111', '2020-07-01', '2020-07-29', 'zefe'),
-(23, '1', 1, '1', 'qvqeb', 1, 'excursion test', '1212', '111', '2020-07-01', '2020-07-29', 'zefe'),
-(24, 'Array', 2, 'Array', 'efaevea', 1, 'OYUDONPZYD', '1233', '222', '2020-08-27', '2020-08-30', 'eavveve'),
-(25, 'Array', 1, 'Array', 'cav', 1, 'TEEEEEETS', 'evaev', '344', '2020-08-07', '2020-08-21', 'aeveav'),
-(26, 'Array', 2, 'Array', 'here.com', 2, 'local test', '777', '233', '2020-08-21', '2020-09-06', 'fragile');
+(55, 'TV Thomson.jpg', 2, 'TV Thomson.pdf', 'Boulanger Chateaufarine', 1, 'TV LED Thomson', '55UE6400', '429', '2020-04-01', '2022-04-01', 'Don\'t touch screen'),
+(56, 'Golf.jpg', 4, '', 'Garage Volkswagen Besançon', 1, 'Volkswagen Golf 7', 'AA-123-AA', '17990', '2019-09-19', '2022-09-19', 'Contrôle technique tous les 2 ans'),
+(59, 'lave linge.png', 1, '8806098558292_f_0.pdf', 'www.boulanger.com', 2, 'Lave linge hublot LG', 'F94J62WH', '499', '2018-09-04', '2020-09-04', 'Vider la trappe régulièrement');
 
 -- --------------------------------------------------------
 

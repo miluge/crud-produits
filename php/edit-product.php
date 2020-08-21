@@ -147,7 +147,7 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
             $errors["image"] = "File is to big";
         }
     } else {
-        $errors["image"] = "Please upload receipt";
+        $image = "";
     }
 
     //------ Manual Upload ---------//
@@ -179,7 +179,11 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         $stmt->execute();
         $files = $stmt->fetch(PDO::FETCH_ASSOC);
         $prev_image = "../uploads/images/".$id."-".$files["image_url"];
-        unlink($prev_image);
+        if ($image == ""){
+            $image = $files["image_url"];
+        }else{
+            unlink($prev_image);
+        }
         if ($files["manual_url"] != ""){
             $prev_manual = "../uploads/manuals/".$id."-".$files["manual_url"];
             unlink($prev_manual);
