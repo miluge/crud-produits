@@ -128,9 +128,10 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         // Allowed file types
         $allowd_file_ext = array("jpg", "jpeg", "png");
         
-        if (!file_exists($_FILES["image_url"]["tmp_name"])) {
-            $errors["image"] = "File not uploaded";
-        } else if (!in_array($imageExt, $allowd_file_ext)) {
+        // if (!file_exists($_FILES["image_url"]["tmp_name"])) {
+        //     $errors["image"] = "File not uploaded";
+        // } else
+        if (!in_array($imageExt, $allowd_file_ext)) {
             $errors["image"] = "Allowed formats: .jpg .jpeg .png";         
         } else if ($_FILES["image_url"]["size"] > 2097152) {
             $errors["image"] = "File is to big";
@@ -147,9 +148,10 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         // Allowed file types
         $allowd_file_ext = array("pdf", "txt");
         
-        if (!file_exists($_FILES["manual_url"]["tmp_name"])) {
-            $errors["manual"] = "File not uploaded";
-        } else if (!in_array($manualExt, $allowd_file_ext)) {
+        // if (!file_exists($_FILES["manual_url"]["tmp_name"])) {
+        //     $errors["manual"] = "File not uploaded";
+        // } else 
+        if (!in_array($manualExt, $allowd_file_ext)) {
             $errors["manual"] = "Allowed formats: .pdf .txt";         
         } else if ($_FILES["manual_url"]["size"] > 2097152) {
             $errors["manual"] = "File is to big";
