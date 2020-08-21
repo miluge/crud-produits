@@ -184,9 +184,13 @@ if (v::arrayVal()->notEmpty()->validate($_POST) && check_user()) {// Check if PO
         }else{
             unlink($prev_image);
         }
-        if ($files["manual_url"] != ""){
-            $prev_manual = "../uploads/manuals/".$id."-".$files["manual_url"];
-            unlink($prev_manual);
+        $prev_manual = "../uploads/manuals/".$id."-".$files["manual_url"];
+        if (file_exists($prev_manual)){
+            if ($manual != ""){
+                unlink($prev_manual);
+            }else{
+                $manual = $files["manual_url"];
+            }
         }
 
         //update product in database
