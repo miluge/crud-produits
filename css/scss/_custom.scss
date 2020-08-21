@@ -105,8 +105,8 @@ th.sorting:nth-child(6)::before {
 
 //SEARCH INPUT 
 input[type=search]{
-    @media (max-width: 348px){
-        max-width: 136px;
+    @media (max-width: 368px){
+        max-width: 126px;
     }
 }
 

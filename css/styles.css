@@ -10262,9 +10262,9 @@ th.sorting:nth-child(6)::before {
   display: none;
 }
 
-@media (max-width: 348px) {
+@media (max-width: 368px) {
   input[type=search] {
-    max-width: 136px;
+    max-width: 126px;
   }
 }
 
