@@ -8,7 +8,7 @@ Guillaume Blondel was in charge of back end and Guillaume Perbet was in charge o
 Application has CRUD functionalities
 
 ### User
-User needs to connect to access application and manage his/her/they own products
+User needs to connect to access application and manage his own products
 
 ### Products details
 Products are defined by:
@@ -18,6 +18,6 @@ Products are defined by:
 - Buy ticket photo and pdf version of user manual
 
 ## Try it
-Application is online at products.guillaumeperbet.fr
+Application is online at https://www.guillaumeblondel.dev/projects/crud-produits/
 Email: admin@login.com
 Password: 12345
